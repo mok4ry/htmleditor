@@ -38,8 +38,4 @@ public class TextElement implements Element {
         return text;
     }
     
-    @Override
-    public boolean equals( Object o ) {
-        return false;
-    }
 }

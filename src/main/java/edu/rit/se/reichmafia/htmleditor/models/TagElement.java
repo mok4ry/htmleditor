@@ -46,8 +46,4 @@ public class TagElement implements Element {
         return result;
     }
     
-    @Override
-    public boolean equals( Object o ) {
-        return false;
-    }
 }
