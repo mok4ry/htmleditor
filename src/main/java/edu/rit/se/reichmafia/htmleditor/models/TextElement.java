@@ -19,11 +19,27 @@ public class TextElement implements Element {
     }
     
     /**
-     * Gets the text represented by this element.
+     * Gets the text represented by this element.  Note that this is the same as
+     * toString()
      * 
      * @return The text represented by this element.
      */
     public String getName() {
         return text;
+    }
+    
+    /**
+     * Get a string representation of this TextElement.  This is simply the text
+     * it contains.  Note that this is the same as getName()
+     * 
+     * @return Text contained by this text element.
+     */
+    public String toString() {
+        return text;
+    }
+    
+    @Override
+    public boolean equals( Object o ) {
+        return false;
     }
 }

@@ -12,4 +12,5 @@ public interface Element {
      * @return Name of this Element.
      */
     public String getName();
+    
 }

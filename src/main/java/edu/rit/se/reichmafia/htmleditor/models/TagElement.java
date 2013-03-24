@@ -39,6 +39,15 @@ public class TagElement implements Element {
      */
     @Override
     public String toString() {
-        return null;
+        String result = String.format("<%s>");
+        for ( Element e : contents ) result += e.toString();
+        result += String.format("</%s>", name );
+        
+        return result;
+    }
+    
+    @Override
+    public boolean equals( Object o ) {
+        return false;
     }
 }
