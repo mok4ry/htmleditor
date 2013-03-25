@@ -141,8 +141,61 @@ public class ParserTest extends TestCase {
     public void test_getClosingTagRegexNotThere() {
         String name = "div";
         Pattern tagPattern = Parser.getClosingTagRegex(name);
-        Matcher m = tagPattern.matcher(String.format("<%s>there is <b>no closing tag</b>.", name));
+        Matcher m = tagPattern.matcher(String.format("<%s><b>no closing tag</b>.", name));
         assertFalse( m.matches() );
     }
     
+    public void test_getLeadingTextExists() {
+        String leadingText = "Here is some leading text";
+        String html = String.format("%s<p>content text</p>", leadingText);
+        assertTrue( Parser.getLeadingText(html).equals(leadingText) );
+    }
+    
+    public void test_getLeadingTextDoesNotExist() {
+        String html = "<p>this html has no leading text</p>";
+        assertTrue( Parser.getLeadingText(html).equals("") );
+    }
+    
+    public void test_getLeadingTextNoTags() {
+        String html = "this html is only leading text, no tags";
+        assertTrue( Parser.getLeadingText(html).equals(html) );
+    }
+    
+    public void test_getFirstElementStringSimple() {
+        String firstElement = "<b>Software</b>";
+        String html = String.format("%s<b>Engineering</b>", firstElement);
+        try {
+            assertTrue( Parser.getFirstElementString(html).equals(firstElement) );
+        } catch ( ParseException e ) {
+            assertTrue( false );
+        }
+    }
+    
+    public void test_getFirstElementStringWholeString() {
+        String firstElement = "<b>Software</b>";
+        try {
+            assertTrue( Parser.getFirstElementString(firstElement).equals(firstElement) );
+        } catch ( ParseException e ) {
+            assertTrue( false );
+        }
+    }
+    
+    public void test_getFirstElementStringBadlyFormed() {
+        String firstElement = "<b>Software";
+        String html = String.format("%s<b>Engineering</b>", firstElement);
+        try {
+            assertFalse( Parser.getFirstElementString(html).equals(firstElement) );
+        } catch ( ParseException e ) {
+            assertTrue( false );
+        }
+    }
+    
+    public void test_parseDocumentSimple() {
+        String html = "<html><head></head><body></body></html>";
+        try {
+            assertTrue( Parser.parseDocument(html).toString().equals(html) );
+        } catch ( ParseException e ) {
+            assertTrue( false );
+        }
+    }
 }

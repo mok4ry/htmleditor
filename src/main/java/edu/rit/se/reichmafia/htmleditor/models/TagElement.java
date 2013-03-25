@@ -39,7 +39,7 @@ public class TagElement implements Element {
      */
     @Override
     public String toString() {
-        String result = String.format("<%s>");
+        String result = String.format("<%s>", name );
         for ( Element e : contents ) result += e.toString();
         result += String.format("</%s>", name );
         

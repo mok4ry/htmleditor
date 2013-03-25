@@ -22,7 +22,7 @@ public class Parser {
     public static Element parseDocument( String html ) throws ParseException {
         Element[] parsed = parse(html);
         if ( parsed.length > 1 ) {
-            throw new ParseException("Document not enclosed in <html> tag");
+            throw new ParseException("Document not completely enclosed in <html> tag");
         } else {
             return parsed[0];
         }
@@ -52,11 +52,44 @@ public class Parser {
         return elementStrings;
     }
     
-    // TODO: Implement this
+    // get the string of the first HTML element in the string
+    // this is everything from the first opening tag to its corresponding closing tag
+    // e.g. getFirstElementString("<b><em>asdf</em>text</b><p></p>") will return
+    // "<b><em>asdf</em>text</b>"
     protected static String getFirstElementString( String html ) throws ParseException {
+        if ( html.equals( NO_ELEMENTS_REMAIN ) ) return html;
+        if ( !(html.charAt(0) == '<') ) return getLeadingText(html);
         String tagName = getTagName(html);
-        int tagCount = 0;
-        return "";
+        int tagCount = 1;
+        
+        Pattern open = getOpeningTagRegex(tagName);
+        Pattern close = getClosingTagRegex(tagName);
+        Matcher openMatcher = open.matcher(html);
+        Matcher closeMatcher = close.matcher(html);
+        openMatcher.find();
+        
+        while( tagCount > 0 ) {
+            if ( openMatcher.find() ) {
+                tagCount++;
+                closeMatcher.region(openMatcher.end(), html.length());
+            } else if ( closeMatcher.find() ) {
+                tagCount--;
+            } else {
+                String errmsg = "Unmatched tags in: %s";
+                String formattedErrmsg = String.format(errmsg, html);
+                throw new ParseException(formattedErrmsg);
+            }
+        }
+        
+        return html.substring( 0, closeMatcher.end() );
+    }
+    
+    // get any text between the beginning of the html string and whichever comes
+    // first: a tag or the end of the string
+    protected static String getLeadingText( String html ) {
+        int endIndex = html.indexOf("<");
+        endIndex = endIndex == -1 ? html.length() : endIndex;
+        return html.substring(0, endIndex);
     }
     
     // get a Pattern object with regex matching opening tags for given tag name
