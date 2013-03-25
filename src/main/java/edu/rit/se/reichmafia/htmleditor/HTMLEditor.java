@@ -1,5 +1,7 @@
 package edu.rit.se.reichmafia.htmleditor;
 
+import edu.rit.se.reichmafia.htmleditor.views.*;
+
 /**
  * Hello world!
  *
@@ -8,6 +10,7 @@ public class HTMLEditor
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        MainScreen ms = new MainScreen();
+        ms.setVisible(true);
     }
 }
