@@ -198,4 +198,53 @@ public class ParserTest extends TestCase {
             assertTrue( false );
         }
     }
+    
+    public void test_parseDocumentBadlyFormedNoHTMLTag() {
+        String html = "<head></head><body></body>";
+        try {
+            Parser.parseDocument(html);
+            assertTrue( false );
+        } catch ( ParseException e ) {
+            assertTrue( true );
+        }
+    }
+    
+    public void test_parseDocumentOddlyFormed() {
+        String html = "< html>< head ></head><body></body></html >";
+        try {
+            System.out.println(Parser.parseDocument(html) );
+            assertTrue( Parser.parseDocument(html).toString().equals("<html><head></head><body></body></html>") );
+        } catch ( ParseException e ) {
+            assertTrue( false );
+        }
+    }
+    
+    public void test_parseDocumentWithTextWellFormed() {
+        String html = "<html><head></head><body>Here is some text</body></html>";
+        try {
+            assertTrue( Parser.parseDocument(html).toString().equals(html) );
+        } catch ( ParseException e ) {
+            assertTrue( false );
+        }
+    }
+    
+    public void test_parseDocumentBadlyFormedBodyNotClosed() {
+        String html = "<html><head></head><body></html>";
+        try {
+            Parser.parseDocument(html);
+            assertTrue( false );
+        } catch ( ParseException e ) {
+            assertTrue( true );
+        }
+    }
+    
+    public void test_parseDocumentBadlyFormedOpeningTagNotClosed() {
+        String html = "<html><p This should really be in a p tag</p></html>";
+        try {
+            Parser.parseDocument(html);
+            assertTrue( false );
+        } catch ( ParseException e ) {
+            assertTrue( true );
+        }
+    }
 }
