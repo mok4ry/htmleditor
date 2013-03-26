@@ -3,7 +3,7 @@ package edu.rit.se.reichmafia.htmleditor;
 import edu.rit.se.reichmafia.htmleditor.views.*;
 
 /**
- * Hello world!
+ * Hello wayne!
  *
 */
 public class HTMLEditor 
