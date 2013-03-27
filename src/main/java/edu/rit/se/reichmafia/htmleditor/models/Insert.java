@@ -7,7 +7,7 @@ package edu.rit.se.reichmafia.htmleditor.models;
 /**
  * Handles the insertion of new tags
  * 
- * @author Zach
+ * @author Zach, Wayne
  */
 public class Insert {
     

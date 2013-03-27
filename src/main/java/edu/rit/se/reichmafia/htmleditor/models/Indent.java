@@ -22,7 +22,7 @@ public class Indent {
             String[] endTags = newText.substring(0,indexOf).split("</\\w*>");
             int depth = startTags.length - endTags.length;
             for (int j = 0; j <= depth; j++) {
-                newText = newText.substring(0,indexOf) + tab + newText.substring(indexOf+1+tab.length()*j,newText.length()-1);
+                newText = newText.substring(0,indexOf) + tab + newText.substring(indexOf+tab.length()*j);
             }
             indexOf = newText.indexOf('\n', indexOf+1);
         }

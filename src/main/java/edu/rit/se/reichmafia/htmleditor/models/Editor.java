@@ -7,7 +7,7 @@ package edu.rit.se.reichmafia.htmleditor.models;
 /**
  * Handles dealing with the functions such as indent and insert
  * 
- * @author Zach
+ * @author Zach, Wayne
  */
 public class Editor {
     

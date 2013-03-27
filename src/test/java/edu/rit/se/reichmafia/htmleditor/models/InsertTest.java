@@ -8,8 +8,8 @@ import static junit.framework.Assert.assertEquals;
 import junit.framework.TestCase;
 
 /**
- *
- * @author Wayne E Starr
+ * Tests the insert methods
+ * @author Wayne
  */
 public class InsertTest extends TestCase {
     
