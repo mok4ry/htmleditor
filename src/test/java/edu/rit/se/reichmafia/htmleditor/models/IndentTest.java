@@ -72,8 +72,21 @@ public class IndentTest extends TestCase {
         System.out.println("indentTextAdvanced");
         Indent instance = new Indent();
         String expResult = "<table>\n<th>\n<tr><b>Hello</b></tr>\n</th>\n</table>\n";
-        String input = "<table>\n<th>\n<tr><b>Hello</b></tr>\n</th>\n</table>\n\n\n";
+        String input = "<table>\n\t<th>\t\t\n<tr><b>Hello</b></tr>\n\t</th>\n</table>\n\n\n\n\n";
         String result = instance.indentText(input, 0, input.length()-1);
+        System.out.println(result);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of indentText method with super advanced html.
+     */
+    public void testIndentTextSuperAdvanced() {
+        System.out.println("indentTextSuperAdvanced");
+        Indent instance = new Indent();
+        String expResult = "\t<table>\n<th>\n<tr><b>Hello</b></tr>\n</th>\n</table>\n\n\n\n";
+        String input = "\t<table>\n<th>\n<tr><b>Hello</b></tr>\n</th>\n</table>\n";
+        String result = instance.indentText(input, 11, input.length()-10);
         System.out.println(result);
         assertEquals(expResult, result);
     }

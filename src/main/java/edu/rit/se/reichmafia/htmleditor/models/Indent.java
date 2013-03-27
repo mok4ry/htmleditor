@@ -25,7 +25,7 @@ public class Indent {
      * @return newText
      */
     public String indentText (String text, int startChar, int endChar) {
-        String[] newText = text.split("\n");
+        String[] newText = text.split("\n", -1);
         //Calculate the line numbers to indent
         int startLine = 0;
         int endLine = 0;
@@ -52,7 +52,7 @@ public class Indent {
         
         //Add the tabs to the apropriate line
         while (startLine < endLine) {
-            //String trim = newText[startLine].trim();
+            newText[startLine] = newText[startLine].trim();
             if (tabDifference(newText[startLine]) < 0)
                 numTabs += tabDifference(newText[startLine]);
             
@@ -83,7 +83,7 @@ public class Indent {
     private int countTabs (String line) {
         int tabs = 0;
         int i = 0;
-        while ((line.charAt(i) != tab || line.charAt(i) != ' ') && i < line.length()) {
+        while ((line.charAt(i) == tab || line.charAt(i) == ' ') && i < line.length()) {
             if (line.charAt(i) == tab)
                 tabs++;
             i++;
