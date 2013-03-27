@@ -59,7 +59,7 @@ public class Editor {
     }
     
     /**
-     * inserts a table of given rows and columns at the given index
+     * Inserts a table of given rows and columns at the given index
      * @param toInsert
      * @param startIndex
      * @param rows
