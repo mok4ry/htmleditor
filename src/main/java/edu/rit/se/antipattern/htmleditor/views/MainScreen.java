@@ -273,6 +273,11 @@ public class MainScreen extends javax.swing.JFrame {
 
         validateItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         validateItem.setText("Validate");
+        validateItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validateItemActionPerformed(evt);
+            }
+        });
         editMenu.add(validateItem);
 
         prefItem.setText("Preferences");
@@ -478,8 +483,18 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_closeCurrentTabButtonActionPerformed
 
     private void jTextArea1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyTyped
+        System.out.println( "This is working." );
         c.bufferModified(currentTabButton);
     }//GEN-LAST:event_jTextArea1KeyTyped
+
+    private void validateItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateItemActionPerformed
+        System.out.println( "Getting here." );
+        String alertMsg = "Document is %svalid HTML";
+        String result = c.validate(currentTabButton) ? "" : "NOT ";
+        String formattedAlertMsg = String.format(alertMsg, result);
+        System.out.println( formattedAlertMsg );
+        javax.swing.JOptionPane.showMessageDialog(getContentPane(), formattedAlertMsg);
+    }//GEN-LAST:event_validateItemActionPerformed
 
     private void closeCurrentTab() {
         System.out.println(String.format("firstAvailableButton: %d", firstAvailableButton));

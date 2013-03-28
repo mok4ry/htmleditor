@@ -48,8 +48,14 @@ public class MainController {
         editor.insert(buffers.get(bufferIndex), name, subName, startIndex, endIndex);
     }
     
-    public void validate (int bufferIndex) throws ParseException{
-        Parser.parseDocument(buffers.get(bufferIndex).getText());
+    public boolean validate (int bufferIndex) {
+        System.out.println( "Validating." );
+        try {
+            Parser.parseDocument(buffers.get(bufferIndex).getText());
+            return true;
+        } catch ( ParseException e ) {
+            return false;
+        }
     }
     
     public boolean createBuffer() {
