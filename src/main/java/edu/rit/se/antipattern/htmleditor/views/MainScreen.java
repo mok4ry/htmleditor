@@ -527,6 +527,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void closeCurrentTabButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeCurrentTabButtonActionPerformed
         if ( currentTabButton != -1 && c.bufferIsModified(currentTabButton) ) {
+            c.setBufferText(currentTabButton, jTextArea1.getText());
             if (discardChangesWarning() == 0) {
                 int result = fc.showSaveDialog(jTextArea1);
                 if ( result == JFileChooser.APPROVE_OPTION ) {
