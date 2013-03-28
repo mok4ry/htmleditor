@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 /**
- *
- * @author Adam
+ * The main screen for our program
+ * @author Adam, Matt, Wayne
  */
 public class MainScreen extends javax.swing.JFrame {
 
