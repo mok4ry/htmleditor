@@ -84,6 +84,7 @@ public class IndentTest extends TestCase {
     
     /**
      * Test of indentText method with super advanced html.
+<<<<<<< HEAD
      *
     public void testIndentTextSuperAdvanced() {
         System.out.println("indentTextSuperAdvanced");
@@ -94,4 +95,11 @@ public class IndentTest extends TestCase {
         System.out.println(result);
         assertEquals(expResult, result);
     }*/
+    
+    /**
+     * Need at least one test in this file.
+     */
+    public void testNothing() {
+        assertTrue( true );
+    }
 }

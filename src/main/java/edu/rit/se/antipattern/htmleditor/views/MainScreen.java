@@ -420,17 +420,15 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
-         int returnVal = fc.showSaveDialog(jTextArea1);
-         if ( returnVal == javax.swing.JFileChooser.APPROVE_OPTION ) {
-            File savedFile = fc.getSelectedFile();
-            c.updateBufferFilepath(currentTabButton, savedFile.getPath());
-            c.setBufferText(currentTabButton, jTextArea1.getText());
-             try {
-                 c.saveBuffer(currentTabButton);
-             } catch (IOException ex) {
-                 Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-             }
-             getButton(currentTabButton).setText(savedFile.getPath());
+        int returnVal = fc.showSaveDialog(jTextArea1);
+        if ( returnVal == JFileChooser.APPROVE_OPTION ) {
+            boolean valid = c.validate(currentTabButton);
+            if ( valid || (!valid && warnForValidation() == 0) )
+                if ( !c.saveBuffer(currentTabButton, fc.getSelectedFile() ) ) {
+                    String msg = "File failed to save: %s";
+                    String formatted = String.format(msg, fc.getSelectedFile().getName() );
+                    javax.swing.JOptionPane.showMessageDialog(null, formatted );
+                }
         }
     }//GEN-LAST:event_saveItemActionPerformed
 
@@ -533,33 +531,50 @@ public class MainScreen extends javax.swing.JFrame {
         if ( currentTabButton != -1 && c.bufferIsModified(currentTabButton) ) {
             int result = fc.showSaveDialog(jTextArea1);
             if ( result == JFileChooser.APPROVE_OPTION ) {
-                c.setBufferText(currentTabButton, jTextArea1.getText());
-                try {
-                    c.saveBuffer(currentTabButton);
-                } catch (IOException ex) {
-                    Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+                boolean valid = c.validate(currentTabButton);
+                if ( valid || (!valid && warnForValidation() == 0) ) {
+                    if ( c.saveBuffer(currentTabButton, fc.getSelectedFile() ) ) {
+                        closeCurrentTab();
+                    } else {
+                        String msg = "Failed to save file: %s";
+                        String formatted = String.format(msg, fc.getSelectedFile().getName());
+                        javax.swing.JOptionPane.showMessageDialog(null, formatted);
+                    }
                 }
-                closeCurrentTab();
             }
         } else {
             closeCurrentTab();
         }
     }//GEN-LAST:event_closeCurrentTabButtonActionPerformed
 
+    private int warnForValidation() {
+        String msg = "This file contains badly-formed HTML. Do you still want " +
+                "to save it?";
+        String[] choices = { "Save anyway", "Abort mission" };
+        int r = javax.swing.JOptionPane.showOptionDialog( null, msg, "Uh oh!",
+                javax.swing.JOptionPane.OK_CANCEL_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE, null, choices, choices[0] );
+        return r;
+    }
+    
     private void jTextArea1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyTyped
-        System.out.println( "This is working." );
         c.bufferModified(currentTabButton);
     }//GEN-LAST:event_jTextArea1KeyTyped
 
     private void validateItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateItemActionPerformed
-        System.out.println( "Getting here." );
         String alertMsg = "Document is %svalid HTML";
+        
+        updateCurrentBuffer();
         String result = c.validate(currentTabButton) ? "" : "NOT ";
         String formattedAlertMsg = String.format(alertMsg, result);
         System.out.println( formattedAlertMsg );
         javax.swing.JOptionPane.showMessageDialog(getContentPane(), formattedAlertMsg);
     }//GEN-LAST:event_validateItemActionPerformed
 
+    private void updateCurrentBuffer() {
+        c.setBufferText(currentTabButton, jTextArea1.getText());
+    }
+    
     private void hTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hTagItemActionPerformed
         c.setBufferText(currentTabButton, jTextArea1.getText());
         HeaderPopup hp = new HeaderPopup(this,c,currentTabButton,jTextArea1.getCaretPosition());
@@ -591,8 +606,6 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_newItemActionPerformed
 
     private void closeCurrentTab() {
-        System.out.println(String.format("firstAvailableButton: %d", firstAvailableButton));
-        System.out.println( String.format( "currentTabButton: %d", currentTabButton ));
         if ( firstAvailableButton != 0 && c.removeBuffer(currentTabButton) ) {
             getButton(firstAvailableButton - 1).setVisible(false);
             changeActiveButtonTabClosed(currentTabButton);
