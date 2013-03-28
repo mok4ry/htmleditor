@@ -33,6 +33,22 @@ public class Editor {
     }
     
     /**
+     * Auto indents a new line when given a cursor position
+     * @param toIndent
+     * @param cursor 
+     */
+    public int autoIndent (Buffer toIndent, int cursor) {
+        int i = 0;
+        String text = toIndent.getText();
+        int numTabs = indentor.calulateTabs(text, cursor-1);
+        for (i = 0 ; i < numTabs; i++) {
+            toIndent.insertText("\t", cursor);
+        }
+        
+        return cursor + numTabs;
+    }
+    
+    /**
      * Insert a given tag at the given index in the given buffer
      * @param toInsert
      * @param name

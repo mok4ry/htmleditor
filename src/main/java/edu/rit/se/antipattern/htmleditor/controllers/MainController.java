@@ -13,7 +13,7 @@ import org.apache.commons.io.FileUtils;
  * Main controller for managing information between the HTML Editor's view and
  * models.
  * 
- * @author Team ReichMafia
+ * @author TeamAntiPattern
  */
 public class MainController {
     
@@ -135,6 +135,10 @@ public class MainController {
     
     public int getNextBufferIndex() {
         return buffers.size();
+    }
+    
+    public int autoIndent(int index, int cursor) {
+        return editor.autoIndent(buffers.get(index), cursor);
     }
     
     public String getBufferText( int index ) {

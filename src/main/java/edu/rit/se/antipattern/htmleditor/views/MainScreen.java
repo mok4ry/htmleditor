@@ -558,6 +558,12 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
     private void jTextArea1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyTyped
+        if (evt.getKeyChar() == '\n') {
+            c.setBufferText(currentTabButton, jTextArea1.getText());
+            int i = c.autoIndent(currentTabButton, jTextArea1.getCaretPosition());
+            jTextArea1.setText(c.getBufferText(currentTabButton));
+            jTextArea1.setCaretPosition(i);
+        }
         c.bufferModified(currentTabButton);
     }//GEN-LAST:event_jTextArea1KeyTyped
 

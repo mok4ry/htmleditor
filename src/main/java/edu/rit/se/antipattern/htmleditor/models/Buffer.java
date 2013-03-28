@@ -41,6 +41,16 @@ public class Buffer {
     }
     
     /**
+     * Inserts text at a given index
+     * @param insert
+     * @param index
+     * @return newText
+     */
+    public void insertText(String insert, int index) {
+        text = text.substring(0, index) + insert + text.substring(index);
+    }
+    
+    /**
      * returns the filePath of this buffer
      * 
      * @return the file path this file resides at 

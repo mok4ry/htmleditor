@@ -3,8 +3,8 @@ package edu.rit.se.antipattern.htmleditor;
 import edu.rit.se.antipattern.htmleditor.views.MainScreen;
 
 /**
- * Hello wayne!
- *
+ * Our main driver class that sets the view
+ * @author TeamAntiPattern
 */
 public class HTMLEditor 
 {
