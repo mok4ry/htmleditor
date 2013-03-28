@@ -205,6 +205,11 @@ public class MainScreen extends javax.swing.JFrame {
 
         newItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         newItem.setText("New");
+        newItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(newItem);
 
         jMenuBar1.add(fileMenu);
@@ -543,6 +548,14 @@ public class MainScreen extends javax.swing.JFrame {
         c.indent(currentTabButton, jTextArea1.getSelectionStart(), jTextArea1.getSelectionEnd());
         jTextArea1.setText(c.getBufferText(currentTabButton));
     }//GEN-LAST:event_indentItemActionPerformed
+
+    private void newItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newItemActionPerformed
+            if ( c.createBuffer() ) {
+                createAndGoToNewTab("Untitled.html");
+            } else {
+                // TODO: Write error message to some designated error spot (bottom status bar?)
+            }
+    }//GEN-LAST:event_newItemActionPerformed
 
     private void closeCurrentTab() {
         System.out.println(String.format("firstAvailableButton: %d", firstAvailableButton));
