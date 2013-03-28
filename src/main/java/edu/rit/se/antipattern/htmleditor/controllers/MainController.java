@@ -33,22 +33,27 @@ public class MainController {
     }
     
     public void indent (int bufferIndex, int startIndex, int endIndex) {
+        if ( indexOutOfRange(bufferIndex) ) return;
         editor.indent(buffers.get(bufferIndex), startIndex, endIndex);
     }
     
     public void insert (int bufferIndex, String name, int index){
+        if ( indexOutOfRange(bufferIndex) ) return;
         editor.insert(buffers.get(bufferIndex), name, index);
     }
     
     public void insert (int bufferIndex, int index, int rows, int cols){
+        if ( indexOutOfRange(bufferIndex) ) return;
         editor.insert(buffers.get(bufferIndex), index, rows, cols);
     }
     
     public void insert (int bufferIndex, String name, String subName, int startIndex, int endIndex){
+        if ( indexOutOfRange(bufferIndex) ) return;
         editor.insert(buffers.get(bufferIndex), name, subName, startIndex, endIndex);
     }
     
     public boolean validate (int bufferIndex) {
+        if ( indexOutOfRange(bufferIndex) ) return false;
         try {
             Parser.parseDocument(buffers.get(bufferIndex).getText());
             return true;
@@ -163,7 +168,12 @@ public class MainController {
     }
     
     public void setBufferText( int index, String text ) {
+        if ( indexOutOfRange(index) ) return;
         buffers.get(index).setText(text);
+    }
+    
+    private boolean indexOutOfRange( int index ) {
+        return index < 0 || index >= buffers.size();
     }
     
 }

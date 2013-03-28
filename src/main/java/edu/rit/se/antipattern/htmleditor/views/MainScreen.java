@@ -480,10 +480,23 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void switchToCurrentTab() {
-        if ( currentTabButton > -1 )
+        if ( currentTabButton > -1 ) {
             switchToTab( currentTabButton );
-        else
+            setTabRelatedButtonsEnabled(true);
+        } else {
             jTextArea1.setText("");
+            setTabRelatedButtonsEnabled(false);
+        }
+    }
+    
+    private void setTabRelatedButtonsEnabled( boolean onOrOff ) {
+        setEditorMenuEnabled(onOrOff);
+        saveItem.setEnabled(onOrOff);
+        jTextArea1.setVisible(onOrOff);
+    }
+    
+    private void setEditorMenuEnabled( boolean onOrOff ) {
+        editMenu.setEnabled(onOrOff);
     }
     
     private void switchToTab( int index ) {
