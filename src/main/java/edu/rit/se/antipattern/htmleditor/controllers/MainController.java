@@ -49,7 +49,6 @@ public class MainController {
     }
     
     public boolean validate (int bufferIndex) {
-        System.out.println( "Validating." );
         try {
             Parser.parseDocument(buffers.get(bufferIndex).getText());
             return true;

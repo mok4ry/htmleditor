@@ -548,12 +548,10 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
     private void jTextArea1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyTyped
-        System.out.println( "This is working." );
         c.bufferModified(currentTabButton);
     }//GEN-LAST:event_jTextArea1KeyTyped
 
     private void validateItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateItemActionPerformed
-        System.out.println( "Getting here." );
         String alertMsg = "Document is %svalid HTML";
         
         updateCurrentBuffer();
@@ -595,8 +593,6 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_newItemActionPerformed
 
     private void closeCurrentTab() {
-        System.out.println(String.format("firstAvailableButton: %d", firstAvailableButton));
-        System.out.println( String.format( "currentTabButton: %d", currentTabButton ));
         if ( firstAvailableButton != 0 && c.removeBuffer(currentTabButton) ) {
             getButton(firstAvailableButton - 1).setVisible(false);
             changeActiveButtonTabClosed(currentTabButton);
