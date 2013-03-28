@@ -7,36 +7,64 @@ package edu.rit.se.antipattern.htmleditor.models;
 /**
  * Handles dealing with the functions such as indent and insert
  * 
- * @author Zach
+ * @author Zach, Wayne
  */
 public class Editor {
     
-    private Indent indentor;
-    private Insert inserter;
+    private Indent indentor = new Indent();
+    private Insert inserter = new Insert();
     
+    /**
+     * Instantiates an editor construct.
+     */
     public Editor () {
         
     }
     
+    /**
+     * Indents a given buffer with the given start and end indexes
+     * @param toIndent
+     * @param startIndex
+     * @param endIndex 
+     */
     public void indent (Buffer toIndent, int startIndex, int endIndex) {
-        String oldString = toIndent.getText();
-        String newText = toIndent.getText().substring(startIndex,endIndex);
-        newText = indentor.indentText(newText);
-        toIndent.setText(oldString.substring(0,startIndex-1) + newText + 
-                oldString.substring(endIndex+1,oldString.length()));
+        toIndent.setText(indentor.indentText(toIndent.getText(), startIndex, 
+                endIndex));
     }
     
+    /**
+     * Insert a given tag at the given index in the given buffer
+     * @param toInsert
+     * @param name
+     * @param startIndex 
+     */
     public void insert (Buffer toInsert, String name, int startIndex) {
         toInsert.setText(inserter.insertFlat(toInsert.getText(), name, 
                 startIndex));
     }
     
+    /**
+     * Inserts a given layered tag with a sub tag name at the given index for
+     * n sub tags.
+     * @param toInsert
+     * @param name
+     * @param subName
+     * @param startIndex
+     * @param subTags 
+     */
     public void insert (Buffer toInsert, String name, String subName, 
             int startIndex, int subTags) {
         toInsert.setText(inserter.insertLayered(toInsert.getText(), name, 
                 subName, startIndex, subTags));
     }
     
+    /**
+     * Inserts a table of given rows and columns at the given index
+     * @param toInsert
+     * @param startIndex
+     * @param rows
+     * @param cols 
+     */
     public void insert (Buffer toInsert, int startIndex, int rows, int cols) {
         toInsert.setText(inserter.insertTable(toInsert.getText(), startIndex, 
                 rows, cols));

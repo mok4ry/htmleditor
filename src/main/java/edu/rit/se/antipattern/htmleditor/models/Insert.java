@@ -7,16 +7,32 @@ package edu.rit.se.antipattern.htmleditor.models;
 /**
  * Handles the insertion of new tags
  * 
- * @author Zach
+ * @author Zach, Wayne
  */
 public class Insert {
     
+    /**
+     * Inserts a flat tag
+     * @param text
+     * @param name
+     * @param index
+     * @return newText
+     */
     public String insertFlat (String text, String name, int index) {
         String newString = text.substring(0,index) + "<" + name + "></" + name
                 + ">" + text.substring(index);
         return newString;
     }
     
+    /**
+     * Inserts a layered tag
+     * @param text
+     * @param name
+     * @param subName
+     * @param index
+     * @param subTags
+     * @return newText
+     */
     public String insertLayered (String text, String name, String subName, 
             int index, int subTags) {
         String newString = text.substring(0,index) + "<" + name + ">\n";
@@ -28,6 +44,14 @@ public class Insert {
         return newString;
     }
     
+    /**
+     * Inserts a new table
+     * @param text
+     * @param index
+     * @param rows
+     * @param cols
+     * @return newText
+     */
     public String insertTable (String text, int index, int rows, int cols) {
         String newString = text.substring(0,index) + "\n<table>\n";
         if (rows > 0) {
