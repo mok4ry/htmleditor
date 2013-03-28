@@ -8,7 +8,7 @@ import static junit.framework.Assert.assertEquals;
 import junit.framework.TestCase;
 
 /**
- *
+ * Tests the indent class
  * @author Wayne E Starr
  */
 public class IndentTest extends TestCase {
