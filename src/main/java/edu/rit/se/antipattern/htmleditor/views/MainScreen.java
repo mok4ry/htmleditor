@@ -487,20 +487,23 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_pasteItemActionPerformed
 
     private void quitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitItemActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_quitItemActionPerformed
 
     private void emTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emTagItemActionPerformed
+        c.setBufferText(currentTabButton, jTextArea1.getText());
         c.insert(currentTabButton, "em", jTextArea1.getCaretPosition());
         jTextArea1.setText(c.getBufferText(currentTabButton));
     }//GEN-LAST:event_emTagItemActionPerformed
 
     private void bTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTagItemActionPerformed
+        c.setBufferText(currentTabButton, jTextArea1.getText());
         c.insert(currentTabButton, "b", jTextArea1.getCaretPosition());
         jTextArea1.setText(c.getBufferText(currentTabButton));
     }//GEN-LAST:event_bTagItemActionPerformed
 
     private void ulTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulTagItemActionPerformed
+        c.setBufferText(currentTabButton, jTextArea1.getText());
         ULPopup temp = new ULPopup(this,c,currentTabButton,jTextArea1.getCaretPosition());
         temp.setVisible(true);
     }//GEN-LAST:event_ulTagItemActionPerformed
@@ -536,11 +539,13 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_validateItemActionPerformed
 
     private void hTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hTagItemActionPerformed
+        c.setBufferText(currentTabButton, jTextArea1.getText());
         HeaderPopup hp = new HeaderPopup(this,c,currentTabButton,jTextArea1.getCaretPosition());
         hp.setVisible(true);
     }//GEN-LAST:event_hTagItemActionPerformed
 
     private void tableTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableTagItemActionPerformed
+        c.setBufferText(currentTabButton, jTextArea1.getText());
         TablePopup temp = new TablePopup(this,c,currentTabButton,jTextArea1.getCaretPosition());
         temp.setVisible(true);
     }//GEN-LAST:event_tableTagItemActionPerformed
@@ -550,6 +555,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_editMenuActionPerformed
 
     private void indentItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indentItemActionPerformed
+        c.setBufferText(currentTabButton, jTextArea1.getText());
         c.indent(currentTabButton, jTextArea1.getSelectionStart(), jTextArea1.getSelectionEnd());
         jTextArea1.setText(c.getBufferText(currentTabButton));
     }//GEN-LAST:event_indentItemActionPerformed
