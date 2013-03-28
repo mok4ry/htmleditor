@@ -79,6 +79,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;h#&gt;"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hTagItemActionPerformed"/>
+                      </Events>
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="emTagItem">
                       <Properties>
@@ -108,6 +111,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;table&gt;"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tableTagItemActionPerformed"/>
+                      </Events>
                     </MenuItem>
                   </SubComponents>
                 </Menu>
