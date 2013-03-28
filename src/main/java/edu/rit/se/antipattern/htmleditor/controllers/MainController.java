@@ -1,6 +1,9 @@
 package edu.rit.se.antipattern.htmleditor.controllers;
 
 import edu.rit.se.antipattern.htmleditor.models.Buffer;
+import edu.rit.se.antipattern.htmleditor.models.Editor;
+import edu.rit.se.antipattern.htmleditor.models.ParseException;
+import edu.rit.se.antipattern.htmleditor.models.Parser;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,11 +23,33 @@ public class MainController {
     };
     private ArrayList<Buffer> buffers = null;
     private int currentBufferIndex, previousBufferIndex;
+    private Editor editor;
     
     public MainController() {
         buffers = new ArrayList<Buffer>();
         currentBufferIndex = -1;
         previousBufferIndex = -1;
+        editor = new Editor();
+    }
+    
+    public void indent (int bufferIndex, int startIndex, int endIndex) {
+        editor.indent(buffers.get(bufferIndex), startIndex, endIndex);
+    }
+    
+    public void insert (int bufferIndex, String name, int index){
+        editor.insert(buffers.get(bufferIndex), name, index);
+    }
+    
+    public void insert (int bufferIndex, int index, int rows, int cols){
+        editor.insert(buffers.get(bufferIndex), index, rows, cols);
+    }
+    
+    public void insert (int bufferIndex, String name, String subName, int startIndex, int endIndex){
+        editor.insert(buffers.get(bufferIndex), name, subName, startIndex, endIndex);
+    }
+    
+    public void validate (int bufferIndex) throws ParseException{
+        Parser.parseDocument(buffers.get(bufferIndex).getText());
     }
     
     public boolean createBuffer() {
