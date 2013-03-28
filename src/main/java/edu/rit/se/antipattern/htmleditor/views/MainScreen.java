@@ -5,14 +5,12 @@
 package edu.rit.se.antipattern.htmleditor.views;
 
 import edu.rit.se.antipattern.htmleditor.controllers.MainController;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 
 /**
  * The main screen for our program
@@ -24,7 +22,6 @@ public class MainScreen extends javax.swing.JFrame {
     private static final int MAX_FILENAME_CHARS_SHORT = 8;
     private MainController c;
     private int currentTabButton, firstAvailableButton;
-    private Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
     
     /**
      * Creates new form MainScreen
@@ -420,15 +417,16 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
-        int returnVal = fc.showSaveDialog(jTextArea1);
-        if ( returnVal == JFileChooser.APPROVE_OPTION ) {
+        int result = fc.showSaveDialog(jTextArea1);
+        if ( result == JFileChooser.APPROVE_OPTION ) {
             boolean valid = c.validate(currentTabButton);
-            if ( valid || (!valid && warnForValidation() == 0) )
+            if ( valid || (!valid && warnForValidation() == 0) ) {
                 if ( !c.saveBuffer(currentTabButton, fc.getSelectedFile() ) ) {
-                    String msg = "File failed to save: %s";
-                    String formatted = String.format(msg, fc.getSelectedFile().getName() );
-                    javax.swing.JOptionPane.showMessageDialog(null, formatted );
+                    String msg = "Failed to save file: %s";
+                    String formatted = String.format(msg, fc.getSelectedFile().getName());
+                    javax.swing.JOptionPane.showMessageDialog(null, formatted);
                 }
+            }
         }
     }//GEN-LAST:event_saveItemActionPerformed
 
@@ -529,18 +527,22 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void closeCurrentTabButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeCurrentTabButtonActionPerformed
         if ( currentTabButton != -1 && c.bufferIsModified(currentTabButton) ) {
-            int result = fc.showSaveDialog(jTextArea1);
-            if ( result == JFileChooser.APPROVE_OPTION ) {
-                boolean valid = c.validate(currentTabButton);
-                if ( valid || (!valid && warnForValidation() == 0) ) {
-                    if ( c.saveBuffer(currentTabButton, fc.getSelectedFile() ) ) {
-                        closeCurrentTab();
-                    } else {
-                        String msg = "Failed to save file: %s";
-                        String formatted = String.format(msg, fc.getSelectedFile().getName());
-                        javax.swing.JOptionPane.showMessageDialog(null, formatted);
+            if (discardChangesWarning() == 0) {
+                int result = fc.showSaveDialog(jTextArea1);
+                if ( result == JFileChooser.APPROVE_OPTION ) {
+                    boolean valid = c.validate(currentTabButton);
+                    if ( valid || (!valid && warnForValidation() == 0) ) {
+                        if ( c.saveBuffer(currentTabButton, fc.getSelectedFile() ) ) {
+                            closeCurrentTab();
+                        } else {
+                            String msg = "Failed to save file: %s";
+                            String formatted = String.format(msg, fc.getSelectedFile().getName());
+                            javax.swing.JOptionPane.showMessageDialog(null, formatted);
+                        }
                     }
                 }
+            } else {
+                closeCurrentTab();
             }
         } else {
             closeCurrentTab();
@@ -557,7 +559,23 @@ public class MainScreen extends javax.swing.JFrame {
         return r;
     }
     
+    private int discardChangesWarning() {
+        String msg = "There are unsaved changes in the current document.  "
+                + "Save changes?";
+        String[] choices = { "Save", "Discard Changes" };
+        int r = javax.swing.JOptionPane.showOptionDialog( null, msg, "Uh oh!",
+                javax.swing.JOptionPane.OK_CANCEL_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE, null, choices, choices[0] );
+        return r;
+    }
+    
     private void jTextArea1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyTyped
+        if (evt.getKeyChar() == '\n') {
+            c.setBufferText(currentTabButton, jTextArea1.getText());
+            int i = c.autoIndent(currentTabButton, jTextArea1.getCaretPosition());
+            jTextArea1.setText(c.getBufferText(currentTabButton));
+            jTextArea1.setCaretPosition(i);
+        }
         c.bufferModified(currentTabButton);
     }//GEN-LAST:event_jTextArea1KeyTyped
 

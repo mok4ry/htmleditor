@@ -5,8 +5,8 @@ import edu.rit.se.antipattern.htmleditor.models.Parser;
 import edu.rit.se.antipattern.htmleditor.views.MainScreen;
 
 /**
- * Hello wayne!
- *
+ * Our main driver class that sets the view
+ * @author TeamAntiPattern
 */
 public class HTMLEditor 
 {

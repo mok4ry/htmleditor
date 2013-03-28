@@ -91,12 +91,9 @@ public class Indent {
      */
     private int countTabs (String line) {
         int tabs = 0;
-        int i = 0;
         if (line.length() > 0) {
-            while ((line.charAt(i) == tab || line.charAt(i) == ' ') && i < line.length()) {
-                if (line.charAt(i) == tab)
-                    tabs++;
-                i++;
+            while (line.charAt(tabs) == tab && tabs < line.length()-1) {
+                tabs++;
             }
         }
         return tabs;
@@ -123,9 +120,35 @@ public class Indent {
         return tabDifference;
     }
     
+    /**
+     * Calculates the tabs for a certain line
+     * @param text
+     * @param cursor
+     * @return numTabs
+     */
     public int calulateTabs (String text, int cursor) {
         int numTabs = 0;
+        int curLine = 0;
+        int i = cursor;
+        while (i >= text.length())
+            i--;
+        while (i > 0) {
+            if (text.charAt(i) == '\n')
+                curLine++;
+            i--;
+        }
+        String[] newText = text.split("\n");
+        int tabDiff = 0;
+        if (curLine > 0) {
+            numTabs = countTabs(newText[curLine-1]);
+            tabDiff = tabDifference(newText[curLine-1]);
+        }
+        if (tabDiff < 0) 
+            tabDiff = 0;
+        numTabs += tabDiff;
         
+        if (numTabs < 0)
+            numTabs = 0;
         
         return numTabs;
     }
