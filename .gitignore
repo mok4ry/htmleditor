@@ -8,3 +8,8 @@
 
 # NetBeans files
 nbactions.xml
+
+# LaTeX tuff
+*.aux
+*.log
+*.pdf
