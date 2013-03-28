@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.rit.se.reichmafia.htmleditor.models;
+package edu.rit.se.antipattern.htmleditor.models;
 
 /**
  * Handles dealing with the functions such as indent and insert

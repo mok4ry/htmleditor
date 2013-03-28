@@ -1,6 +1,6 @@
-package edu.rit.se.reichmafia.htmleditor;
+package edu.rit.se.antipattern.htmleditor;
 
-import edu.rit.se.reichmafia.htmleditor.views.*;
+import edu.rit.se.antipattern.htmleditor.views.MainScreen;
 
 /**
  * Hello wayne!

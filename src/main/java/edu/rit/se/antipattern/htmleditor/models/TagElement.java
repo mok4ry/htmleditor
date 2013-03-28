@@ -1,4 +1,4 @@
-package edu.rit.se.reichmafia.htmleditor.models;
+package edu.rit.se.antipattern.htmleditor.models;
 
 /**
  * HTML Element that is an HTML tag with arbitrary contents.

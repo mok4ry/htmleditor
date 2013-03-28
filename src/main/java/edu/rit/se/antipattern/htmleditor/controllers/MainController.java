@@ -1,0 +1,131 @@
+package edu.rit.se.antipattern.htmleditor.controllers;
+
+import edu.rit.se.antipattern.htmleditor.models.Buffer;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import org.apache.commons.io.FileUtils;
+
+/**
+ * Main controller for managing information between the HTML Editor's view and
+ * models.
+ * 
+ * @author Team ReichMafia
+ */
+public class MainController {
+    
+    public static final int MAX_NUM_TABS = 10;
+    private boolean[] isModified = {
+        false, false, false, false, false, false, false, false, false, false
+    };
+    private ArrayList<Buffer> buffers = null;
+    private int currentBufferIndex, previousBufferIndex;
+    
+    public MainController() {
+        buffers = new ArrayList<Buffer>();
+        currentBufferIndex = -1;
+        previousBufferIndex = -1;
+    }
+    
+    public boolean createBuffer() {
+        // TODO: What happens if you save a buffer with no filename?
+        if ( !maxTabsOpen() ) {
+            buffers.add( new Buffer(null) );
+            updateCurrentBufferAfterCreate();
+        } else return false;
+        return true;
+    }
+    
+    public boolean createBuffer( File openedFile ) {
+        if ( maxTabsOpen() ) return false;
+        String absPath = openedFile.getAbsolutePath();
+        try {
+            buffers.add( new Buffer( absPath, getFileText(absPath) ) );
+            updateCurrentBufferAfterCreate();
+        } catch ( IOException e ) {
+            return false;
+        }
+        return true;
+    }
+        
+    private boolean maxTabsOpen() {
+        return buffers.size() == MAX_NUM_TABS;
+    }
+    
+    public boolean saveBuffer( int index ) {
+        // TODO implement
+        isModified[index] = false;
+        return true;
+    }
+    
+    private String getFileText( String filepath ) throws IOException {
+        return FileUtils.readFileToString(new File(filepath));
+    }
+    
+    public boolean removeBuffer( int index ) {
+        if ( buffers.size() > index && index >= 0 ) {
+            buffers.remove(index);
+            updateCurrentBufferAfterRemove(index);
+            return true;
+        } else return false;
+    }
+    
+    private void updateCurrentBufferAfterCreate() {
+        previousBufferIndex = currentBufferIndex;
+        currentBufferIndex = buffers.size() - 1;
+    }
+    
+    private void updateCurrentBufferAfterRemove( int index ) {
+        if ( buffers.isEmpty() )
+            currentBufferIndex = -1;
+        else {
+            previousBufferIndex = currentBufferIndex;
+            currentBufferIndex = (buffers.size() > index) ? index : index - 1;
+        }
+    }
+    
+    public boolean updateBufferFilepath( int index, String newFilepath ) {
+        if ( buffers.size() > index ) {
+            buffers.get(index).setFilePath(newFilepath);
+            return true;
+        } else return false;
+    }
+    
+    public void bufferModified( int index ) {
+        if ( !isModified[index] ) isModified[index] = true;
+    }
+    
+    public boolean bufferIsModified( int index ) {
+        return isModified[index];
+    }
+    
+    public int getNextBufferIndex() {
+        return buffers.size();
+    }
+    
+    public String getBufferText( int index ) {
+        return buffers.get(index).getText();
+    }
+    
+    public String getBufferFilepath( int index ) {
+        return buffers.get(index).getFilePath();
+    }
+    
+    public int getCurrentBufferIndex() {
+        return currentBufferIndex;
+    }
+    
+    public void setCurrentBufferIndex( int index ) {
+        previousBufferIndex = currentBufferIndex;
+        currentBufferIndex = index;
+    }
+    
+    public int getPreviousBufferIndex() {
+        return previousBufferIndex;
+    }
+    
+    public void setBufferText( int index, String text ) {
+        buffers.get(index).setText(text);
+    }
+    
+}

@@ -1,17 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package edu.rit.se.reichmafia.htmleditor.models;
+package edu.rit.se.antipattern.htmleditor.models;
 
+import edu.rit.se.antipattern.htmleditor.models.Parser;
+import edu.rit.se.antipattern.htmleditor.models.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static junit.framework.Assert.assertTrue;
 import junit.framework.TestCase;
 
 /**
- *
- * @author mok4ry
+ * Units tests for the Parser class.
+ * 
+ * @author Team ReichMafia
  */
 public class ParserTest extends TestCase {
     
@@ -212,7 +211,6 @@ public class ParserTest extends TestCase {
     public void test_parseDocumentOddlyFormed() {
         String html = "< html>< head ></head><body></body></html >";
         try {
-            System.out.println(Parser.parseDocument(html) );
             assertTrue( Parser.parseDocument(html).toString().equals("<html><head></head><body></body></html>") );
         } catch ( ParseException e ) {
             assertTrue( false );

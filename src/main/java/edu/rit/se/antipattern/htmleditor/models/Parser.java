@@ -1,4 +1,4 @@
-package edu.rit.se.reichmafia.htmleditor.models;
+package edu.rit.se.antipattern.htmleditor.models;
 
 import java.util.ArrayList;
 import java.util.regex.*;

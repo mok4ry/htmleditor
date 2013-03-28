@@ -1,4 +1,4 @@
-package edu.rit.se.reichmafia.htmleditor.models;
+package edu.rit.se.antipattern.htmleditor.models;
 
 /**
  * the Buffer that holds the text and file path info for the gui
@@ -64,5 +64,16 @@ public class Buffer {
       */
     public void setFilePath (String filePath) {
         this.filePath = filePath;
+    }
+    
+    @Override
+    public boolean equals( Object o ) {
+        if ( o instanceof Buffer ) return false;
+        return ((Buffer)o).getFilePath().equals(filePath);
+    }
+    
+    @Override
+    public String toString() {
+        return String.format( "Buffer for file: %s", filePath );
     }
 }
