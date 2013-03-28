@@ -53,7 +53,7 @@ public class Insert {
      * @return newText
      */
     public String insertTable (String text, int index, int rows, int cols) {
-        String newString = text.substring(0,index) + "\n<table>\n";
+        String newString = text.substring(0,index) + "<table>\n";
         if (rows > 0) {
             newString = newString + insertLayered("", "th", "td", 0, cols);
         }

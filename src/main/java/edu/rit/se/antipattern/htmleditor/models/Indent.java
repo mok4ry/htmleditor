@@ -29,13 +29,19 @@ public class Indent {
         //Calculate the line numbers to indent
         int startLine = 0;
         int endLine = 0;
+        //Get Start Line
         int i = startChar;
+        if (i == text.length())
+            i--;
         while (i > 0) {
             if (text.charAt(i) == '\n')
                 startLine++;
             i--;
         }
+        //Get End Line
         i = endChar;
+        if (i == text.length())
+            i--;
         while (i > startChar) {
             if (text.charAt(i) == '\n')
                 endLine++;
@@ -51,10 +57,13 @@ public class Indent {
         }
         
         //Add the tabs to the apropriate line
-        while (startLine < endLine) {
+        while (startLine <= endLine) {
             newText[startLine] = newText[startLine].trim();
             if (tabDifference(newText[startLine]) < 0)
                 numTabs += tabDifference(newText[startLine]);
+            
+            if (numTabs < 0)
+                numTabs = 0;
             
             for (i = 0 ; i < numTabs ; i++){
                 newText[startLine] = tab + newText[startLine];
@@ -72,7 +81,7 @@ public class Indent {
             text = text + newText[i] + "\n";
         }
         
-        return text;
+        return text.trim();
     }
     
     /**
@@ -83,10 +92,12 @@ public class Indent {
     private int countTabs (String line) {
         int tabs = 0;
         int i = 0;
-        while ((line.charAt(i) == tab || line.charAt(i) == ' ') && i < line.length()) {
-            if (line.charAt(i) == tab)
-                tabs++;
-            i++;
+        if (line.length() > 0) {
+            while ((line.charAt(i) == tab || line.charAt(i) == ' ') && i < line.length()) {
+                if (line.charAt(i) == tab)
+                    tabs++;
+                i++;
+            }
         }
         return tabs;
     }
@@ -110,5 +121,12 @@ public class Indent {
             tabDifference--;
         
         return tabDifference;
+    }
+    
+    public int calulateTabs (String text, int cursor) {
+        int numTabs = 0;
+        
+        
+        return numTabs;
     }
 }

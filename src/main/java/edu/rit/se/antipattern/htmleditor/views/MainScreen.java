@@ -281,7 +281,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         editMenu.add(insertItem);
 
-        indentItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_TAB, 0));
+        indentItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         indentItem.setText("Indent");
         indentItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,7 +317,7 @@ public class MainScreen extends javax.swing.JFrame {
         });
         editMenu.add(validateItem);
 
-        prefItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, 0));
+        prefItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
         prefItem.setText("Auto-wrap");
         prefItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -593,8 +593,12 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void indentItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indentItemActionPerformed
         c.setBufferText(currentTabButton, jTextArea1.getText());
-        c.indent(currentTabButton, jTextArea1.getSelectionStart(), jTextArea1.getSelectionEnd());
+        int start = jTextArea1.getSelectionStart();
+        int end = jTextArea1.getSelectionEnd()-1;
+        c.indent(currentTabButton, start, end);
         jTextArea1.setText(c.getBufferText(currentTabButton));
+        jTextArea1.setSelectionStart(start);
+        jTextArea1.setSelectionEnd(end);
     }//GEN-LAST:event_indentItemActionPerformed
 
     private void newItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newItemActionPerformed
