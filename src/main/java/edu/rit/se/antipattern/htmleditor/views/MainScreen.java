@@ -37,6 +37,11 @@ public class MainScreen extends javax.swing.JFrame {
         jButton8.setVisible(false);
         jButton9.setVisible(false);
         jButton10.setVisible(false);
+        if ( c.createBuffer() ) {
+                createAndGoToNewTab("Untitled.html");
+            } else {
+                // TODO: Write error message to some designated error spot (bottom status bar?)
+            }
     }
 
     /**
