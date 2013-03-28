@@ -83,9 +83,10 @@ public class MainController {
         return buffers.size() == MAX_NUM_TABS;
     }
     
-    public boolean saveBuffer( int index ) {
-        // TODO implement
+    public boolean saveBuffer( int index ) throws IOException {
         isModified[index] = false;
+        Buffer b = buffers.get(index);
+        FileUtils.writeStringToFile(new File(b.getFilePath()), b.getText());
         return true;
     }
     

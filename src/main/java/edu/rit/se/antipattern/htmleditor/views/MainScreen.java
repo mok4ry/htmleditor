@@ -5,7 +5,13 @@
 package edu.rit.se.antipattern.htmleditor.views;
 
 import edu.rit.se.antipattern.htmleditor.controllers.MainController;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 /**
@@ -18,6 +24,7 @@ public class MainScreen extends javax.swing.JFrame {
     private static final int MAX_FILENAME_CHARS_SHORT = 8;
     private MainController c;
     private int currentTabButton, firstAvailableButton;
+    private Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
     
     /**
      * Creates new form MainScreen
@@ -413,8 +420,18 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
-        // TODO add your handling code here:
          int returnVal = fc.showSaveDialog(jTextArea1);
+         if ( returnVal == javax.swing.JFileChooser.APPROVE_OPTION ) {
+            File savedFile = fc.getSelectedFile();
+            c.updateBufferFilepath(currentTabButton, savedFile.getPath());
+            c.setBufferText(currentTabButton, jTextArea1.getText());
+             try {
+                 c.saveBuffer(currentTabButton);
+             } catch (IOException ex) {
+                 Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             getButton(currentTabButton).setText(savedFile.getPath());
+        }
     }//GEN-LAST:event_saveItemActionPerformed
 
     private void prefItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prefItemActionPerformed
@@ -483,7 +500,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
     private void pasteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteItemActionPerformed
-        // TODO add your handling code here:
+        jTextArea1.paste();
     }//GEN-LAST:event_pasteItemActionPerformed
 
     private void quitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitItemActionPerformed
@@ -509,14 +526,19 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_ulTagItemActionPerformed
 
     private void cutItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutItemActionPerformed
-        // TODO add your handling code here:
+        jTextArea1.cut();
     }//GEN-LAST:event_cutItemActionPerformed
 
     private void closeCurrentTabButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeCurrentTabButtonActionPerformed
         if ( currentTabButton != -1 && c.bufferIsModified(currentTabButton) ) {
             int result = fc.showSaveDialog(jTextArea1);
             if ( result == JFileChooser.APPROVE_OPTION ) {
-                c.saveBuffer(currentTabButton);
+                c.setBufferText(currentTabButton, jTextArea1.getText());
+                try {
+                    c.saveBuffer(currentTabButton);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 closeCurrentTab();
             }
         } else {
