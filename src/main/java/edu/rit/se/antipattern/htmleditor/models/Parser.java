@@ -31,6 +31,7 @@ public class Parser {
     
     // parse a line of html into an array of separate, non-overlapping elements
     protected static Element[] parse( String html ) throws ParseException {
+        html = stripSpecialChars(html);
         ArrayList<Element> elements = new ArrayList<Element>();
         for ( String htmlElement : getElementStrings(html) ) {
             elements.add( parseSingle(htmlElement) );
@@ -39,6 +40,11 @@ public class Parser {
         Element[] elementsArray = new Element[elements.size()];
         elements.toArray(elementsArray);
         return elementsArray;
+    }
+    
+    protected static String stripSpecialChars( String html ) {
+        String specialCharsRegex = "(\\n|\\r)*";
+        return html.replaceAll( specialCharsRegex, "" );
     }
     
     // get the strings representing separate, non-overlapping elements in html
@@ -62,7 +68,7 @@ public class Parser {
         if ( !(html.charAt(0) == '<') ) return getLeadingText(html);
         String tagName = getTagName(html);
         int tagCount = 1;
-        
+        System.out.println(String.format("tagName: %s", tagName));
         Pattern open = getOpeningTagRegex(tagName);
         Pattern close = getClosingTagRegex(tagName);
         Matcher openMatcher = open.matcher(html);
@@ -70,6 +76,7 @@ public class Parser {
         openMatcher.find();
         
         while( tagCount > 0 ) {
+            System.out.println(String.format("tagCount: %d", tagCount));
             if ( openMatcher.find() ) {
                 tagCount++;
                 closeMatcher.region(openMatcher.end(), html.length());

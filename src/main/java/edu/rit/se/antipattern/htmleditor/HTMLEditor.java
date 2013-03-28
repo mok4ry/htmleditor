@@ -1,5 +1,7 @@
 package edu.rit.se.antipattern.htmleditor;
 
+import edu.rit.se.antipattern.htmleditor.models.ParseException;
+import edu.rit.se.antipattern.htmleditor.models.Parser;
 import edu.rit.se.antipattern.htmleditor.views.MainScreen;
 
 /**

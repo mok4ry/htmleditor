@@ -2,6 +2,7 @@ package edu.rit.se.antipattern.htmleditor.models;
 
 import edu.rit.se.antipattern.htmleditor.models.Parser;
 import edu.rit.se.antipattern.htmleditor.models.ParseException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static junit.framework.Assert.assertTrue;
@@ -243,6 +244,27 @@ public class ParserTest extends TestCase {
             assertTrue( false );
         } catch ( ParseException e ) {
             assertTrue( true );
+        }
+    }
+    
+    public void test_getElementStringsDuplicateTags() {
+        String divTag = "<div></div>";
+        String html = String.format("%s%s", divTag, divTag );
+        try {
+            ArrayList<String> elems = Parser.getElementStrings(html);
+            assertTrue( elems.get(0).equals(divTag) && elems.get(1).equals(divTag) );
+        } catch ( ParseException e ) {
+            fail(String.format("Should have been successful at parsing: %s", html));
+        }
+    }
+    
+    public void test_parseDuplicateTagsSeparateLines() {
+        String html = "<th><td></td>\n<td></td></th>";
+        try {
+            Parser.parse(html);
+            assertTrue( true );
+        } catch ( ParseException e ) {
+            fail(String.format("Should have been successful at parsing: %s", html));
         }
     }
 }
