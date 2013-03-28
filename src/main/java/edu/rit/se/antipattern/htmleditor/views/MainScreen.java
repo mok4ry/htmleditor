@@ -37,6 +37,11 @@ public class MainScreen extends javax.swing.JFrame {
         jButton8.setVisible(false);
         jButton9.setVisible(false);
         jButton10.setVisible(false);
+        if ( c.createBuffer() ) {
+                createAndGoToNewTab("Untitled.html");
+            } else {
+                // TODO: Write error message to some designated error spot (bottom status bar?)
+            }
     }
 
     /**
@@ -205,11 +210,21 @@ public class MainScreen extends javax.swing.JFrame {
 
         newItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         newItem.setText("New");
+        newItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(newItem);
 
         jMenuBar1.add(fileMenu);
 
         editMenu.setText("Edit");
+        editMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editMenuActionPerformed(evt);
+            }
+        });
 
         insertItem.setText("Insert");
 
@@ -261,6 +276,11 @@ public class MainScreen extends javax.swing.JFrame {
 
         indentItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_TAB, 0));
         indentItem.setText("Indent");
+        indentItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indentItemActionPerformed(evt);
+            }
+        });
         editMenu.add(indentItem);
 
         cutItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
@@ -290,7 +310,8 @@ public class MainScreen extends javax.swing.JFrame {
         });
         editMenu.add(validateItem);
 
-        prefItem.setText("Preferences");
+        prefItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, 0));
+        prefItem.setText("Auto-wrap");
         prefItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 prefItemActionPerformed(evt);
@@ -405,7 +426,12 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_saveItemActionPerformed
 
     private void prefItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prefItemActionPerformed
-        // TODO add your handling code here:
+        if(jTextArea1.getLineWrap()){
+            jTextArea1.setLineWrap(false);
+        }
+        else{
+            jTextArea1.setLineWrap(true);
+        }
     }//GEN-LAST:event_prefItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -550,6 +576,23 @@ public class MainScreen extends javax.swing.JFrame {
         TablePopup temp = new TablePopup(this,c,currentTabButton,jTextArea1.getCaretPosition());
         temp.setVisible(true);
     }//GEN-LAST:event_tableTagItemActionPerformed
+
+    private void editMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editMenuActionPerformed
+
+    private void indentItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indentItemActionPerformed
+        c.indent(currentTabButton, jTextArea1.getSelectionStart(), jTextArea1.getSelectionEnd());
+        jTextArea1.setText(c.getBufferText(currentTabButton));
+    }//GEN-LAST:event_indentItemActionPerformed
+
+    private void newItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newItemActionPerformed
+            if ( c.createBuffer() ) {
+                createAndGoToNewTab("Untitled.html");
+            } else {
+                // TODO: Write error message to some designated error spot (bottom status bar?)
+            }
+    }//GEN-LAST:event_newItemActionPerformed
 
     private void closeCurrentTab() {
         System.out.println(String.format("firstAvailableButton: %d", firstAvailableButton));
