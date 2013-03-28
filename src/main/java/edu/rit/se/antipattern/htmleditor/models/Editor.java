@@ -55,8 +55,9 @@ public class Editor {
      * @param startIndex 
      */
     public void insert (Buffer toInsert, String name, int startIndex) {
+        int tabs = indentor.calulateTabs(toInsert.getText(), startIndex);
         toInsert.setText(inserter.insertFlat(toInsert.getText(), name, 
-                startIndex));
+                startIndex, tabs));
     }
     
     /**
@@ -70,8 +71,9 @@ public class Editor {
      */
     public void insert (Buffer toInsert, String name, String subName, 
             int startIndex, int subTags) {
+        int tabs = indentor.calulateTabs(toInsert.getText(), startIndex);
         toInsert.setText(inserter.insertLayered(toInsert.getText(), name, 
-                subName, startIndex, subTags));
+                subName, startIndex, subTags, tabs));
     }
     
     /**
@@ -82,7 +84,8 @@ public class Editor {
      * @param cols 
      */
     public void insert (Buffer toInsert, int startIndex, int rows, int cols) {
+        int tabs = indentor.calulateTabs(toInsert.getText(), startIndex);
         toInsert.setText(inserter.insertTable(toInsert.getText(), startIndex, 
-                rows, cols));
+                rows, cols, tabs));
     }
 }

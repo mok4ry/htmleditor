@@ -96,6 +96,8 @@ public class Indent {
                 tabs++;
             }
         }
+        if (tabs == line.length()-1)
+            tabs++;
         return tabs;
     }
     
