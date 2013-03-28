@@ -68,7 +68,6 @@ public class Parser {
         if ( !(html.charAt(0) == '<') ) return getLeadingText(html);
         String tagName = getTagName(html);
         int tagCount = 1;
-        System.out.println(String.format("tagName: %s", tagName));
         Pattern open = getOpeningTagRegex(tagName);
         Pattern close = getClosingTagRegex(tagName);
         Matcher openMatcher = open.matcher(html);
@@ -76,7 +75,6 @@ public class Parser {
         openMatcher.find();
         
         while( tagCount > 0 ) {
-            System.out.println(String.format("tagCount: %d", tagCount));
             if ( openMatcher.find() ) {
                 tagCount++;
                 closeMatcher.region(openMatcher.end(), html.length());
