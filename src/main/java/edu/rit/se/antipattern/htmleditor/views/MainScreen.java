@@ -404,6 +404,9 @@ public class MainScreen extends javax.swing.JFrame {
             getButton(firstAvailableButton).setText(c.getFileNameFromPath(pathname));
             currentTabButton = firstAvailableButton++;
             switchToCurrentTab();
+            if ( !c.validate(currentTabButton) ) {
+                javax.swing.JOptionPane.showMessageDialog(null, "This file contains badly-formed HTML.");
+            }
         }
     }
     
