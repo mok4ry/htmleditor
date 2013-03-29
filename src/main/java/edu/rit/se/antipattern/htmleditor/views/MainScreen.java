@@ -6,11 +6,7 @@ package edu.rit.se.antipattern.htmleditor.views;
 
 import edu.rit.se.antipattern.htmleditor.controllers.MainController;
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
 
 /**
  * The main screen for our program
@@ -23,8 +19,8 @@ public class MainScreen extends javax.swing.JFrame {
     /**
      * Creates new form MainScreen
      */
-    public MainScreen() {
-        c = new MainController();
+    public MainScreen(MainController controller) {
+        c = controller;
         currentTabButton = -1;
         firstAvailableButton = 0;
         initComponents();
@@ -38,11 +34,18 @@ public class MainScreen extends javax.swing.JFrame {
         jButton8.setVisible(false);
         jButton9.setVisible(false);
         jButton10.setVisible(false);
-        if ( c.createBuffer() ) {
-            createAndGoToNewTab("Untitled.html");
+
+        if (c.isEmpty()) {
+            if ( c.createBuffer() ) {
+                createAndGoToNewTab("Untitled.html");
+            } else {
+                // TODO: Write error message to some designated error spot (bottom status bar?)
+            }
         } else {
-            // TODO: Write error message to some designated error spot (bottom status bar?)
+            String f = c.get(firstAvailableButton).getFilePath();
+            createAndGoToNewTab(f.substring(f.lastIndexOf('\\')+1));
         }
+        
     }
 
     /**
@@ -413,6 +416,8 @@ public class MainScreen extends javax.swing.JFrame {
                     String msg = "Failed to save file: %s";
                     String formatted = String.format(msg, fc.getSelectedFile().getName());
                     javax.swing.JOptionPane.showMessageDialog(null, formatted);
+                } else {
+                    getButton(currentTabButton).setText(fc.getSelectedFile().getName());
                 }
             }
         }
@@ -683,7 +688,7 @@ public class MainScreen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainScreen().setVisible(true);
+                new MainScreen(null).setVisible(true);
             }
         });
     }

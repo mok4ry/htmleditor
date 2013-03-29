@@ -187,4 +187,11 @@ public class MainController {
         return index < 0 || index >= buffers.size();
     }
     
+    public boolean isEmpty() {
+        return buffers.isEmpty();
+    }
+    
+    public Buffer get(int index) {
+        return buffers.get(index);
+    }
 }
