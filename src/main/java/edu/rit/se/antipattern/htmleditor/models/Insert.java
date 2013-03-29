@@ -65,10 +65,11 @@ public class Insert {
         int i = 0;
         
         String newString = text.substring(0,index) + "<table>\n";
-        for ( i = 0 ; i < tabDepth+1 ; i++) {
-            newString = newString + "\t";
-        }
+        
         if (rows > 0) {
+            for ( i = 0 ; i < tabDepth+1 ; i++) {
+                newString = newString + "\t";
+            }
             newString = newString + insertLayered("", "th", "td", 0, cols, 
                     tabDepth+1);
         }

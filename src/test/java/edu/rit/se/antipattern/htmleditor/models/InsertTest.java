@@ -35,7 +35,7 @@ public class InsertTest extends TestCase {
         System.out.println("insertFlat");
         Insert instance = new Insert();
         String expResult = "<em></em>";
-        String result = instance.insertFlat("", "em", 0);
+        String result = instance.insertFlat("", "em", 0, 0);
         assertEquals(expResult, result);
     }
     
@@ -45,7 +45,7 @@ public class InsertTest extends TestCase {
     public void testInsertFlatMiddle() {
         Insert instance = new Insert();
         String expResult = "Hel<b></b>lo";
-        String result = instance.insertFlat("Hello", "b", 3);
+        String result = instance.insertFlat("Hello", "b", 3, 0);
         assertEquals(expResult, result);
     }
 
@@ -56,7 +56,7 @@ public class InsertTest extends TestCase {
         System.out.println("insertLayered");
         Insert instance = new Insert();
         String expResult = "<ul>\n</ul>\n";
-        String result = instance.insertLayered("", "ul", "li", 0, 0);
+        String result = instance.insertLayered("", "ul", "li", 0, 0, 0);
         assertEquals(expResult, result);
     }
     
@@ -65,8 +65,8 @@ public class InsertTest extends TestCase {
      */
     public void testInsertLayeredFive() {
         Insert instance = new Insert();
-        String expResult = "Hel<ul>\n<li></li>\n<li></li>\n<li></li>\n</ul>\nlo";
-        String result = instance.insertLayered("Hello", "ul", "li", 3, 3);
+        String expResult = "Hel<ul>\n\t<li></li>\n\t<li></li>\n\t<li></li>\n</ul>\nlo";
+        String result = instance.insertLayered("Hello", "ul", "li", 3, 3, 0);
         assertEquals(expResult, result);
     }
 
@@ -77,7 +77,7 @@ public class InsertTest extends TestCase {
         System.out.println("insertTable");
         Insert instance = new Insert();
         String expResult = "<table>\n</table>\n";
-        String result = instance.insertTable("", 0, 0, 0);
+        String result = instance.insertTable("", 0, 0, 0, 0);
         assertEquals(expResult, result);
     }
     
@@ -86,8 +86,8 @@ public class InsertTest extends TestCase {
      */
     public void testInsertTableOneZero() {
         Insert instance = new Insert();
-        String expResult = "<table>\n<th>\n</th>\n</table>\n";
-        String result = instance.insertTable("", 0, 1, 0);
+        String expResult = "<table>\n\t<th>\n\t</th>\n</table>\n";
+        String result = instance.insertTable("", 0, 1, 0, 0);
         assertEquals(expResult, result);
     }
     
@@ -96,9 +96,9 @@ public class InsertTest extends TestCase {
      */
     public void testInsertTableOneThree() {
         Insert instance = new Insert();
-        String expResult = "<table>\n<th>\n<td></td>\n<td></td>\n<td></td>\n"
-                + "</th>\n</table>\n";
-        String result = instance.insertTable("", 0, 1, 3);
+        String expResult = "<table>\n\t<th>\n\t\t<td></td>\n\t\t<td></td>\n\t\t<td></td>\n"
+                + "\t</th>\n</table>\n";
+        String result = instance.insertTable("", 0, 1, 3, 0);
         assertEquals(expResult, result);
     }
     
@@ -107,10 +107,10 @@ public class InsertTest extends TestCase {
      */
     public void testInsertTableThreeThree() {
         Insert instance = new Insert();
-        String expResult = "<table>\n<th>\n<td></td>\n<td></td>\n<td></td>\n"
-                + "</th>\n<tr>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n"
-                + "<tr>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n</table>\n";
-        String result = instance.insertTable("", 0, 3, 3);
+        String expResult = "<table>\n\t<th>\n\t\t<td></td>\n\t\t<td></td>\n\t\t<td></td>\n"
+                + "\t</th>\n\t<tr>\n\t\t<td></td>\n\t\t<td></td>\n\t\t<td></td>\n\t</tr>\n"
+                + "\t<tr>\n\t\t<td></td>\n\t\t<td></td>\n\t\t<td></td>\n\t</tr>\n</table>\n";
+        String result = instance.insertTable("", 0, 3, 3, 0);
         assertEquals(expResult, result);
     }
 }
