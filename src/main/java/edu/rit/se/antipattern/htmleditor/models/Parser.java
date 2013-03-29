@@ -21,6 +21,7 @@ public class Parser {
      */
     public static Element parseDocument( String html ) throws ParseException {
         Element[] parsed = parse(html);
+        if ( parsed.length == 0 ) return new TextElement("");
         Matcher m = (Pattern.compile("(?i)html")).matcher(parsed[0].getName());
         if ( parsed.length > 1 || !m.find() ) {
             throw new ParseException("Document not completely enclosed in <html> tag");
