@@ -52,6 +52,12 @@ public class MainController {
         editor.insert(buffers.get(bufferIndex), name, subName, startIndex, endIndex);
     }
     
+    public int getIndexOfPathname( String pathname ) {
+        for ( int i = 0; i < buffers.size(); i++ )
+            if ( buffers.get(i).getFilePath().equals(pathname) ) return i;
+        return -1;
+    }
+    
     public boolean validate (int bufferIndex) {
         if ( indexOutOfRange(bufferIndex) ) return false;
         try {
@@ -65,7 +71,7 @@ public class MainController {
     public boolean createBuffer() {
         // TODO: What happens if you save a buffer with no filename?
         if ( !maxTabsOpen() ) {
-            buffers.add( new Buffer(null) );
+            buffers.add( new Buffer("Untitled.html") );
             updateCurrentBufferAfterCreate();
         } else return false;
         return true;
@@ -81,6 +87,11 @@ public class MainController {
             return false;
         }
         return true;
+    }
+    
+    public String getFileNameFromPath( String filePath ) {
+        int startOfFileName = filePath.lastIndexOf("/") + 1;
+        return startOfFileName == 0 ? filePath : filePath.substring(startOfFileName);
     }
         
     private boolean maxTabsOpen() {

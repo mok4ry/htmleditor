@@ -17,9 +17,6 @@ import javax.swing.filechooser.FileFilter;
  * @author Adam, Matt, Wayne
  */
 public class MainScreen extends javax.swing.JFrame {
-
-    private static final int MAX_FILENAME_CHARS_LONG = 15;
-    private static final int MAX_FILENAME_CHARS_SHORT = 8;
     private MainController c;
     private int currentTabButton, firstAvailableButton;
     
@@ -42,10 +39,10 @@ public class MainScreen extends javax.swing.JFrame {
         jButton9.setVisible(false);
         jButton10.setVisible(false);
         if ( c.createBuffer() ) {
-                createAndGoToNewTab("Untitled.html");
-            } else {
-                // TODO: Write error message to some designated error spot (bottom status bar?)
-            }
+            createAndGoToNewTab("Untitled.html");
+        } else {
+            // TODO: Write error message to some designated error spot (bottom status bar?)
+        }
     }
 
     /**
@@ -388,32 +385,23 @@ public class MainScreen extends javax.swing.JFrame {
         if ( returnVal == javax.swing.JFileChooser.APPROVE_OPTION ) {
             File openedFile = fc.getSelectedFile();
             if ( c.createBuffer(openedFile) ) {
-                createAndGoToNewTab( openedFile.getName() );
+                createAndGoToNewTab( openedFile.getPath() );
             } else {
                 // TODO: Write error message to some designated error spot (bottom status bar?)
             }
         }
     }//GEN-LAST:event_openItemActionPerformed
     
-    private void createAndGoToNewTab( String filename ) {
-        getButton(firstAvailableButton).setVisible(true);
-        getButton(firstAvailableButton).setText(filename);
-        currentTabButton = firstAvailableButton++;
-        switchToCurrentTab();
-    }
-    
-    private String truncateActive( String name ) {
-        return truncateToLastNChars( name, MAX_FILENAME_CHARS_LONG );
-    }
-    
-    private String truncateInactive( String name ) {
-        return truncateToLastNChars( name, MAX_FILENAME_CHARS_SHORT );
-    }
-    
-    private String truncateToLastNChars( String text, int n ) {
-        if ( text.length() > n ) {
-            return String.format("...%s", text.substring(text.length() - n + 3));
-        } else return text;
+    private void createAndGoToNewTab( String pathname ) {
+        int index = c.getIndexOfPathname(pathname);
+        if ( index < firstAvailableButton ) {
+            switchToTab(index);
+        } else {
+            getButton(firstAvailableButton).setVisible(true);
+            getButton(firstAvailableButton).setText(c.getFileNameFromPath(pathname));
+            currentTabButton = firstAvailableButton++;
+            switchToCurrentTab();
+        }
     }
     
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed

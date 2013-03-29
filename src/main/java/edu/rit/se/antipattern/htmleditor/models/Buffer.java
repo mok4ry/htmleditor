@@ -58,7 +58,7 @@ public class Buffer {
     public String getFilePath () {
         return filePath;
     }
-    
+   
     /**
      * sets the text in this buffer
      * 
