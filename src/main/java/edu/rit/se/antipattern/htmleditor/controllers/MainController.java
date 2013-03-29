@@ -90,7 +90,14 @@ public class MainController {
     }
     
     public String getFileNameFromPath( String filePath ) {
-        int startOfFileName = filePath.lastIndexOf("/") + 1;
+        int startOfFileName = 0;
+        int startOfFileNameMac = filePath.lastIndexOf("/") + 1;
+        int startOfFileNameWin = filePath.lastIndexOf("\\") + 1;
+        if (startOfFileNameMac > startOfFileNameWin) {
+            startOfFileName = startOfFileNameMac;
+        } else {
+            startOfFileName = startOfFileNameWin;
+        }
         return startOfFileName == 0 ? filePath : filePath.substring(startOfFileName);
     }
         

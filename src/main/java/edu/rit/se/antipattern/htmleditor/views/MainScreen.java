@@ -43,7 +43,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         } else {
             String f = c.get(firstAvailableButton).getFilePath();
-            createAndGoToNewTab(f.substring(f.lastIndexOf('\\')+1));
+            createAndGoToNewTab(f);
         }
         
     }
