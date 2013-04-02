@@ -1,0 +1,391 @@
+commit e349c7cf4d641a6a4d1d0dc0aea369e7acc61b98
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 21:16:02 2013 -0400
+
+    Fixed error where empty document was parsed
+
+commit 30c422475803d7289edeb817af0300cbe55c28d9
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 21:03:01 2013 -0400
+
+    Filepaths updated
+
+commit 3af2698375877409ce185dd59f444c537fb992b3
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 20:54:03 2013 -0400
+
+    Do a validation check upon opening new file
+
+commit 508722ed83600b665893bb89a99e3580403851e8
+Merge: 14d0adc 1e97158
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 20:45:35 2013 -0400
+
+    Merged with master
+
+commit 14d0adcd59bbc0181e97aa011fb5bfe471596703
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 20:42:30 2013 -0400
+
+    Changed to not open multiple tabs of the same file
+
+commit 1e971586d786786f5e6a2b5cece748c43bd66fad
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 20:25:47 2013 -0400
+
+    Command line arguments work!!!!
+
+commit a653d2f2f6f66ce2d54028bd04e8394303b2ef91
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 20:01:34 2013 -0400
+
+    Insert test fixed
+
+commit fa164b8344aacbc8a0675231decb174f7b4ec976
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 19:56:40 2013 -0400
+
+    Disable edit buttons when no tab open, merge with Editor changes
+
+commit e88ff8e430377ef327311968dd7a5c6657316f2b
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 19:53:53 2013 -0400
+
+    Indent fixed, and insert fixed
+
+commit 89dc27461aa6fea36e13aeabd458c4669fed8890
+Merge: b44c545 4020b63
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 19:39:42 2013 -0400
+
+    Merge branch 'master' of https://github.com/mok4ry/htmleditor
+
+commit b44c5459a438d5dce2f9002f37dd25d03f742a6f
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 19:39:33 2013 -0400
+
+    Fixed updating of buffer when typing raw text and then closing tab
+
+commit 4020b6393e79cade18a176270aadad95648985a8
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 19:34:50 2013 -0400
+
+    Table text boxes fixed. Really
+
+commit 44427b3099fa67a422cbab8f1879fefe723d6a73
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 19:32:24 2013 -0400
+
+    Table text boxes fixed
+
+commit ea6c7b8b329b68f07bdab36f0999c90707c95bd9
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 19:30:31 2013 -0400
+
+    removing print statements from Parser
+
+commit 37255549cc99d721bf15ca13dcc2872e1fb8302d
+Merge: fe32083 f969ee4
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 19:29:20 2013 -0400
+
+    Merge branch 'master' of https://github.com/mok4ry/htmleditor
+
+commit fe3208316e26bfeaa1276301ea8aafb2b08f37ee
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 19:29:15 2013 -0400
+
+    Fixed validation by stripping all return carriages and newlines before parsing
+
+commit f969ee45152533038259b303bdb7649d0baae642
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 19:28:18 2013 -0400
+
+    Save dialog updated
+
+commit 3cd3eb47cff1f60d46229adac053d10300adc364
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 19:00:14 2013 -0400
+
+    Indent Test Updated
+
+commit 09b74362fa7e6cd1cb4712e5be8719325b172a3a
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 18:51:44 2013 -0400
+
+    Insert Test Updated
+
+commit d65de657899cd5aa6613e54b666a07ca5914780e
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 18:50:55 2013 -0400
+
+    Auto-Indent Done!!
+
+commit aec66ffadd2ca5b222b00198c2db98e31177975a
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 17:42:08 2013 -0400
+
+    Indent Done!!!!
+
+commit ae615696726523fa1d45360c2e0239b3de2016f4
+Merge: 75e5577 a2e48a0
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 17:36:31 2013 -0400
+
+    Merge branch 'master' of https://github.com/mok4ry/htmleditor
+
+commit 75e5577728b1f4cf9bf5673eeb902dc1d3959365
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 17:36:14 2013 -0400
+
+    Adding list of source files to docs
+
+commit a2e48a09e15a3299c483ebc22b45c0a7cdabbfd8
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 17:07:30 2013 -0400
+
+    Documentation updated
+
+commit 1c0d31456172a4df5c2bc655331790c1ff6dde03
+Merge: 1f5f730 04e88d0
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 14:49:07 2013 -0400
+
+    Updating before presentation, fixing merge conflicts
+
+commit 1f5f7309c61fd67a5ab5d7405b77c044fb7b5e2b
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 14:43:53 2013 -0400
+
+    Updating before presentation
+
+commit 0fdf9309dd3fead7a1011a2181d631befd2573c4
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 14:12:16 2013 -0400
+
+    Indent Tests commented out
+
+commit d2e9329e8693d3ec6d6f8ef5f56c06562028c2a4
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Thu Mar 28 14:08:51 2013 -0400
+
+    Insert fixed
+
+commit 04e88d038327ec96a794a7b6f0c10fc51dc7cf57
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 13:03:44 2013 -0400
+
+    Removing extraneous print statements
+
+commit 471d398fd1aeed5c800ca33c7dd444cfd165701d
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 12:50:03 2013 -0400
+
+    Updating pom.xml
+
+commit ea5dda2bfc458434f07200872be97b69d5e43862
+Merge: e1410e0 57b7a1c
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 12:27:16 2013 -0400
+
+    Merge branch 'master' of https://github.com/mok4ry/htmleditor
+
+commit e1410e05515c36de7a1319d5e16857fee4bb99c4
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 12:27:04 2013 -0400
+
+    Getting stuff ready for packaging, implemented file saving
+
+commit 57b7a1c1b53ce9743cac6e1d882b439ecf3ec665
+Author: Zachary Edward Nielsen <zen.gameman@gmail.com>
+Date:   Thu Mar 28 09:28:51 2013 -0400
+
+    added functionality so that when the program is opened a new file is made
+
+commit b91d506466755c8aa9e673ffc577ca2d46479a41
+Author: Zachary Edward Nielsen <zen.gameman@gmail.com>
+Date:   Thu Mar 28 09:27:01 2013 -0400
+
+    added functionality for new file
+
+commit 5f325b16906a1608098b4d8d4d3db75c301ebb90
+Author: Zachary Edward Nielsen <zen.gameman@gmail.com>
+Date:   Thu Mar 28 08:56:53 2013 -0400
+
+    added functionality to do word-wrap
+
+commit 15c6601ad792e33097647ee9a25961a676a0f945
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 03:47:11 2013 -0400
+
+    Merging Zach's changes
+
+commit 8e4df4c95b40d30c846044a2decd2f6fffccac0f
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 03:09:53 2013 -0400
+
+    Aded parsing integration between GUI and controller
+
+commit b4573edc7f63abdc3225dae7db4ddb8118702ad8
+Author: Zachary Edward Nielsen <zen.gameman@gmail.com>
+Date:   Thu Mar 28 01:40:05 2013 -0400
+
+    commiting so i can push.... its too late for this
+
+commit deb00eda5845fe6e4e153a4db77941bb7204f61c
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 01:35:55 2013 -0400
+
+    Adding empty LaTeX file for source file listing
+
+commit 508c940159bd46f50cc9bd34a844711a88bfd3a3
+Merge: c7fcd64 cd8161f
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 00:52:53 2013 -0400
+
+    Merging with changes to Indent. Insert, and Editor
+
+commit c7fcd646c926f08604acbb1b6c733a290ff70a10
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 28 00:48:36 2013 -0400
+
+    Added tab support to GUI, changed packages to reflect new team name
+
+commit cd8161ff311aeb3a986c2fab44c1abd05899435c
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Wed Mar 27 20:15:33 2013 -0400
+
+    Added some documentation
+
+commit da317937988e43114ae798e197353c364b96d14b
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Wed Mar 27 19:46:30 2013 -0400
+
+    Indent should be tested fully :)
+
+commit 24913d6e8f0224da946c95028f908bcbbb76b787
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Wed Mar 27 19:25:48 2013 -0400
+
+    Editor documentation fixed
+
+commit 3d683ffa19cb3118c969aa6e406ec0822127343f
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Wed Mar 27 19:25:02 2013 -0400
+
+    Tests on indent mostly complete. Indent fixed. Editor documented.
+
+commit 6582484c5dcc754598a8951f52cfd1020d09f5a2
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Wed Mar 27 16:58:07 2013 -0400
+
+    Tests on insert complete, indent pending.
+
+commit 316cd834b78152dcd2ea7bd2a120ff925a4445fa
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Tue Mar 26 18:51:32 2013 -0400
+
+    Tests flushed out
+
+commit f2b25706936e701e982333858cbac5150e3036c4
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Tue Mar 26 15:46:22 2013 -0400
+
+    Insert errors updated
+
+commit dd6a6fe11ca3b3bf26a9d40959ddd64085896cc5
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Tue Mar 26 15:45:59 2013 -0400
+
+    InsertTest completed
+
+commit 0c9ddfa243bc8d498cd2c96be713efd6e00ecf6e
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Tue Mar 26 15:10:50 2013 -0400
+
+    Updated editor to reflect changes to editor
+
+commit ca1a9a97cc8e0d10663b5f3f8c8cdad18afc6865
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Tue Mar 26 14:58:24 2013 -0400
+
+    Added algorithms to insert for table and layered tags
+
+commit a881e3b1835eae482cdc0526ed6b91f5856cda1b
+Merge: cfe91cd 9fa09e4
+Author: il2648 <zen.gameman@gmail.com>
+Date:   Tue Mar 26 14:25:02 2013 -0400
+
+    Merge branch 'master' of https://github.com/mok4ry/htmleditor
+
+commit cfe91cdcfbe89fe19b8fa81b121b40061ff9b5e6
+Author: il2648 <zen.gameman@gmail.com>
+Date:   Tue Mar 26 14:13:56 2013 -0400
+
+    commiting everything that i have thus far
+
+commit c8ef3d25a6029b99d1ec83016c3dbad3ef40f080
+Author: il2648 <zen.gameman@gmail.com>
+Date:   Tue Mar 26 14:11:36 2013 -0400
+
+    commiting everything i have done so far
+
+commit 9fa09e4770d4371cf1fb1aff4cc1821580779d84
+Author: Wayne E Starr <Wayne E Starr@129.21.41.0>
+Date:   Tue Mar 26 14:04:49 2013 -0400
+
+    Testing push
+
+commit ed397c28c5104e44cb9e0cd8365a551e4ca308b5
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Sun Mar 24 23:11:26 2013 -0400
+
+    GUI integration, stub for controller
+
+commit 05e25e925908338cf78245324119707f90747551
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Sun Mar 24 22:47:13 2013 -0400
+
+    Added more tests for Parser.parseDocument
+
+commit fb6549bd1ba2d8e3ec6ca9512baa4f56ed0aaced
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Sun Mar 24 21:38:52 2013 -0400
+
+    Finished implementing parsing subsystem. Still requires more testing.
+
+commit ea62a3bd76be89786acf24ee6c132044b1dfc64a
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Sun Mar 24 17:35:08 2013 -0400
+
+    Removed stub for equals method in TagElement and TextElement classes
+
+commit 31141309709ae3a6613ce72d3415da9420fbd256
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Sun Mar 24 17:29:44 2013 -0400
+
+    Implemented most of the parsing subsystem and its unit test coverage
+
+commit efe25df108eb451d1ca253492b731972e38dc10b
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Sat Mar 23 16:21:08 2013 -0400
+
+    Added stubs for parsing subsystem
+
+commit 65585ea0a6f38fdb6321f2990793b122cf9275e8
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 21 18:30:58 2013 -0300
+
+    Update README.md
+
+commit 8aeb2a0bf1b6821844c4878484f736120984b8db
+Author: Matt Mokary <mxm6060@rit.edu>
+Date:   Thu Mar 21 17:24:28 2013 -0400
+
+    Initial Maven project structure
+
+commit 875b745f8df7ff7eace7c829fa306ae7a8fbb50f
+Author: mok4ry <mxm6060@rit.edu>
+Date:   Thu Mar 21 13:53:15 2013 -0700
+
+    Initial commit

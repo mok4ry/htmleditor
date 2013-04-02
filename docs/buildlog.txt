@@ -1,0 +1,173 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building HTMLEditor 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[WARNING] The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2
+[INFO] 
+[INFO] --- maven-resources-plugin:2.4.3:resources (default-resources) @ HTMLEditor ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ HTMLEditor ---
+[INFO] Compiling 15 source files to /Users/mok4ry/Documents/School/2012-3/SE362/htmleditor/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.4.3:testResources (default-testResources) @ HTMLEditor ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/mok4ry/Documents/School/2012-3/SE362/htmleditor/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ HTMLEditor ---
+[INFO] Compiling 3 source files to /Users/mok4ry/Documents/School/2012-3/SE362/htmleditor/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.7.2:test (default-test) @ HTMLEditor ---
+[INFO] Surefire report directory: /Users/mok4ry/Documents/School/2012-3/SE362/htmleditor/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running edu.rit.se.antipattern.htmleditor.models.IndentTest
+indentTextEmpty
+indentTextPlain
+indentTextBasic
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+Running edu.rit.se.antipattern.htmleditor.models.InsertTest
+insertFlat
+insertLayered
+insertTable
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
+Running edu.rit.se.antipattern.htmleditor.models.ParserTest
+Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 sec
+
+Results :
+
+Tests run: 40, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.2:jar (default-jar) @ HTMLEditor ---
+[INFO] Building jar: /Users/mok4ry/Documents/School/2012-3/SE362/htmleditor/target/HTMLEditor-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-assembly-plugin:2.2-beta-4:single (default) @ HTMLEditor ---
+[WARNING] While downloading org.apache.commons:commons-io:1.3.2
+  This artifact has been relocated to commons-io:commons-io:1.3.2.
+  https://issues.sonatype.org/browse/MVNCENTRAL-244
+
+
+[WARNING] While downloading org.apache.commons:commons-io:1.3.2
+  This artifact has been relocated to commons-io:commons-io:1.3.2.
+  https://issues.sonatype.org/browse/MVNCENTRAL-244
+
+
+[INFO] META-INF/ already added, skipping
+[INFO] META-INF/MANIFEST.MF already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/controllers/MainController.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/HTMLEditor.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Buffer.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Editor.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Element.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Indent.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Insert.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/ParseException.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Parser.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/TagElement.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/TextElement.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/HeaderPopup$1.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/HeaderPopup$2.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/HeaderPopup.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$1.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$10.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$11.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$12.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$13.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$14.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$15.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$16.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$17.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$18.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$19.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$2.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$20.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$21.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$22.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$23.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$24.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$25.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$26.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$27.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$28.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$3.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$4.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$5.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$6.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$7.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$8.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$9.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/TablePopup$1.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/TablePopup$2.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/TablePopup.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/ULPopup$1.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/ULPopup$2.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/ULPopup$3.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/ULPopup.class already added, skipping
+[INFO] META-INF/maven/ already added, skipping
+[INFO] Building jar: /Users/mok4ry/Documents/School/2012-3/SE362/htmleditor/target/HTMLEditor-1.0-SNAPSHOT-jar-with-dependencies.jar
+[INFO] META-INF/ already added, skipping
+[INFO] META-INF/MANIFEST.MF already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/controllers/MainController.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/HTMLEditor.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Buffer.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Editor.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Element.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Indent.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Insert.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/ParseException.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/Parser.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/TagElement.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/models/TextElement.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/HeaderPopup$1.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/HeaderPopup$2.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/HeaderPopup.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$1.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$10.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$11.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$12.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$13.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$14.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$15.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$16.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$17.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$18.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$19.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$2.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$20.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$21.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$22.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$23.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$24.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$25.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$26.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$27.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$28.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$3.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$4.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$5.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$6.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$7.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$8.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen$9.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/MainScreen.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/TablePopup$1.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/TablePopup$2.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/TablePopup.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/ULPopup$1.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/ULPopup$2.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/ULPopup$3.class already added, skipping
+[INFO] edu/rit/se/antipattern/htmleditor/views/ULPopup.class already added, skipping
+[INFO] META-INF/maven/ already added, skipping
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 4.975s
+[INFO] Finished at: Thu Mar 28 21:19:59 EDT 2013
+[INFO] Final Memory: 11M/81M
+[INFO] ------------------------------------------------------------------------
