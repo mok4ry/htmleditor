@@ -68,10 +68,10 @@ public class MainController {
         }
     }
     
-    public boolean createBuffer() {
+    public boolean createBuffer( int num ) {
         // TODO: What happens if you save a buffer with no filename?
         if ( !maxTabsOpen() ) {
-            buffers.add( new Buffer("Untitled.html") );
+            buffers.add( new Buffer(String.format("Untitled%d.html", num)) );
             updateCurrentBufferAfterCreate();
         } else return false;
         return true;
@@ -88,19 +88,7 @@ public class MainController {
         }
         return true;
     }
-    
-    public String getFileNameFromPath( String filePath ) {
-        int startOfFileName = 0;
-        int startOfFileNameMac = filePath.lastIndexOf("/") + 1;
-        int startOfFileNameWin = filePath.lastIndexOf("\\") + 1;
-        if (startOfFileNameMac > startOfFileNameWin) {
-            startOfFileName = startOfFileNameMac;
-        } else {
-            startOfFileName = startOfFileNameWin;
-        }
-        return startOfFileName == 0 ? filePath : filePath.substring(startOfFileName);
-    }
-        
+
     private boolean maxTabsOpen() {
         return buffers.size() == MAX_NUM_TABS;
     }

@@ -8,6 +8,7 @@ package edu.rit.se.antipattern.htmleditor.models;
 public class Buffer {
     
     private String filePath;
+    private String fileName;
     private String text;
     
     /**
@@ -17,6 +18,7 @@ public class Buffer {
      */
     public Buffer (String filePath) {
         this.filePath = filePath;
+        this.fileName = getFileNameFromPath(filePath);
         this.text = "";
     }
     
@@ -29,6 +31,18 @@ public class Buffer {
     public Buffer (String filePath, String text) {
         this.filePath = filePath;
         this.text = text;
+    }
+    
+    private String getFileNameFromPath( String fp ) {
+        int startOfFileName = 0;
+        int startOfFileNameMac = fp.lastIndexOf("/") + 1;
+        int startOfFileNameWin = fp.lastIndexOf("\\") + 1;
+        if (startOfFileNameMac > startOfFileNameWin) {
+            startOfFileName = startOfFileNameMac;
+        } else {
+            startOfFileName = startOfFileNameWin;
+        }
+        return startOfFileName == 0 ? fp : fp.substring(startOfFileName);
     }
     
     /**
@@ -57,6 +71,10 @@ public class Buffer {
      */
     public String getFilePath () {
         return filePath;
+    }
+    
+    public String getFileName() {
+        return fileName;
     }
    
     /**

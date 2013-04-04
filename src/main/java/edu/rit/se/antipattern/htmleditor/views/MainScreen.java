@@ -1,51 +1,29 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.rit.se.antipattern.htmleditor.views;
 
 import edu.rit.se.antipattern.htmleditor.controllers.MainController;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 
 /**
  * The main screen for our program
- * @author Adam, Matt, Wayne
+ * @author Team Anti-Pattern
  */
 public class MainScreen extends javax.swing.JFrame {
-    private MainController c;
-    private int currentTabButton, firstAvailableButton;
+    private MainController c = null;
+    private ArrayList<javax.swing.JTextArea> textAreas = null;
+    private int numOfUntitledPagesOpened = 0;
+    
+    public static final int DEFAULT_FONT_SIZE = 14;
     
     /**
      * Creates new form MainScreen
      */
     public MainScreen(MainController controller) {
         c = controller;
-        currentTabButton = -1;
-        firstAvailableButton = 0;
+        textAreas = new ArrayList<javax.swing.JTextArea>();
         initComponents();
-        jButton1.setVisible(false);
-        jButton2.setVisible(false);
-        jButton3.setVisible(false);
-        jButton4.setVisible(false);
-        jButton5.setVisible(false);
-        jButton6.setVisible(false);
-        jButton7.setVisible(false);
-        jButton8.setVisible(false);
-        jButton9.setVisible(false);
-        jButton10.setVisible(false);
-
-        if (c.isEmpty()) {
-            if ( c.createBuffer() ) {
-                createAndGoToNewTab("Untitled.html");
-            } else {
-                // TODO: Write error message to some designated error spot (bottom status bar?)
-            }
-        } else {
-            String f = c.get(firstAvailableButton).getFilePath();
-            createAndGoToNewTab(f);
-        }
-        
+        newItemActionPerformed(null);
     }
 
     /**
@@ -59,19 +37,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         fc = new javax.swing.JFileChooser();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        closeCurrentTabButton = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openItem = new javax.swing.JMenuItem();
@@ -93,95 +59,6 @@ public class MainScreen extends javax.swing.JFrame {
         prefItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Courier", 0, 14)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setMaximumSize(new java.awt.Dimension(500, 800));
-        jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextArea1KeyTyped(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jButton1.setFont(new java.awt.Font("Courier", 0, 14)); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setFont(new java.awt.Font("Courier", 0, 14)); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setFont(new java.awt.Font("Courier", 0, 14)); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setFont(new java.awt.Font("Courier", 0, 14)); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setFont(new java.awt.Font("Courier", 0, 14)); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setFont(new java.awt.Font("Courier", 0, 14)); // NOI18N
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setFont(new java.awt.Font("Courier", 0, 14)); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setFont(new java.awt.Font("Courier", 0, 14)); // NOI18N
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setFont(new java.awt.Font("Courier", 0, 14)); // NOI18N
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setFont(new java.awt.Font("Courier", 0, 14)); // NOI18N
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
-        closeCurrentTabButton.setText("X");
-        closeCurrentTabButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeCurrentTabButtonActionPerformed(evt);
-            }
-        });
 
         fileMenu.setText("File");
 
@@ -224,11 +101,6 @@ public class MainScreen extends javax.swing.JFrame {
         jMenuBar1.add(fileMenu);
 
         editMenu.setText("Edit");
-        editMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editMenuActionPerformed(evt);
-            }
-        });
 
         insertItem.setText("Insert");
 
@@ -316,11 +188,6 @@ public class MainScreen extends javax.swing.JFrame {
 
         prefItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
         prefItem.setText("Auto-wrap");
-        prefItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                prefItemActionPerformed(evt);
-            }
-        });
         editMenu.add(prefItem);
 
         jMenuBar1.add(editMenu);
@@ -331,234 +198,106 @@ public class MainScreen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(closeCurrentTabButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(closeCurrentTabButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
-        
-        int returnVal = fc.showOpenDialog(jTextArea1);
-        if ( returnVal == javax.swing.JFileChooser.APPROVE_OPTION ) {
-            File openedFile = fc.getSelectedFile();
-            if ( c.createBuffer(openedFile) ) {
-                createAndGoToNewTab( openedFile.getPath() );
-            } else {
-                // TODO: Write error message to some designated error spot (bottom status bar?)
-            }
-        }
+        // get File object from JFileChooser
+        // pass it to controller to create a buffer
+        // open a new tab with that buffer's contents
     }//GEN-LAST:event_openItemActionPerformed
-    
-    private void createAndGoToNewTab( String pathname ) {
-        int index = c.getIndexOfPathname(pathname);
-        if ( index < firstAvailableButton ) {
-            switchToTab(index);
-        } else {
-            getButton(firstAvailableButton).setVisible(true);
-            getButton(firstAvailableButton).setText(c.getFileNameFromPath(pathname));
-            currentTabButton = firstAvailableButton++;
-            switchToCurrentTab();
-            if ( !c.validate(currentTabButton) ) {
-                javax.swing.JOptionPane.showMessageDialog(null, "This file contains badly-formed HTML.");
-            }
-        }
-    }
-    
+
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
-        int result = fc.showSaveDialog(jTextArea1);
-        if ( result == JFileChooser.APPROVE_OPTION ) {
-            boolean valid = c.validate(currentTabButton);
-            if ( valid || (!valid && warnForValidation() == 0) ) {
-                if ( !c.saveBuffer(currentTabButton, fc.getSelectedFile() ) ) {
-                    String msg = "Failed to save file: %s";
-                    String formatted = String.format(msg, fc.getSelectedFile().getName());
-                    javax.swing.JOptionPane.showMessageDialog(null, formatted);
-                } else {
-                    getButton(currentTabButton).setText(fc.getSelectedFile().getName());
-                }
-            }
-        }
+        // validate buffer, warn for validation if necessary
+        // call controller's saveBuffer function on current tab's index
     }//GEN-LAST:event_saveItemActionPerformed
 
-    private void prefItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prefItemActionPerformed
-        if(jTextArea1.getLineWrap()){
-            jTextArea1.setLineWrap(false);
-        }
-        else{
-            jTextArea1.setLineWrap(true);
-        }
-    }//GEN-LAST:event_prefItemActionPerformed
+    private void quitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitItemActionPerformed
+        // check for modified buffers, prompt for saving for each one
+        // quit program
+    }//GEN-LAST:event_quitItemActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        switchToTab(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        switchToTab(1);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        switchToTab(2);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        switchToTab(3);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        switchToTab(4);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        switchToTab(5);
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        switchToTab(6);
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        switchToTab(7);
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        switchToTab(8);
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        switchToTab(9);
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void switchToCurrentTab() {
-        if ( currentTabButton > -1 ) {
-            switchToTab( currentTabButton );
-            setTabRelatedButtonsEnabled(true);
+    private void newItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newItemActionPerformed
+        if ( c.createBuffer( ++numOfUntitledPagesOpened ) ) {
+            int index = textAreas.size();
+            textAreas.add(getNewTextArea(index));
+            jTabbedPane1.add(c.get(index).getFileName(), textAreas.get(index));
         } else {
-            jTextArea1.setText("");
-            setTabRelatedButtonsEnabled(false);
+            // write to some error place that a new file could not be opened
         }
+    }//GEN-LAST:event_newItemActionPerformed
+
+    private javax.swing.JTextArea getNewTextArea( final int index ) {
+        javax.swing.JTextArea jta = new javax.swing.JTextArea();
+        java.awt.Font f = new java.awt.Font("Courier New", java.awt.Font.PLAIN,
+                DEFAULT_FONT_SIZE);
+        jta.setFont(f);
+        jta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                c.bufferModified(index);
+            }
+        });
+        return jta;
     }
     
-    private void setTabRelatedButtonsEnabled( boolean onOrOff ) {
-        setEditorMenuEnabled(onOrOff);
-        saveItem.setEnabled(onOrOff);
-        jTextArea1.setVisible(onOrOff);
-    }
-    
+    private void hTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hTagItemActionPerformed
+        // call controller's corresponding insert function
+        // update the current text area with the updated buffer
+    }//GEN-LAST:event_hTagItemActionPerformed
+
+    private void emTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emTagItemActionPerformed
+        // call controller's corresponding insert function
+        // update the current text area with the updated buffer
+    }//GEN-LAST:event_emTagItemActionPerformed
+
+    private void bTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTagItemActionPerformed
+        // call controller's corresponding insert function
+        // update the current text area with the updated buffer
+    }//GEN-LAST:event_bTagItemActionPerformed
+
+    private void ulTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulTagItemActionPerformed
+        // call controller's corresponding insert function
+        // update the current text area with the updated buffer
+    }//GEN-LAST:event_ulTagItemActionPerformed
+
+    private void tableTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableTagItemActionPerformed
+        // call controller's corresponding insert function
+        // update the current text area with the updated buffer
+    }//GEN-LAST:event_tableTagItemActionPerformed
+
+    private void indentItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indentItemActionPerformed
+        // call controller's indent function
+        // update the current text area with the updated buffer
+    }//GEN-LAST:event_indentItemActionPerformed
+
+    private void cutItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutItemActionPerformed
+        // call the controller's cut function
+        // update the current text area with the updated buffer
+    }//GEN-LAST:event_cutItemActionPerformed
+
+    private void pasteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteItemActionPerformed
+        // call the controller's paste function
+        // update the current text area with the updated buffer
+    }//GEN-LAST:event_pasteItemActionPerformed
+
+    private void validateItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateItemActionPerformed
+        // call the controller's validation function
+        // update the current text area with the updated buffer
+    }//GEN-LAST:event_validateItemActionPerformed
+
     private void setEditorMenuEnabled( boolean onOrOff ) {
         editMenu.setEnabled(onOrOff);
     }
     
-    private void switchToTab( int index ) {
-        System.out.println(String.format("Switching to tab: %d", index));
-        if ( !getButton(index).isVisible() ) return;
-        
-        c.setBufferText(currentTabButton, c.getBufferText(currentTabButton));
-        jTextArea1.setText( c.getBufferText(index) );
-        currentTabButton = index;
-    }
-    
-    private void pasteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteItemActionPerformed
-        jTextArea1.paste();
-    }//GEN-LAST:event_pasteItemActionPerformed
-
-    private void quitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_quitItemActionPerformed
-
-    private void emTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emTagItemActionPerformed
-        c.setBufferText(currentTabButton, jTextArea1.getText());
-        c.insert(currentTabButton, "em", jTextArea1.getCaretPosition());
-        jTextArea1.setText(c.getBufferText(currentTabButton));
-    }//GEN-LAST:event_emTagItemActionPerformed
-
-    private void bTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTagItemActionPerformed
-        c.setBufferText(currentTabButton, jTextArea1.getText());
-        c.insert(currentTabButton, "b", jTextArea1.getCaretPosition());
-        jTextArea1.setText(c.getBufferText(currentTabButton));
-    }//GEN-LAST:event_bTagItemActionPerformed
-
-    private void ulTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulTagItemActionPerformed
-        c.setBufferText(currentTabButton, jTextArea1.getText());
-        ULPopup temp = new ULPopup(this,c,currentTabButton,jTextArea1.getCaretPosition());
-        temp.setVisible(true);
-    }//GEN-LAST:event_ulTagItemActionPerformed
-
-    private void cutItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutItemActionPerformed
-        jTextArea1.cut();
-    }//GEN-LAST:event_cutItemActionPerformed
-
-    private void closeCurrentTabButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeCurrentTabButtonActionPerformed
-        if ( currentTabButton != -1 && c.bufferIsModified(currentTabButton) ) {
-            c.setBufferText(currentTabButton, jTextArea1.getText());
-            if (discardChangesWarning() == 0) {
-                int result = fc.showSaveDialog(jTextArea1);
-                if ( result == JFileChooser.APPROVE_OPTION ) {
-                    boolean valid = c.validate(currentTabButton);
-                    if ( valid || (!valid && warnForValidation() == 0) ) {
-                        if ( c.saveBuffer(currentTabButton, fc.getSelectedFile() ) ) {
-                            closeCurrentTab();
-                        } else {
-                            String msg = "Failed to save file: %s";
-                            String formatted = String.format(msg, fc.getSelectedFile().getName());
-                            javax.swing.JOptionPane.showMessageDialog(null, formatted);
-                        }
-                    }
-                }
-            } else {
-                closeCurrentTab();
-            }
-        } else {
-            closeCurrentTab();
-        }
-    }//GEN-LAST:event_closeCurrentTabButtonActionPerformed
-
     private int warnForValidation() {
         String msg = "This file contains badly-formed HTML. Do you still want " +
                 "to save it?";
@@ -579,86 +318,9 @@ public class MainScreen extends javax.swing.JFrame {
         return r;
     }
     
-    private void jTextArea1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyTyped
-        if (evt.getKeyChar() == '\n') {
-            c.setBufferText(currentTabButton, jTextArea1.getText());
-            int i = c.autoIndent(currentTabButton, jTextArea1.getCaretPosition());
-            jTextArea1.setText(c.getBufferText(currentTabButton));
-            jTextArea1.setCaretPosition(i);
-        }
-        c.bufferModified(currentTabButton);
-    }//GEN-LAST:event_jTextArea1KeyTyped
-
-    private void validateItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateItemActionPerformed
-        String alertMsg = "Document is %svalid HTML";
-        
-        updateCurrentBuffer();
-        String result = c.validate(currentTabButton) ? "" : "NOT ";
-        String formattedAlertMsg = String.format(alertMsg, result);
-        System.out.println( formattedAlertMsg );
-        javax.swing.JOptionPane.showMessageDialog(getContentPane(), formattedAlertMsg);
-    }//GEN-LAST:event_validateItemActionPerformed
-
-    private void updateCurrentBuffer() {
-        c.setBufferText(currentTabButton, jTextArea1.getText());
-    }
-    
-    private void hTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hTagItemActionPerformed
-        c.setBufferText(currentTabButton, jTextArea1.getText());
-        HeaderPopup hp = new HeaderPopup(this,c,currentTabButton,jTextArea1.getCaretPosition());
-        hp.setVisible(true);
-    }//GEN-LAST:event_hTagItemActionPerformed
-
-    private void tableTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableTagItemActionPerformed
-        c.setBufferText(currentTabButton, jTextArea1.getText());
-        TablePopup temp = new TablePopup(this,c,currentTabButton,jTextArea1.getCaretPosition());
-        temp.setVisible(true);
-    }//GEN-LAST:event_tableTagItemActionPerformed
-
-    private void editMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMenuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editMenuActionPerformed
-
-    private void indentItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indentItemActionPerformed
-        c.setBufferText(currentTabButton, jTextArea1.getText());
-        int start = jTextArea1.getSelectionStart();
-        int end = jTextArea1.getSelectionEnd()-1;
-        c.indent(currentTabButton, start, end);
-        jTextArea1.setText(c.getBufferText(currentTabButton));
-        jTextArea1.setSelectionStart(start);
-        jTextArea1.setSelectionEnd(end);
-    }//GEN-LAST:event_indentItemActionPerformed
-
-    private void newItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newItemActionPerformed
-            if ( c.createBuffer() ) {
-                createAndGoToNewTab("Untitled.html");
-            } else {
-                // TODO: Write error message to some designated error spot (bottom status bar?)
-            }
-    }//GEN-LAST:event_newItemActionPerformed
-
-    private void closeCurrentTab() {
-        if ( firstAvailableButton != 0 && c.removeBuffer(currentTabButton) ) {
-            getButton(firstAvailableButton - 1).setVisible(false);
-            changeActiveButtonTabClosed(currentTabButton);
-        }
-    }
-    
-    private void changeActiveButtonTabClosed( int index ) {
-        if ( currentTabButton == --firstAvailableButton ) currentTabButton--;
-        shiftButtonsDownStartingWith(index);
-        switchToCurrentTab();
-    }
-    
-    private void shiftButtonsDownStartingWith( int index ) {
-        while( index < c.MAX_NUM_TABS - 1 ) {
-            getButton(index).setText(getButton(index+1).getText());
-            index++;
-        }
-    }
-    
     public void updateText () {
-        jTextArea1.setText(c.getBufferText(currentTabButton));
+        int index = jTabbedPane1.getSelectedIndex();
+        textAreas.get(index).setText(c.getBufferText(index));
     }
     
     /**
@@ -698,7 +360,6 @@ public class MainScreen extends javax.swing.JFrame {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem bTagItem;
-    private javax.swing.JButton closeCurrentTabButton;
     private javax.swing.JMenuItem cutItem;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem emTagItem;
@@ -707,20 +368,9 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem hTagItem;
     private javax.swing.JMenuItem indentItem;
     private javax.swing.JMenu insertItem;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem newItem;
     private javax.swing.JMenuItem openItem;
     private javax.swing.JMenuItem pasteItem;
@@ -732,32 +382,5 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem ulTagItem;
     private javax.swing.JMenuItem validateItem;
     // End of variables declaration//GEN-END:variables
-    
-    private javax.swing.JButton getButton( int index ) {
-        switch (index) {
-            case 0:
-                return jButton1;
-            case 1:
-                return jButton2;
-            case 2:
-                return jButton3;
-            case 3:
-                return jButton4;
-            case 4:
-                return jButton5;
-            case 5:
-                return jButton6;
-            case 6:
-                return jButton7;
-            case 7:
-                return jButton8;
-            case 8:
-                return jButton9;
-            case 9:
-                return jButton10;
-            default:
-                return null;
-        }
-    }
-    
+
 }
