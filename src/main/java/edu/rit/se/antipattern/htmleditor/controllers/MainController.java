@@ -103,6 +103,10 @@ public class MainController {
         }
     }
     
+    public boolean bufferIsNamed( int index ) {
+        return ! buffers.get(index).getFileName().matches("Untitled\\d+.html");
+    }
+    
     private String getFileText( String filepath ) throws IOException {
         return FileUtils.readFileToString(new File(filepath));
     }
@@ -160,6 +164,10 @@ public class MainController {
         return buffers.get(index).getFilePath();
     }
     
+    public String getBufferFilename( int index ) {
+        return buffers.get(index).getFileName();
+    }
+    
     public int getCurrentBufferIndex() {
         return currentBufferIndex;
     }
@@ -186,6 +194,7 @@ public class MainController {
         return buffers.isEmpty();
     }
     
+    @Deprecated
     public Buffer get(int index) {
         return buffers.get(index);
     }

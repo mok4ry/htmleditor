@@ -30,6 +30,7 @@ public class Buffer {
      */
     public Buffer (String filePath, String text) {
         this.filePath = filePath;
+        this.fileName = getFileNameFromPath(filePath);
         this.text = text;
     }
     

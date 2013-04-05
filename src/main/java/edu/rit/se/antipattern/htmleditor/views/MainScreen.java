@@ -15,6 +15,9 @@ public class MainScreen extends javax.swing.JFrame {
     private int numOfUntitledPagesOpened = 0;
     
     public static final int DEFAULT_FONT_SIZE = 14;
+    public static final int CANCELED = 0;
+    public static final int CONFIRMED = 1;
+    public static final int DISCARD = 2;
     
     /**
      * Creates new form MainScreen
@@ -211,31 +214,101 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void openItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openItemActionPerformed
-        // get File object from JFileChooser
-        // pass it to controller to create a buffer
-        // open a new tab with that buffer's contents
+        int fcResult = fc.showOpenDialog(this);
+        if ( fcResult == javax.swing.JFileChooser.APPROVE_OPTION ) {
+            if ( c.createBuffer(fc.getSelectedFile()) ) {
+                int index = textAreas.size();
+                createAndSwitchToNewTab( index );
+                if ( !c.validate(index) ) {
+                    String errmsg = "The file %s contains badly-formed HTML";
+                    String formattedMsg = String.format( errmsg, c.getBufferFilename(index) );
+                    javax.swing.JOptionPane.showMessageDialog(this, formattedMsg);
+                }
+            }
+        } else {
+            // TODO: write to some error place that a new file could not be opened
+        }
     }//GEN-LAST:event_openItemActionPerformed
 
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
-        // validate buffer, warn for validation if necessary
-        // call controller's saveBuffer function on current tab's index
+        attemptSaveBuffer( jTabbedPane1.getSelectedIndex() );
     }//GEN-LAST:event_saveItemActionPerformed
 
     private void quitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitItemActionPerformed
-        // check for modified buffers, prompt for saving for each one
-        // quit program
+        System.out.println( textAreas.size() );
+        for ( int i = textAreas.size() - 1; i > -1; i-- ) {
+            if ( attemptCloseBuffer(i) == CANCELED ) return;
+        }
+        System.exit(0);
     }//GEN-LAST:event_quitItemActionPerformed
 
+    // TODO: rename these functions
+    private int attemptCloseBuffer( int index ) {
+        if ( c.bufferIsModified(index) ) {
+            if ( discardChangesWarning() == CANCELED ) {
+                removeBuffer(index);
+                return CONFIRMED;
+            }
+        }
+        c.setBufferText(index, textAreas.get(index).getText());
+        return closeBuffer(index);
+    }
+    
+    private int closeBuffer( int index ) {
+        if ( attemptSaveBuffer(index) == CONFIRMED ) {
+            removeBuffer(index);
+            return CONFIRMED;
+        } else return CANCELED;
+    }
+    
+    private void removeBuffer( int index ) {
+        if ( index == 0 ) setEditorMenuEnabled(false);
+        jTabbedPane1.remove(index);
+        c.removeBuffer(index);
+        textAreas.remove(index);
+    }
+    
+    private int attemptSaveBuffer( int index ) {
+        c.setBufferText(index, textAreas.get(index).getText());
+        if ( c.validate(index) ) {
+            return saveBuffer(index);
+        } else {
+            if ( warnForValidation() == CONFIRMED ) {
+                return saveBuffer(index);
+            } else return CANCELED;
+        }
+    }
+    
+    private int saveBuffer( int index ) {
+        System.out.println( c.bufferIsNamed(index) );
+        if ( c.bufferIsNamed(index) ) {
+            File outFile = new File(c.getBufferFilepath(index));
+            return c.saveBuffer(index, outFile) ? CONFIRMED : CANCELED;
+        } else {
+            int result = fc.showSaveDialog(this);
+            if ( result == javax.swing.JFileChooser.APPROVE_OPTION ) {
+                return c.saveBuffer(index, fc.getSelectedFile()) ?
+                        CONFIRMED : CANCELED;
+            } else return CANCELED;
+        }
+    }
+    
     private void newItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newItemActionPerformed
         if ( c.createBuffer( ++numOfUntitledPagesOpened ) ) {
-            int index = textAreas.size();
-            textAreas.add(getNewTextArea(index));
-            jTabbedPane1.add(c.get(index).getFileName(), textAreas.get(index));
+            createAndSwitchToNewTab( textAreas.size() );
         } else {
-            // write to some error place that a new file could not be opened
+            // TODO: write to some error place that a new file could not be opened
         }
     }//GEN-LAST:event_newItemActionPerformed
 
+    private void createAndSwitchToNewTab( int index ) {
+        setEditorMenuEnabled(true);
+        textAreas.add(getNewTextArea(index));
+        textAreas.get(index).setText( c.getBufferText(index) );
+        jTabbedPane1.add(c.getBufferFilename(index), textAreas.get(index));
+        jTabbedPane1.setSelectedIndex(index);
+    }
+    
     private javax.swing.JTextArea getNewTextArea( final int index ) {
         javax.swing.JTextArea jta = new javax.swing.JTextArea();
         java.awt.Font f = new java.awt.Font("Courier New", java.awt.Font.PLAIN,
@@ -243,6 +316,14 @@ public class MainScreen extends javax.swing.JFrame {
         jta.setFont(f);
         jta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
+                int currentIndex = jTabbedPane1.getSelectedIndex();
+                javax.swing.JTextArea j = textAreas.get(currentIndex);
+                if (evt.getKeyChar() == '\n') {
+                    c.setBufferText(currentIndex, j.getText());
+                    int i = c.autoIndent(currentIndex, j.getCaretPosition());
+                    j.setText(c.getBufferText(currentIndex));
+                    j.setCaretPosition(i);
+                }
                 c.bufferModified(index);
             }
         });
@@ -301,20 +382,26 @@ public class MainScreen extends javax.swing.JFrame {
     private int warnForValidation() {
         String msg = "This file contains badly-formed HTML. Do you still want " +
                 "to save it?";
-        String[] choices = { "Save anyway", "Abort mission" };
+        String[] choices = new String[2];
+        choices[CONFIRMED] = "Save anyway";
+        choices[CANCELED] = "Don't save";
         int r = javax.swing.JOptionPane.showOptionDialog( null, msg, "Uh oh!",
                 javax.swing.JOptionPane.OK_CANCEL_OPTION,
-                javax.swing.JOptionPane.QUESTION_MESSAGE, null, choices, choices[0] );
+                javax.swing.JOptionPane.QUESTION_MESSAGE,
+                null, choices, choices[CONFIRMED] );
         return r;
     }
     
     private int discardChangesWarning() {
         String msg = "There are unsaved changes in the current document.  "
                 + "Save changes?";
-        String[] choices = { "Save", "Discard Changes" };
+        String[] choices = new String[2];
+        choices[CONFIRMED] = "Save";
+        choices[CANCELED] = "Discard Changes";
         int r = javax.swing.JOptionPane.showOptionDialog( null, msg, "Uh oh!",
                 javax.swing.JOptionPane.OK_CANCEL_OPTION,
-                javax.swing.JOptionPane.QUESTION_MESSAGE, null, choices, choices[0] );
+                javax.swing.JOptionPane.QUESTION_MESSAGE,
+                null, choices, choices[CONFIRMED] );
         return r;
     }
     
