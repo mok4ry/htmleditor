@@ -17,7 +17,7 @@ import org.apache.commons.io.FileUtils;
  */
 public class MainController {
     
-    public static final int MAX_NUM_TABS = Integer.MAX_VALUE;
+    public static final int MAX_NUM_TABS = 100;
     private boolean[] isModified = {
         false, false, false, false, false, false, false, false, false, false
     };
