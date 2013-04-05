@@ -328,50 +328,96 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
     private void hTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hTagItemActionPerformed
-        // call controller's corresponding insert function
-        // update the current text area with the updated buffer
+        updateCurrentBuffer();
+        int index = jTabbedPane1.getSelectedIndex();
+        HeaderPopup hp = new HeaderPopup(this,c,index,
+                textAreas.get(index).getCaretPosition());
+        hp.setVisible(true);
     }//GEN-LAST:event_hTagItemActionPerformed
 
     private void emTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emTagItemActionPerformed
-        // call controller's corresponding insert function
-        // update the current text area with the updated buffer
+        updateCurrentBuffer();
+        int index = jTabbedPane1.getSelectedIndex();
+        c.insert(index, "em", textAreas.get(index).getCaretPosition());
+        updateCurrentTextArea();
     }//GEN-LAST:event_emTagItemActionPerformed
 
     private void bTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTagItemActionPerformed
-        // call controller's corresponding insert function
-        // update the current text area with the updated buffer
+        updateCurrentBuffer();
+        int index = getCurrentIndex();
+        c.insert(index, "b", textAreas.get(index).getCaretPosition());
+        updateCurrentTextArea();
     }//GEN-LAST:event_bTagItemActionPerformed
 
     private void ulTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulTagItemActionPerformed
-        // call controller's corresponding insert function
-        // update the current text area with the updated buffer
+        updateCurrentBuffer();
+        int index = getCurrentIndex();
+        ULPopup temp = new ULPopup(this,c,index,
+                textAreas.get(index).getCaretPosition());
+        temp.setVisible(true);
     }//GEN-LAST:event_ulTagItemActionPerformed
 
     private void tableTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableTagItemActionPerformed
-        // call controller's corresponding insert function
-        // update the current text area with the updated buffer
+        updateCurrentBuffer();
+        int index = getCurrentIndex();
+        TablePopup temp = new TablePopup(this,c,index,
+                textAreas.get(index).getCaretPosition());
+        temp.setVisible(true);
     }//GEN-LAST:event_tableTagItemActionPerformed
 
     private void indentItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indentItemActionPerformed
-        // call controller's indent function
-        // update the current text area with the updated buffer
+        updateCurrentBuffer();
+        int index = getCurrentIndex();
+        javax.swing.JTextArea j = textAreas.get(index);
+        int start = j.getSelectionStart();
+        int end = j.getSelectionEnd()-1;
+        c.indent(index, start, end);
+        updateCurrentTextArea();
+        j.setSelectionStart(start);
+        j.setSelectionEnd(end);
     }//GEN-LAST:event_indentItemActionPerformed
 
     private void cutItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutItemActionPerformed
-        // call the controller's cut function
-        // update the current text area with the updated buffer
+        updateCurrentBuffer();
+        // TODO: Implement this
+        updateCurrentTextArea();
     }//GEN-LAST:event_cutItemActionPerformed
 
     private void pasteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteItemActionPerformed
-        // call the controller's paste function
-        // update the current text area with the updated buffer
+        updateCurrentBuffer();
+        // TODO: Implement this
+        updateCurrentTextArea();
     }//GEN-LAST:event_pasteItemActionPerformed
 
     private void validateItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateItemActionPerformed
-        // call the controller's validation function
-        // update the current text area with the updated buffer
+        updateCurrentBuffer();
+        String alertMsg = "Document is %svalid HTML";
+        String result = c.validate(getCurrentIndex()) ? "" : "NOT ";
+        String formattedAlertMsg = String.format(alertMsg, result);
+        System.out.println( formattedAlertMsg );
+        javax.swing.JOptionPane.showMessageDialog(getContentPane(), formattedAlertMsg);
     }//GEN-LAST:event_validateItemActionPerformed
 
+    private int getCurrentIndex() {
+        return jTabbedPane1.getSelectedIndex();
+    }
+    
+    private void updateCurrentTextArea() {
+        updateTextArea( jTabbedPane1.getSelectedIndex() );
+    }
+    
+    private void updateTextArea( int index ) {
+        textAreas.get(index).setText(c.getBufferText(index));
+    }
+    
+    private void updateCurrentBuffer() {
+        updateBuffer(jTabbedPane1.getSelectedIndex());
+    }
+    
+    private void updateBuffer( int index ) {
+        c.setBufferText(index, textAreas.get(index).getText());
+    }
+    
     private void setEditorMenuEnabled( boolean onOrOff ) {
         editMenu.setEnabled(onOrOff);
     }

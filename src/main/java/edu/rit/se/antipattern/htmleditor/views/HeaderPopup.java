@@ -12,7 +12,7 @@ import edu.rit.se.antipattern.htmleditor.controllers.MainController;
  */
 public class HeaderPopup extends javax.swing.JFrame {
 
-       private MainController cont;
+    private MainController cont;
     private int buffer;
     private int curs;
     private MainScreen main;
@@ -84,7 +84,7 @@ public class HeaderPopup extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         cont.insert(buffer, "h"+jTextField1.getText(), curs);
-        main.updateText();
+            main.updateText();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
