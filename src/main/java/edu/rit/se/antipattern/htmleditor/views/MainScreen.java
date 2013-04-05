@@ -1,9 +1,6 @@
 package edu.rit.se.antipattern.htmleditor.views;
 
 import edu.rit.se.antipattern.htmleditor.controllers.MainController;
-import java.io.File;
-import java.util.ArrayList;
-import javax.swing.JFileChooser;
 
 /**
  * The main screen for our program
@@ -11,7 +8,7 @@ import javax.swing.JFileChooser;
  */
 public class MainScreen extends javax.swing.JFrame {
     private MainController c = null;
-    private ArrayList<javax.swing.JTextArea> textAreas = null;
+    private java.util.ArrayList<javax.swing.JTextArea> textAreas = null;
     private int numOfUntitledPagesOpened = 0;
     
     public static final int DEFAULT_FONT_SIZE = 14;
@@ -24,7 +21,7 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen(MainController controller) {
         c = controller;
-        textAreas = new ArrayList<javax.swing.JTextArea>();
+        textAreas = new java.util.ArrayList<javax.swing.JTextArea>();
         initComponents();
         newItemActionPerformed(null);
     }
@@ -282,7 +279,7 @@ public class MainScreen extends javax.swing.JFrame {
     private int saveBuffer( int index ) {
         System.out.println( c.bufferIsNamed(index) );
         if ( c.bufferIsNamed(index) ) {
-            File outFile = new File(c.getBufferFilepath(index));
+            java.io.File outFile = new java.io.File(c.getBufferFilepath(index));
             return c.saveBuffer(index, outFile) ? CONFIRMED : CANCELED;
         } else {
             int result = fc.showSaveDialog(this);
