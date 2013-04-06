@@ -88,6 +88,10 @@ public class Buffer {
         return this.startIndex;
     }
     
+    /**
+     * 
+     * @return the end index of the selected text
+     */
     public int getEndIndex(){
         return this.endIndex;
     }
