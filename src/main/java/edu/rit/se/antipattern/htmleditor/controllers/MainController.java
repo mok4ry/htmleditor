@@ -18,9 +18,7 @@ import org.apache.commons.io.FileUtils;
 public class MainController {
     
     public static final int MAX_NUM_TABS = 100;
-    private boolean[] isModified = {
-        false, false, false, false, false, false, false, false, false, false
-    };
+    private boolean[] isModified = new boolean[MAX_NUM_TABS];
     private ArrayList<Buffer> buffers = null;
     private int currentBufferIndex, previousBufferIndex;
     private Editor editor;
