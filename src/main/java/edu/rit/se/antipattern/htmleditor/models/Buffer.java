@@ -32,8 +32,8 @@ public class Buffer {
         this.filePath = toClone.getFilePath();
         this.fileName = toClone.getFileName();
         this.text = toClone.getText();
-        this.startIndex = toClone.getStartIndex();
-        this.endIndex = toClone.getEndIndex();
+        this.startIndex = toClone.getCursorStartPos();
+        this.endIndex = toClone.getCursorEndPos();
         this.lastState = toClone.getLastState();
     }
     
@@ -46,8 +46,8 @@ public class Buffer {
         this.filePath = temp.getFilePath();
         this.fileName = temp.getFileName();
         this.text = temp.getText();
-        this.startIndex = temp.getStartIndex();
-        this.endIndex = temp.getEndIndex();
+        this.startIndex = temp.getCursorStartPos();
+        this.endIndex = temp.getCursorEndPos();
         this.lastState = temp.getLastState();
     }
     
@@ -84,7 +84,7 @@ public class Buffer {
         return text;
     }
     
-    public int getStartIndex(){
+    public int getCursorStartPos(){
         return this.startIndex;
     }
     
@@ -92,7 +92,7 @@ public class Buffer {
      * 
      * @return the end index of the selected text
      */
-    public int getEndIndex(){
+    public int getCursorEndPos(){
         return this.endIndex;
     }
     
