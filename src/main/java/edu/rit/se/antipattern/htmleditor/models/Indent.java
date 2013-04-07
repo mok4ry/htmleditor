@@ -6,15 +6,20 @@ import java.util.regex.*;
  * 
  * @author Zach, Wayne
  */
-public class Indent {
+public class Indent implements EditorStrategy {
     
-    private char tab;
+    private static final char tab = '\t';
+    private Buffer b = null;
     
     /**
      * Creates an indent object
      */
-    public Indent () {
-        tab = '\t';
+    public Indent ( Buffer toIndent ) {
+        this.b = toIndent;
+    }
+    
+    public void execute() {
+        b.setText( indentText(b.getText(), b.getCursorStartPos(), b.getCursorEndPos()) );
     }
     
     /**
@@ -24,7 +29,7 @@ public class Indent {
      * @param endChar
      * @return newText
      */
-    public String indentText (String text, int startChar, int endChar) {
+    private String indentText (String text, int startChar, int endChar) {
         String[] newText = text.split("\n", -1);
         //Calculate the line numbers to indent
         int startLine = 0;
@@ -89,7 +94,7 @@ public class Indent {
      * @param line
      * @return tabs
      */
-    private int countTabs (String line) {
+    private static int countTabs (String line) {
         int tabs = 0;
         if (line.length() > 0) {
             while (line.charAt(tabs) == tab && tabs < line.length()-1) {
@@ -106,7 +111,7 @@ public class Indent {
      * @param line
      * @return tabDifference
      */
-    private int tabDifference (String line) {
+    private static int tabDifference (String line) {
         int tabDifference = 0;
         
         Pattern open = Pattern.compile("<\\w*>");
@@ -128,7 +133,7 @@ public class Indent {
      * @param cursor
      * @return numTabs
      */
-    public int calulateTabs (String text, int cursor) {
+    public static int calulateTabs (String text, int cursor) {
         int numTabs = 0;
         int curLine = 0;
         int i = cursor;

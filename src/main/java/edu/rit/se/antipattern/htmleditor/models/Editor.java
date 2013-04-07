@@ -11,9 +11,6 @@ package edu.rit.se.antipattern.htmleditor.models;
  */
 public class Editor {
     
-    private Indent indentor = new Indent();
-    private Insert inserter = new Insert();
-    
     /**
      * Instantiates an editor construct.
      */
@@ -27,9 +24,9 @@ public class Editor {
      * @param startIndex
      * @param endIndex 
      */
-    public void indent (Buffer toIndent, int startIndex, int endIndex) {
-        toIndent.setText(indentor.indentText(toIndent.getText(), startIndex, 
-                endIndex));
+    public void indent ( Buffer toIndent ) {
+        EditorStrategy i = new Indent( toIndent );
+        i.execute();
     }
     
     /**
@@ -40,7 +37,7 @@ public class Editor {
     public int autoIndent (Buffer toIndent, int cursor) {
         int i = 0;
         String text = toIndent.getText();
-        int numTabs = indentor.calulateTabs(text, cursor-1);
+        int numTabs = Indent.calulateTabs(text, cursor-1);
         for (i = 0 ; i < numTabs; i++) {
             toIndent.insertText("\t", cursor);
         }
@@ -49,15 +46,15 @@ public class Editor {
     }
     
     /**
-     * Insert a given tag at the given index in the given buffer
+     * Insert a given tag at the given index in the given buffer. Flat insert.
      * @param toInsert
      * @param name
      * @param startIndex 
      */
-    public void insert (Buffer toInsert, String name, int startIndex) {
-        int tabs = indentor.calulateTabs(toInsert.getText(), startIndex);
-        toInsert.setText(inserter.insertFlat(toInsert.getText(), name, 
-                startIndex, tabs));
+    public void insert (Buffer toInsert, String name ) {
+        int tabs = Indent.calulateTabs(toInsert.getText(), toInsert.getCursorStartPos());
+        EditorStrategy ins = new Insert( toInsert, name, tabs );
+        ins.execute();
     }
     
     /**
@@ -69,11 +66,10 @@ public class Editor {
      * @param startIndex
      * @param subTags 
      */
-    public void insert (Buffer toInsert, String name, String subName, 
-            int startIndex, int subTags) {
-        int tabs = indentor.calulateTabs(toInsert.getText(), startIndex);
-        toInsert.setText(inserter.insertLayered(toInsert.getText(), name, 
-                subName, startIndex, subTags, tabs));
+    public void insert (Buffer toInsert, String name, String subName, int subTags) {
+        int tabs = Indent.calulateTabs(toInsert.getText(), toInsert.getCursorStartPos());
+        EditorStrategy ins = new Insert( toInsert, name, subName, subTags, tabs );
+        ins.execute();
     }
     
     /**
@@ -83,9 +79,9 @@ public class Editor {
      * @param rows
      * @param cols 
      */
-    public void insert (Buffer toInsert, int startIndex, int rows, int cols) {
-        int tabs = indentor.calulateTabs(toInsert.getText(), startIndex);
-        toInsert.setText(inserter.insertTable(toInsert.getText(), startIndex, 
-                rows, cols, tabs));
+    public void insert (Buffer toInsert, int rows, int cols) {
+        int tabs = Indent.calulateTabs(toInsert.getText(), toInsert.getCursorStartPos());
+        EditorStrategy ins = new Insert( toInsert, rows, cols, tabs );
+        ins.execute();
     }
 }

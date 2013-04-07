@@ -336,14 +336,14 @@ public class MainScreen extends javax.swing.JFrame {
     private void emTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emTagItemActionPerformed
         updateCurrentBuffer();
         int index = jTabbedPane1.getSelectedIndex();
-        c.insert(index, "em", textAreas.get(index).getCaretPosition());
+        c.insert(index, "em");
         updateCurrentTextArea();
     }//GEN-LAST:event_emTagItemActionPerformed
 
     private void bTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTagItemActionPerformed
         updateCurrentBuffer();
         int index = getCurrentIndex();
-        c.insert(index, "b", textAreas.get(index).getCaretPosition());
+        c.insert(index, "b");
         updateCurrentTextArea();
     }//GEN-LAST:event_bTagItemActionPerformed
 

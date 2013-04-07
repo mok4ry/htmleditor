@@ -32,22 +32,22 @@ public class MainController {
     
     public void indent (int bufferIndex, int startIndex, int endIndex) {
         if ( indexOutOfRange(bufferIndex) ) return;
-        editor.indent(buffers.get(bufferIndex), startIndex, endIndex);
+        editor.indent(buffers.get(bufferIndex));
     }
     
-    public void insert (int bufferIndex, String name, int index){
+    public void insert (int bufferIndex, String name){
         if ( indexOutOfRange(bufferIndex) ) return;
-        editor.insert(buffers.get(bufferIndex), name, index);
+        editor.insert(buffers.get(bufferIndex), name);
     }
     
-    public void insert (int bufferIndex, int index, int rows, int cols){
+    public void insert (int bufferIndex, int rows, int cols){
         if ( indexOutOfRange(bufferIndex) ) return;
-        editor.insert(buffers.get(bufferIndex), index, rows, cols);
+        editor.insert(buffers.get(bufferIndex), rows, cols);
     }
     
-    public void insert (int bufferIndex, String name, String subName, int startIndex, int endIndex){
+    public void insert (int bufferIndex, String name, String subName, int numSubs ){
         if ( indexOutOfRange(bufferIndex) ) return;
-        editor.insert(buffers.get(bufferIndex), name, subName, startIndex, endIndex);
+        editor.insert(buffers.get(bufferIndex), name, subName, numSubs);
     }
     
     public int getIndexOfPathname( String pathname ) {

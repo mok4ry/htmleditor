@@ -95,9 +95,19 @@ public class Buffer {
         this.filePath = filePath;
     }
     
+    // stub for future functionality
+    public int getCursorStartPos() {
+        return 0;
+    }
+    
+    // stub for future functionality
+    public int getCursorEndPos() {
+        return 0;
+    }
+    
     @Override
     public boolean equals( Object o ) {
-        if ( o instanceof Buffer ) return false;
+        if ( !(o instanceof Buffer) ) return false;
         return ((Buffer)o).getFilePath().equals(filePath);
     }
     

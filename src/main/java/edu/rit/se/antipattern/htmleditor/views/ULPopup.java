@@ -102,7 +102,7 @@ public class ULPopup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        cont.insert(buffer, "ul", "li", curs, Integer.parseInt(jTextField2.getText()));
+        cont.insert(buffer, "ul", "li", Integer.parseInt(jTextField2.getText()));
         main.updateText();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
