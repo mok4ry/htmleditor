@@ -7,9 +7,12 @@ package edu.rit.se.antipattern.htmleditor.models;
  */
 public class Buffer {
     
+    private LockedBuffer lastState;
     private String filePath;
     private String fileName;
     private String text;
+    private int startIndex;
+    private int endIndex;
     
     /**
      * Initializes a new buffer with the given file path with no text
@@ -20,6 +23,32 @@ public class Buffer {
         this.filePath = filePath;
         this.fileName = getFileNameFromPath(filePath);
         this.text = "";
+        this.startIndex = 0;
+        this.endIndex = 0;
+        this.lastState = null;
+    }
+    
+    public Buffer (Buffer toClone){
+        this.filePath = toClone.getFilePath();
+        this.fileName = toClone.getFileName();
+        this.text = toClone.getText();
+        this.startIndex = toClone.getCursorStartPos();
+        this.endIndex = toClone.getCursorEndPos();
+        this.lastState = toClone.getLastState();
+    }
+    
+    public void SaveBuffer () {
+        lastState = new LockedBuffer(new Buffer(this));
+    }
+    
+    public void RevertBuffer () {
+        Buffer temp = new Buffer(lastState.getBuffer());
+        this.filePath = temp.getFilePath();
+        this.fileName = temp.getFileName();
+        this.text = temp.getText();
+        this.startIndex = temp.getCursorStartPos();
+        this.endIndex = temp.getCursorEndPos();
+        this.lastState = temp.getLastState();
     }
     
     /**
@@ -53,6 +82,22 @@ public class Buffer {
      */
     public String getText () {
         return text;
+    }
+    
+    public int getCursorStartPos(){
+        return this.startIndex;
+    }
+    
+    /**
+     * 
+     * @return the end index of the selected text
+     */
+    public int getCursorEndPos(){
+        return this.endIndex;
+    }
+    
+    public LockedBuffer getLastState(){
+        return this.lastState;
     }
     
     /**
