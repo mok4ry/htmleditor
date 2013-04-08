@@ -88,12 +88,13 @@ public class Buffer {
         return this.startIndex;
     }
     
-    /**
-     * 
-     * @return the end index of the selected text
-     */
     public int getCursorEndPos(){
         return this.endIndex;
+    }
+    
+    public void setCursorPosition( int start, int end ) {
+        this.startIndex = start;
+        this.endIndex = end;
     }
     
     public LockedBuffer getLastState(){

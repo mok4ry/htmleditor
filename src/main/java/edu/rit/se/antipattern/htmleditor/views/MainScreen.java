@@ -413,7 +413,10 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
     private void updateBuffer( int index ) {
-        c.setBufferText(index, textAreas.get(index).getText());
+        javax.swing.JTextArea jta = textAreas.get(index);
+        c.setBufferText(index, jta.getText());
+        c.setBufferCursorPosition( index,
+                jta.getSelectionStart(), jta.getSelectionEnd() );
     }
     
     private void setEditorMenuEnabled( boolean onOrOff ) {

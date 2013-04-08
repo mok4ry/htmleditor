@@ -184,6 +184,10 @@ public class MainController {
         buffers.get(index).setText(text);
     }
     
+    public void setBufferCursorPosition( int index, int start, int end ) {
+        buffers.get(index).setCursorPosition(start, end);
+    }
+    
     private boolean indexOutOfRange( int index ) {
         return index < 0 || index >= buffers.size();
     }
