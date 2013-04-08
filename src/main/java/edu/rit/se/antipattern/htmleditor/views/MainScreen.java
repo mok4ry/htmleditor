@@ -315,7 +315,7 @@ public class MainScreen extends javax.swing.JFrame {
                 javax.swing.JTextArea j = textAreas.get(currentIndex);
                 if (evt.getKeyChar() == '\n') {
                     c.setBufferText(currentIndex, j.getText());
-                    int i = c.autoIndent(currentIndex, j.getCaretPosition());
+                    int i = c.autoIndent(currentIndex);
                     j.setText(c.getBufferText(currentIndex));
                     j.setCaretPosition(i);
                 }
@@ -369,7 +369,7 @@ public class MainScreen extends javax.swing.JFrame {
         javax.swing.JTextArea j = textAreas.get(index);
         int start = j.getSelectionStart();
         int end = j.getSelectionEnd()-1;
-        c.indent(index, start, end);
+        c.indent(index);
         updateCurrentTextArea();
         j.setSelectionStart(start);
         j.setSelectionEnd(end);
