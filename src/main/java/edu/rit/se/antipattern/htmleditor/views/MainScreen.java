@@ -314,7 +314,7 @@ public class MainScreen extends javax.swing.JFrame {
                 int currentIndex = jTabbedPane1.getSelectedIndex();
                 javax.swing.JTextArea j = textAreas.get(currentIndex);
                 if (evt.getKeyChar() == '\n') {
-                    c.setBufferText(currentIndex, j.getText());
+                    updateCurrentBuffer();
                     int i = c.autoIndent(currentIndex);
                     j.setText(c.getBufferText(currentIndex));
                     j.setCaretPosition(i);

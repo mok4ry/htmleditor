@@ -37,7 +37,7 @@ public class Editor {
     public int autoIndent (Buffer toIndent) {
         int i = 0, cursorPos = toIndent.getCursorStartPos();
         String text = toIndent.getText();
-        int numTabs = Indent.calulateTabs(text, cursorPos-1);
+        int numTabs = Indent.calulateTabs(text, cursorPos - 1);
         for (i = 0 ; i < numTabs; i++) {
             toIndent.insertText("\t", cursorPos);
         }
