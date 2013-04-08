@@ -11,9 +11,9 @@ import org.apache.commons.io.FileUtils;
 
 /**
  * Main controller for managing information between the HTML Editor's view and
- * models.
+ * models. Provides methods for manipulating buffers.
  * 
- * @author TeamAntiPattern
+ * @author Team Antipattern
  */
 public class MainController {
     
@@ -23,6 +23,9 @@ public class MainController {
     private int currentBufferIndex, previousBufferIndex;
     private Editor editor;
     
+    /**
+     * Sole constructor for the HTML editor's controller.
+     */
     public MainController() {
         buffers = new ArrayList<Buffer>();
         currentBufferIndex = -1;
@@ -70,7 +73,6 @@ public class MainController {
         // TODO: What happens if you save a buffer with no filename?
         if ( !maxTabsOpen() ) {
             buffers.add( new Buffer(String.format("Untitled%d.html", num)) );
-            updateCurrentBufferAfterCreate();
         } else return false;
         return true;
     }
@@ -80,7 +82,6 @@ public class MainController {
         String absPath = openedFile.getAbsolutePath();
         try {
             buffers.add( new Buffer( absPath, getFileText(absPath) ) );
-            updateCurrentBufferAfterCreate();
         } catch ( IOException e ) {
             return false;
         }
@@ -112,23 +113,8 @@ public class MainController {
     public boolean removeBuffer( int index ) {
         if ( buffers.size() > index && index >= 0 ) {
             buffers.remove(index);
-            updateCurrentBufferAfterRemove(index);
             return true;
         } else return false;
-    }
-    
-    private void updateCurrentBufferAfterCreate() {
-        previousBufferIndex = currentBufferIndex;
-        currentBufferIndex = buffers.size() - 1;
-    }
-    
-    private void updateCurrentBufferAfterRemove( int index ) {
-        if ( buffers.isEmpty() )
-            currentBufferIndex = -1;
-        else {
-            previousBufferIndex = currentBufferIndex;
-            currentBufferIndex = (buffers.size() > index) ? index : index - 1;
-        }
     }
     
     public boolean updateBufferFilepath( int index, String newFilepath ) {
@@ -197,6 +183,11 @@ public class MainController {
     }
     
     @Deprecated
+    /**
+     * Gets the buffer at a given index. Deprecated because any buffer
+     * manipulation can and should be done via the other methods this controller
+     * provides.
+     */
     public Buffer get(int index) {
         return buffers.get(index);
     }

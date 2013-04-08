@@ -5,8 +5,9 @@ import edu.rit.se.antipattern.htmleditor.views.MainScreen;
 import java.io.File;
 
 /**
- * Our main driver class that sets the view
- * @author TeamAntiPattern
+ * Main driver class of the HTML editor.
+ * 
+ * @author Team Antipattern
 */
 public class HTMLEditor 
 {
