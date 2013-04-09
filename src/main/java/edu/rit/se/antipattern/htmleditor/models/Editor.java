@@ -12,19 +12,13 @@ package edu.rit.se.antipattern.htmleditor.models;
 public class Editor {
     
     /**
-     * Instantiates an editor construct.
-     */
-    public Editor () {
-        
-    }
-    
-    /**
      * Indents a given buffer with the given start and end indexes
      * @param toIndent
      * @param startIndex
      * @param endIndex 
      */
     public void indent ( Buffer toIndent ) {
+        toIndent.saveBuffer();
         EditorStrategy i = new Indent( toIndent );
         i.execute();
     }
@@ -52,6 +46,7 @@ public class Editor {
      * @param startIndex 
      */
     public void insert (Buffer toInsert, String name ) {
+        toInsert.saveBuffer();
         EditorStrategy ins = new Insert( toInsert, name, 0 );
         ins.execute();
     }
@@ -66,6 +61,7 @@ public class Editor {
      * @param subTags 
      */
     public void insert (Buffer toInsert, String name, String subName, int subTags) {
+        toInsert.saveBuffer();
         int tabs = Indent.calulateTabs(toInsert.getText(), toInsert.getCursorStartPos());
         EditorStrategy ins = new Insert( toInsert, name, subName, subTags, tabs );
         ins.execute();
@@ -79,6 +75,7 @@ public class Editor {
      * @param cols 
      */
     public void insert (Buffer toInsert, int rows, int cols) {
+        toInsert.saveBuffer();
         int tabs = Indent.calulateTabs(toInsert.getText(), toInsert.getCursorStartPos());
         EditorStrategy ins = new Insert( toInsert, rows, cols, tabs );
         ins.execute();

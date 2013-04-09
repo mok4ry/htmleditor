@@ -102,11 +102,6 @@ public class MainScreen extends javax.swing.JFrame {
         jMenuBar1.add(fileMenu);
 
         editMenu.setText("Edit");
-        editMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editMenuActionPerformed(evt);
-            }
-        });
 
         insertItem.setText("Insert");
 
@@ -198,6 +193,11 @@ public class MainScreen extends javax.swing.JFrame {
 
         undoItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
         undoItem.setText("Undo");
+        undoItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                undoItemActionPerformed(evt);
+            }
+        });
         editMenu.add(undoItem);
 
         jMenuBar1.add(editMenu);
@@ -406,11 +406,11 @@ public class MainScreen extends javax.swing.JFrame {
         javax.swing.JOptionPane.showMessageDialog(getContentPane(), formattedAlertMsg);
     }//GEN-LAST:event_validateItemActionPerformed
 
-    private void editMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMenuActionPerformed
+    private void undoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoItemActionPerformed
         updateCurrentBuffer();
         c.undoOperation(jTabbedPane1.getSelectedIndex());
         updateCurrentTextArea();
-    }//GEN-LAST:event_editMenuActionPerformed
+    }//GEN-LAST:event_undoItemActionPerformed
 
     private int getCurrentIndex() {
         return jTabbedPane1.getSelectedIndex();

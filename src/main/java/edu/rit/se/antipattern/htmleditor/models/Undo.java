@@ -17,6 +17,6 @@ public class Undo implements EditorStrategy {
     }
     
     public void execute () {
-        b.RevertBuffer();
+        b.revertBuffer();
     }
 }

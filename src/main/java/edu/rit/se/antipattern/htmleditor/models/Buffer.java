@@ -29,19 +29,19 @@ public class Buffer {
     }
     
     public Buffer (Buffer toClone){
-        this.filePath = toClone.getFilePath();
-        this.fileName = toClone.getFileName();
-        this.text = toClone.getText();
+        this.filePath = new String(toClone.getFilePath());
+        this.fileName = new String(toClone.getFileName());
+        this.text = new String(toClone.getText());
         this.startIndex = toClone.getCursorStartPos();
         this.endIndex = toClone.getCursorEndPos();
         this.lastState = toClone.getLastState();
     }
     
-    public void SaveBuffer () {
+    public void saveBuffer () {
         lastState = new LockedBuffer(new Buffer(this));
     }
     
-    public void RevertBuffer () {
+    public void revertBuffer () {
         Buffer temp = new Buffer(lastState.getBuffer());
         this.filePath = temp.getFilePath();
         this.fileName = temp.getFileName();
