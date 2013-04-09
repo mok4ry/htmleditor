@@ -7,5 +7,5 @@ Team members:
 * Adam Blaine
 * Obaseki Idemudia
 * Matt Mokary
-* Zach Nielson
+* Zach Nielsen
 * Wayne Starr
