@@ -71,7 +71,7 @@ public class Insert implements EditorStrategy {
         for ( i = 0 ; i < tabDepth ; i++) {
             newString = newString + "\t";
         }
-        newString = newString + text.substring(0,index) + "<" + name + "></" + name
+        newString =  text.substring(0,index) + newString + "<" + name + "></" + name
                 + ">" + text.substring(index);
         return newString;
     }
@@ -86,7 +86,7 @@ public class Insert implements EditorStrategy {
         for ( i = 0 ; i < tabDepth ; i++) {
             newString = newString + "\t";
         }
-        newString = newString + "</" + name + ">\n" + text.substring(index);
+        newString = newString + "</" + name + ">" + text.substring(index);
         return newString;
     }
 
@@ -101,7 +101,7 @@ public class Insert implements EditorStrategy {
                 newString = newString + "\t";
             }
             newString = newString + insertLayered("", "th", "td", 0, cols, 
-                    tabDepth+1);
+                    tabDepth+1) + "\n";
         }
         
         int j = 0;
@@ -110,13 +110,13 @@ public class Insert implements EditorStrategy {
                 newString = newString + "\t";
             }
             newString = newString + insertLayered("", "tr", "td", 0, cols, 
-                    tabDepth+1);
+                    tabDepth+1) + "\n";
         }
         
         for ( i = 0 ; i < tabDepth ; i++) {
             newString = newString + "\t";
         }
-        newString = newString + "</table>\n" + text.substring(index);
+        newString = newString + "</table>" + text.substring(index);
         return newString;
     }
 }

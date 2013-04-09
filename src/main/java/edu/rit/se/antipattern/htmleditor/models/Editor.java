@@ -52,8 +52,7 @@ public class Editor {
      * @param startIndex 
      */
     public void insert (Buffer toInsert, String name ) {
-        int tabs = Indent.calulateTabs(toInsert.getText(), toInsert.getCursorStartPos());
-        EditorStrategy ins = new Insert( toInsert, name, tabs );
+        EditorStrategy ins = new Insert( toInsert, name, 0 );
         ins.execute();
     }
     
