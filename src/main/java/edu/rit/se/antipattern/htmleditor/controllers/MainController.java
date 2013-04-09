@@ -78,6 +78,11 @@ public class MainController {
         editor.insert(buffers.get(bufferIndex), name, subName, numSubs);
     }
     
+    public void undoOperation( int bufferIndex ) {
+        if ( indexOutOfRange(bufferIndex) ) return;
+        editor.undo( buffers.get(bufferIndex) );
+    }
+    
     /**
      * Find the index of the buffer associated with the given file path. Returns
      * -1 if such a buffer does not exist.
