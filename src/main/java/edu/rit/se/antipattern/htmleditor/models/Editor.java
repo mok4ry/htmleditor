@@ -83,4 +83,14 @@ public class Editor {
         EditorStrategy ins = new Insert( toInsert, rows, cols, tabs );
         ins.execute();
     }
+    
+    /**
+     * 
+     * 
+     * @param toUndo 
+     */
+    public void undo( Buffer toUndo ) {
+        EditorStrategy undo = new Undo( toUndo );
+        undo.execute();
+    }
 }

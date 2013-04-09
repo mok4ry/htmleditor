@@ -57,6 +57,7 @@ public class MainScreen extends javax.swing.JFrame {
         pasteItem = new javax.swing.JMenuItem();
         validateItem = new javax.swing.JMenuItem();
         prefItem = new javax.swing.JMenuItem();
+        undoItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +102,11 @@ public class MainScreen extends javax.swing.JFrame {
         jMenuBar1.add(fileMenu);
 
         editMenu.setText("Edit");
+        editMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editMenuActionPerformed(evt);
+            }
+        });
 
         insertItem.setText("Insert");
 
@@ -189,6 +195,10 @@ public class MainScreen extends javax.swing.JFrame {
         prefItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
         prefItem.setText("Auto-wrap");
         editMenu.add(prefItem);
+
+        undoItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
+        undoItem.setText("Undo");
+        editMenu.add(undoItem);
 
         jMenuBar1.add(editMenu);
 
@@ -396,6 +406,12 @@ public class MainScreen extends javax.swing.JFrame {
         javax.swing.JOptionPane.showMessageDialog(getContentPane(), formattedAlertMsg);
     }//GEN-LAST:event_validateItemActionPerformed
 
+    private void editMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMenuActionPerformed
+        updateCurrentBuffer();
+        c.undoOperation(jTabbedPane1.getSelectedIndex());
+        updateCurrentTextArea();
+    }//GEN-LAST:event_editMenuActionPerformed
+
     private int getCurrentIndex() {
         return jTabbedPane1.getSelectedIndex();
     }
@@ -512,6 +528,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem tableTagItem;
     private javax.swing.JMenu tagMenu;
     private javax.swing.JMenuItem ulTagItem;
+    private javax.swing.JMenuItem undoItem;
     private javax.swing.JMenuItem validateItem;
     // End of variables declaration//GEN-END:variables
 

@@ -6,9 +6,9 @@ package edu.rit.se.antipattern.htmleditor.models;
 
 /**
  *
- * @author David
+ * @author Team Antipattern
  */
-public class Undo {
+public class Undo implements EditorStrategy {
     
     private Buffer b = null;
     
