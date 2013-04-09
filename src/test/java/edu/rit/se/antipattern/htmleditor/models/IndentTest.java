@@ -32,10 +32,13 @@ public class IndentTest extends TestCase {
      */
     public void testIndentTextEmpty() {
         System.out.println("indentTextEmpty");
-        Indent instance = new Indent();
-        String expResult = "";
-        String result = instance.indentText("", 0, 0);
-        assertEquals(expResult, result);
+        Buffer toIndent = new Buffer("C:\\Hello.html");
+        toIndent.setText("");
+        EditorStrategy ins = new Indent( toIndent );
+        String expected = "";
+        ins.execute();
+        String result = toIndent.getText();
+        assertEquals(expected, result);
     }
     
     /**
@@ -43,11 +46,13 @@ public class IndentTest extends TestCase {
      */
     public void testIndentTextPlain() {
         System.out.println("indentTextPlain");
-        Indent instance = new Indent();
-        String input = "Hello World!\nI love the world!\n";
-        String expResult = "Hello World!\nI love the world!";
-        String result = instance.indentText(input, 0, input.length()-1);
-        assertEquals(expResult, result);
+        Buffer toIndent = new Buffer("C:\\Hello.html");
+        toIndent.setText("Hello World!\nI love the world!\n");
+        EditorStrategy ins = new Indent( toIndent );
+        String expected = "Hello World!\nI love the world!";
+        ins.execute();
+        String result = toIndent.getText();
+        assertEquals(expected, result);
     }
     
     /**
@@ -55,36 +60,45 @@ public class IndentTest extends TestCase {
      */
     public void testIndentTextBasic() {
         System.out.println("indentTextBasic");
-        Indent instance = new Indent();
-        String expResult = "<b>Hello</b>\n<em>World</em>";
-        String input = "<b>Hello</b>\n<em>World</em>";
-        String result = instance.indentText(input, 0, input.length()-1);
-        assertEquals(expResult, result);
+        Buffer toIndent = new Buffer("C:\\Hello.html");
+        toIndent.setText("<b>Hello</b>\n<em>World</em>");
+        EditorStrategy ins = new Indent( toIndent );
+        String expected = "<b>Hello</b>\n<em>World</em>";
+        ins.execute();
+        String result = toIndent.getText();
+        assertEquals(expected, result);
     }
     
     /**
      * Test of indentText method with advanced html.
-     *
+     */
     public void testIndentTextAdvanced() {
         System.out.println("indentTextAdvanced");
-        Indent instance = new Indent();
-        String expResult = "<table>\n<th>\n<tr><b>Hello</b></tr>\n</th>\n</table>\n";
-        String input = "<table>\n\t<th>\n\t\t<tr><b>Hello</b></tr>\n\t</th>\n</table>";
-        String result = instance.indentText(input, 0, input.length()-1);
-        System.out.println(result);
-        assertEquals(expResult, result);
-    }*/
+        Buffer toIndent = new Buffer("C:\\Hello.html");
+        String input = "<table>\n<th>\n<tr><b>Hello</b></tr>\n</th>\n</table>\n";
+        toIndent.setCursorPosition(0, input.length()-1);
+        toIndent.setText(input);
+        EditorStrategy ins = new Indent( toIndent );
+        String expected = "<table>\n\t<th>\n\t\t<tr><b>Hello</b></tr>\n\t</th>\n</table>";
+        ins.execute();
+        String result = toIndent.getText();
+        assertEquals(expected, result);
+    }
     
     /**
      * Test of indentText method with super advanced html.
-     *
+     */
     public void testIndentTextSuperAdvanced() {
         System.out.println("indentTextSuperAdvanced");
-        Indent instance = new Indent();
-        String expResult = "\t<table>\n<th>\n<tr><b>Hello</b></tr>\n</th>\n</table>\n\n\n\n";
-        String input = "<table>\n\t\t<th>\n\t\t\t<tr><b>Hello</b></tr>\n\t\t</th>\n</table>";
-        String result = instance.indentText(input, 11, input.length()-10);
+        Buffer toIndent = new Buffer("C:\\Hello.html");
+        String input = "\t<table>\n<th>\n<tr><b>Hello</b></tr>\n</th>\n</table>\n\n\n\n";
+        toIndent.setCursorPosition(11, input.length()-13);
+        toIndent.setText(input);
+        EditorStrategy ins = new Indent( toIndent );
+        String expected = "<table>\n\t\t<th>\n\t\t\t<tr><b>Hello</b></tr>\n\t\t</th>\n\t</table>";
+        ins.execute();
+        String result = toIndent.getText();
         System.out.println(result);
-        assertEquals(expResult, result);
-    }*/
+        assertEquals(expected, result);
+    }
 }
