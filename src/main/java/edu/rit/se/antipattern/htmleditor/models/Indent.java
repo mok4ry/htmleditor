@@ -100,9 +100,10 @@ public class Indent implements EditorStrategy {
             while (line.charAt(tabs) == tab && tabs < line.length()-1) {
                 tabs++;
             }
+            if (line.charAt(tabs) == tab)
+                tabs++;
         }
-        if (tabs == line.length()-1)
-            tabs++;
+        
         return tabs;
     }
     
@@ -113,16 +114,17 @@ public class Indent implements EditorStrategy {
      */
     private static int tabDifference (String line) {
         int tabDifference = 0;
+        if (line.length() < 2) {
+            Pattern open = Pattern.compile("<\\w*>");
+            Matcher openTags = open.matcher(line);
+            while (openTags.find())
+                tabDifference++;
         
-        Pattern open = Pattern.compile("<\\w*>");
-        Matcher openTags = open.matcher(line);
-        while (openTags.find())
-            tabDifference++;
-        
-        Pattern close = Pattern.compile("</\\w*>");
-        Matcher closeTags = close.matcher(line);
-        while (closeTags.find())
-            tabDifference--;
+            Pattern close = Pattern.compile("</\\w*>");
+            Matcher closeTags = close.matcher(line);
+            while (closeTags.find())
+                tabDifference--;
+        }
         
         return tabDifference;
     }
@@ -144,7 +146,7 @@ public class Indent implements EditorStrategy {
                 curLine++;
             i--;
         }
-        String[] newText = text.split("\n");
+        String[] newText = text.split("\n", -1);
         int tabDiff = 0;
         if (curLine > 0) {
             numTabs = countTabs(newText[curLine-1]);
