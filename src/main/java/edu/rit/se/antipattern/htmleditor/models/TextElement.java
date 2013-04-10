@@ -28,14 +28,23 @@ public class TextElement implements Element {
         return text;
     }
     
+    public Element[] getChildren() {
+        return new Element[0];
+    }
+    
     /**
      * Get a string representation of this TextElement.  This is simply the text
      * it contains.  Note that this is the same as getName()
      * 
      * @return Text contained by this text element.
      */
+    @Override
     public String toString() {
         return text;
+    }
+    
+    public boolean equals( Object o ) {
+        return o instanceof TextElement && ((Element)o).getName().equals(text);
     }
     
 }

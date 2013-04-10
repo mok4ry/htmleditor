@@ -44,7 +44,7 @@ public class Parser {
     }
     
     protected static String stripSpecialChars( String html ) {
-        String specialCharsRegex = "(\\n|\\r)*";
+        String specialCharsRegex = "(\\n|\\r|\\t)*";
         return html.replaceAll( specialCharsRegex, "" );
     }
     

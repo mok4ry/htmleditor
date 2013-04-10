@@ -58,6 +58,8 @@ public class MainScreen extends javax.swing.JFrame {
         validateItem = new javax.swing.JMenuItem();
         prefItem = new javax.swing.JMenuItem();
         undoItem = new javax.swing.JMenuItem();
+        ViewMenu = new javax.swing.JMenu();
+        outlineMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -202,6 +204,18 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenuBar1.add(editMenu);
 
+        ViewMenu.setText("View");
+
+        outlineMenuItem.setText("Outline");
+        outlineMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                outlineMenuItemActionPerformed(evt);
+            }
+        });
+        ViewMenu.add(outlineMenuItem);
+
+        jMenuBar1.add(ViewMenu);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,6 +252,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_openItemActionPerformed
 
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
+        updateCurrentBuffer();
         attemptSaveBuffer( jTabbedPane1.getSelectedIndex() );
     }//GEN-LAST:event_saveItemActionPerformed
 
@@ -256,7 +271,6 @@ public class MainScreen extends javax.swing.JFrame {
                 return CONFIRMED;
             }
         }
-        c.setBufferText(index, textAreas.get(index).getText());
         return closeBuffer(index);
     }
     
@@ -412,6 +426,12 @@ public class MainScreen extends javax.swing.JFrame {
         updateCurrentTextArea();
     }//GEN-LAST:event_undoItemActionPerformed
 
+    private void outlineMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outlineMenuItemActionPerformed
+        updateCurrentBuffer();
+        javax.swing.JFrame outline = new OutlineView(getCurrentIndex(), c);
+        outline.setVisible(true);
+    }//GEN-LAST:event_outlineMenuItemActionPerformed
+
     private int getCurrentIndex() {
         return jTabbedPane1.getSelectedIndex();
     }
@@ -507,6 +527,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu ViewMenu;
     private javax.swing.JMenuItem bTagItem;
     private javax.swing.JMenuItem cutItem;
     private javax.swing.JMenu editMenu;
@@ -521,6 +542,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem newItem;
     private javax.swing.JMenuItem openItem;
+    private javax.swing.JMenuItem outlineMenuItem;
     private javax.swing.JMenuItem pasteItem;
     private javax.swing.JMenuItem prefItem;
     private javax.swing.JMenuItem quitItem;

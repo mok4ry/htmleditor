@@ -13,4 +13,12 @@ public interface Element {
      */
     public String getName();
     
+    /**
+     * Get this element's children.  Returns an empty array if this element is a
+     * leaf.
+     * 
+     * @return Array of this element's children. Will be empty if node is a leaf
+     */
+    public Element[] getChildren();
+    
 }

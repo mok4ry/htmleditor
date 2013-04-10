@@ -2,6 +2,8 @@ package edu.rit.se.antipattern.htmleditor.controllers;
 
 import edu.rit.se.antipattern.htmleditor.models.Buffer;
 import edu.rit.se.antipattern.htmleditor.models.Editor;
+import edu.rit.se.antipattern.htmleditor.models.Element;
+import edu.rit.se.antipattern.htmleditor.models.HTMLTreeModel;
 import edu.rit.se.antipattern.htmleditor.models.ParseException;
 import edu.rit.se.antipattern.htmleditor.models.Parser;
 import java.io.File;
@@ -320,6 +322,23 @@ public class MainController {
      */
     public boolean isEmpty() {
         return buffers.isEmpty();
+    }
+    
+    /**
+     * Gets a JTree object representing the tree of HTML elements in the
+     * specified buffer. Returns null if the buffer contains badly-formed HTML
+     * 
+     * @param bufferIndex Index of the buffer of which to get a JTree
+     * @return A JTree object representing the HTML elements in the specified
+     * buffer, or null if buffer contains badly-formed HTML
+     */
+    public javax.swing.tree.TreeModel getJTreeOfBuffer( int bufferIndex ) {
+        try {
+            String bufferText = buffers.get(bufferIndex).getText();
+            return new HTMLTreeModel(Parser.parseDocument(bufferText));
+        } catch ( ParseException p ) {
+            return null;
+        }
     }
     
     @Deprecated

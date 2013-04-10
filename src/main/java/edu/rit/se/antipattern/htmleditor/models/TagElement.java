@@ -32,6 +32,10 @@ public class TagElement implements Element {
         return name;
     }
     
+    public Element[] getChildren() {
+        return contents;
+    }
+    
     /**
      * Returns a string representation of this tag and its contents.
      * 
@@ -39,11 +43,27 @@ public class TagElement implements Element {
      */
     @Override
     public String toString() {
-        String result = String.format("<%s>", name );
-        for ( Element e : contents ) result += e.toString();
-        result += String.format("</%s>", name );
-        
-        return result;
+        return name;
+//        String result = String.format("<%s>", name );
+//        for ( Element e : contents ) result += e.toString();
+//        result += String.format("</%s>", name );
+//        
+//        return result;
     }
     
+    @Override
+    public boolean equals( Object o ) {
+        try {
+            Element e = (Element)o;
+            if( !(e instanceof TagElement && e.getName().equals(name)) )
+                return false;
+            Element[] otherChildren = e.getChildren();
+            for ( int i = 0; i < contents.length; i++ )
+                if ( i >= otherChildren.length || !contents[i].equals(otherChildren[i]) )
+                    return false;
+        } catch ( ClassCastException e ) {
+            return false;
+        }
+        return true;
+    }
 }
