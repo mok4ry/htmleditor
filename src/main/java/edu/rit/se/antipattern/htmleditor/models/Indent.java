@@ -114,7 +114,7 @@ public class Indent implements EditorCommand {
      */
     private static int tabDifference (String line) {
         int tabDifference = 0;
-        Pattern open = Pattern.compile("<\\w*>");
+        Pattern open = Pattern.compile("<[a-zA-Z][a-zA-Z =./:\"]*[^/]>");
         Matcher openTags = open.matcher(line);
         while (openTags.find())
             tabDifference++;
