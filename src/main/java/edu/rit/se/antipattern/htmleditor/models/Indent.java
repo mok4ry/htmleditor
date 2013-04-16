@@ -114,17 +114,15 @@ public class Indent implements EditorCommand {
      */
     private static int tabDifference (String line) {
         int tabDifference = 0;
-        if (line.length() < 2) {
-            Pattern open = Pattern.compile("<\\w*>");
-            Matcher openTags = open.matcher(line);
-            while (openTags.find())
-                tabDifference++;
-        
-            Pattern close = Pattern.compile("</\\w*>");
-            Matcher closeTags = close.matcher(line);
-            while (closeTags.find())
-                tabDifference--;
-        }
+        Pattern open = Pattern.compile("<\\w*>");
+        Matcher openTags = open.matcher(line);
+        while (openTags.find())
+            tabDifference++;
+            
+        Pattern close = Pattern.compile("</\\w*>");
+        Matcher closeTags = close.matcher(line);
+        while (closeTags.find())
+            tabDifference--;
         
         return tabDifference;
     }
