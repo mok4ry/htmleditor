@@ -84,7 +84,7 @@ public class MainController {
         if ( indexOutOfRange(bufferindex) ) return;
         java.util.HashMap<String,String> options = new java.util.HashMap<String, String>();
         options.put("url", url);
-        editor.insertWithOptions(buffers.get(bufferindex), "img", options);
+        editor.insertWithOptions(buffers.get(bufferindex), "img", options, true);
     }
     
     public void undoOperation( int bufferIndex ) {

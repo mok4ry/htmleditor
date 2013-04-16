@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.rit.se.antipattern.htmleditor.models;
 
 /**
@@ -17,12 +13,14 @@ public class Insert implements EditorCommand {
     private java.util.HashMap<String,String> options = null;
     private int numSubTags, tabDepth, rows, cols;
     private int typeOfInsert;
+    private boolean selfClosing;
     
     private static final int FLAT_INSERT = 0;
     private static final int LAYERED_INSERT = 1;
     private static final int TABLE_INSERT = 2;
     private static final int WITH_OPTIONS = 3;
     
+    // flat insert
     public Insert( Buffer toInsertInto, String tagName, int tabDepth ) {
         this.b = toInsertInto;
         this.tagName = tagName;
@@ -30,14 +28,17 @@ public class Insert implements EditorCommand {
         this.typeOfInsert = FLAT_INSERT;
     }
     
+    // insert with options
     public Insert( Buffer toInsertInto, String tagName,
-            java.util.HashMap<String,String> options ) {
+            java.util.HashMap<String,String> options, boolean selfClosing ) {
         this.b = toInsertInto;
         this.tagName = tagName;
         this.options = options;
         this.typeOfInsert = WITH_OPTIONS;
+        this.selfClosing = selfClosing;
     }
     
+    // insert layered
     public Insert( Buffer toInsertInto, String tagName, String subName,
             int numSubTags, int tabDepth ) {
         this.b = toInsertInto;
@@ -48,6 +49,7 @@ public class Insert implements EditorCommand {
         this.typeOfInsert = LAYERED_INSERT;
     }
     
+    // insert table
     public Insert( Buffer toInsertInto, int rows, int cols, int tabDepth ) {
         this.b = toInsertInto;
         this.tabDepth = tabDepth;
@@ -134,8 +136,9 @@ public class Insert implements EditorCommand {
     
     private String insertWithOptions( String text, String tagName,
             java.util.HashMap<String,String> options, int cursorPos ) {
-        String tagString = String.format("<%s%s></%s>", tagName,
-                getOptionsString(options), tagName );
+        String tagString = selfClosing ?
+                String.format("<%s%s />", tagName, getOptionsString(options) )
+                : String.format("<%s%s></%s>", tagName, getOptionsString(options), tagName );
         return text.substring(0, cursorPos) + tagString + text.substring(cursorPos);
     }
     

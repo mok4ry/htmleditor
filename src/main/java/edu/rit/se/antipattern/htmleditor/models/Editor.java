@@ -79,9 +79,10 @@ public class Editor {
         ins.execute();
     }
     
-    public void insertWithOptions(Buffer toInsert, String tagName, HashMap opts) {
+    public void insertWithOptions(Buffer toInsert, String tagName, HashMap opts,
+            boolean selfClosing ) {
         toInsert.saveBuffer();
-        EditorCommand ins = new Insert( toInsert, tagName, opts );
+        EditorCommand ins = new Insert( toInsert, tagName, opts, selfClosing );
         ins.execute();
     }
     
