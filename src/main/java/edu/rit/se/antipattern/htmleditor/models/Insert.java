@@ -9,7 +9,7 @@ package edu.rit.se.antipattern.htmleditor.models;
  * 
  * @author Zach, Wayne
  */
-public class Insert implements EditorStrategy {
+public class Insert implements EditorCommand {
     
     private Buffer b = null;
     private String tagName = null;

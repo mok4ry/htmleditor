@@ -34,7 +34,7 @@ public class IndentTest extends TestCase {
         System.out.println("indentTextEmpty");
         Buffer toIndent = new Buffer("C:\\Hello.html");
         toIndent.setText("");
-        EditorStrategy ins = new Indent( toIndent );
+        EditorCommand ins = new Indent( toIndent );
         String expected = "";
         ins.execute();
         String result = toIndent.getText();
@@ -48,7 +48,7 @@ public class IndentTest extends TestCase {
         System.out.println("indentTextPlain");
         Buffer toIndent = new Buffer("C:\\Hello.html");
         toIndent.setText("Hello World!\nI love the world!\n");
-        EditorStrategy ins = new Indent( toIndent );
+        EditorCommand ins = new Indent( toIndent );
         String expected = "Hello World!\nI love the world!";
         ins.execute();
         String result = toIndent.getText();
@@ -62,7 +62,7 @@ public class IndentTest extends TestCase {
         System.out.println("indentTextBasic");
         Buffer toIndent = new Buffer("C:\\Hello.html");
         toIndent.setText("<b>Hello</b>\n<em>World</em>");
-        EditorStrategy ins = new Indent( toIndent );
+        EditorCommand ins = new Indent( toIndent );
         String expected = "<b>Hello</b>\n<em>World</em>";
         ins.execute();
         String result = toIndent.getText();
@@ -78,7 +78,7 @@ public class IndentTest extends TestCase {
         String input = "<table>\n<th>\n<tr><b>Hello</b></tr>\n</th>\n</table>\n";
         toIndent.setCursorPosition(0, input.length()-1);
         toIndent.setText(input);
-        EditorStrategy ins = new Indent( toIndent );
+        EditorCommand ins = new Indent( toIndent );
         String expected = "<table>\n\t<th>\n\t\t<tr><b>Hello</b></tr>\n\t</th>\n</table>";
         ins.execute();
         String result = toIndent.getText();
@@ -94,7 +94,7 @@ public class IndentTest extends TestCase {
         String input = "\t<table>\n<th>\n<tr><b>Hello</b></tr>\n</th>\n</table>\n\n\n\n";
         toIndent.setCursorPosition(11, input.length()-13);
         toIndent.setText(input);
-        EditorStrategy ins = new Indent( toIndent );
+        EditorCommand ins = new Indent( toIndent );
         String expected = "<table>\n\t\t<th>\n\t\t\t<tr><b>Hello</b></tr>\n\t\t</th>\n\t</table>";
         ins.execute();
         String result = toIndent.getText();

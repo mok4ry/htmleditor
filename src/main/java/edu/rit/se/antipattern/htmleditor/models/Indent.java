@@ -6,7 +6,7 @@ import java.util.regex.*;
  * 
  * @author Zach, Wayne
  */
-public class Indent implements EditorStrategy {
+public class Indent implements EditorCommand {
     
     private static final char tab = '\t';
     private Buffer b = null;

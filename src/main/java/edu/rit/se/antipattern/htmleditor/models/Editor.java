@@ -19,7 +19,7 @@ public class Editor {
      */
     public void indent ( Buffer toIndent ) {
         toIndent.saveBuffer();
-        EditorStrategy i = new Indent( toIndent );
+        EditorCommand i = new Indent( toIndent );
         i.execute();
     }
     
@@ -47,7 +47,7 @@ public class Editor {
      */
     public void insert (Buffer toInsert, String name ) {
         toInsert.saveBuffer();
-        EditorStrategy ins = new Insert( toInsert, name, 0 );
+        EditorCommand ins = new Insert( toInsert, name, 0 );
         ins.execute();
     }
     
@@ -63,7 +63,7 @@ public class Editor {
     public void insert (Buffer toInsert, String name, String subName, int subTags) {
         toInsert.saveBuffer();
         int tabs = Indent.calulateTabs(toInsert.getText(), toInsert.getCursorStartPos());
-        EditorStrategy ins = new Insert( toInsert, name, subName, subTags, tabs );
+        EditorCommand ins = new Insert( toInsert, name, subName, subTags, tabs );
         ins.execute();
     }
     
@@ -77,7 +77,7 @@ public class Editor {
     public void insert (Buffer toInsert, int rows, int cols) {
         toInsert.saveBuffer();
         int tabs = Indent.calulateTabs(toInsert.getText(), toInsert.getCursorStartPos());
-        EditorStrategy ins = new Insert( toInsert, rows, cols, tabs );
+        EditorCommand ins = new Insert( toInsert, rows, cols, tabs );
         ins.execute();
     }
     
@@ -87,7 +87,7 @@ public class Editor {
      * @param toUndo 
      */
     public void undo( Buffer toUndo ) {
-        EditorStrategy undo = new Undo( toUndo );
+        EditorCommand undo = new Undo( toUndo );
         undo.execute();
     }
 }

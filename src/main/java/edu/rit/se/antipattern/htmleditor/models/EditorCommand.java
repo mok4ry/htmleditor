@@ -4,7 +4,7 @@ package edu.rit.se.antipattern.htmleditor.models;
  *
  * @author Team Antipattern
  */
-public interface EditorStrategy {
+public interface EditorCommand {
     
     /**
      * Execute an operation on a buffer.

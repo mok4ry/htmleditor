@@ -8,7 +8,7 @@ package edu.rit.se.antipattern.htmleditor.models;
  *
  * @author Team Antipattern
  */
-public class Undo implements EditorStrategy {
+public class Undo implements EditorCommand {
     
     private Buffer b = null;
     

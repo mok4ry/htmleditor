@@ -34,7 +34,7 @@ public class InsertTest extends TestCase {
         System.out.println("insertFlat");
         Buffer toInsert = new Buffer("C:\\Hello.html");
         toInsert.setText("");
-        EditorStrategy ins = new Insert( toInsert, "em", 0 );
+        EditorCommand ins = new Insert( toInsert, "em", 0 );
         ins.execute();
         String expResult = "<em></em>";
         String result = toInsert.getText();
@@ -50,7 +50,7 @@ public class InsertTest extends TestCase {
         Buffer toInsert = new Buffer("C:\\Hello.html");
         toInsert.setText("Hello");
         toInsert.setCursorPosition(3, 3);
-        EditorStrategy ins = new Insert( toInsert, "b", 0 );
+        EditorCommand ins = new Insert( toInsert, "b", 0 );
         ins.execute();
         String result = toInsert.getText();
         assertEquals(expResult, result);
@@ -63,7 +63,7 @@ public class InsertTest extends TestCase {
         System.out.println("insertLayeredZero");
         Buffer toInsert = new Buffer("C:\\Hello.html");
         toInsert.setText("");
-        EditorStrategy ins = new Insert( toInsert, "ul", "li", 0, 0 );
+        EditorCommand ins = new Insert( toInsert, "ul", "li", 0, 0 );
         ins.execute();
         String result = toInsert.getText();
         String expResult = "<ul>\n</ul>";
@@ -78,7 +78,7 @@ public class InsertTest extends TestCase {
         Buffer toInsert = new Buffer("C:\\Hello.html");
         toInsert.setText("Hello");
         toInsert.setCursorPosition(3, 3);
-        EditorStrategy ins = new Insert( toInsert, "ul", "li", 3, 0 );
+        EditorCommand ins = new Insert( toInsert, "ul", "li", 3, 0 );
         ins.execute();
         String result = toInsert.getText();
         String expResult = "Hel<ul>\n\t<li></li>\n\t<li></li>\n\t<li></li>\n</ul>lo";
@@ -92,7 +92,7 @@ public class InsertTest extends TestCase {
         System.out.println("insertTableZero");
         Buffer toInsert = new Buffer("C:\\Hello.html");
         toInsert.setText("");
-        EditorStrategy ins = new Insert( toInsert, 0, 0, 0 );
+        EditorCommand ins = new Insert( toInsert, 0, 0, 0 );
         ins.execute();
         String result = toInsert.getText();
         String expResult = "<table>\n</table>";
@@ -106,7 +106,7 @@ public class InsertTest extends TestCase {
         System.out.println("insertTableOneZero");
         Buffer toInsert = new Buffer("C:\\Hello.html");
         toInsert.setText("");
-        EditorStrategy ins = new Insert( toInsert, 1, 0, 0 );
+        EditorCommand ins = new Insert( toInsert, 1, 0, 0 );
         ins.execute();
         String result = toInsert.getText();
         String expResult = "<table>\n\t<th>\n\t</th>\n</table>";
@@ -120,7 +120,7 @@ public class InsertTest extends TestCase {
         System.out.println("insertTableOneThree");
         Buffer toInsert = new Buffer("C:\\Hello.html");
         toInsert.setText("");
-        EditorStrategy ins = new Insert( toInsert, 1, 3, 0 );
+        EditorCommand ins = new Insert( toInsert, 1, 3, 0 );
         ins.execute();
         String result = toInsert.getText();
         String expResult = "<table>\n\t<th>\n\t\t<td></td>\n\t\t<td></td>\n\t\t<td></td>\n"
@@ -135,7 +135,7 @@ public class InsertTest extends TestCase {
         System.out.println("insertTableThreeThree");
         Buffer toInsert = new Buffer("C:\\Hello.html");
         toInsert.setText("");
-        EditorStrategy ins = new Insert( toInsert, 3, 3, 0 );
+        EditorCommand ins = new Insert( toInsert, 3, 3, 0 );
         ins.execute();
         String result = toInsert.getText();
         String expResult = "<table>\n\t<th>\n\t\t<td></td>\n\t\t<td></td>\n\t\t<td></td>\n"
