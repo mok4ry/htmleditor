@@ -49,9 +49,9 @@ public class MainController {
      * @param bufferIndex Index of the buffer into which to insert.
      * @param name Name of the tag to insert (e.g. "div", "p", "b", etc.)
      */
-    public void insert (int bufferIndex, String name){
+    public void insertFlat (int bufferIndex, String name){
         if ( indexOutOfRange(bufferIndex) ) return;
-        editor.insert(buffers.get(bufferIndex), name);
+        editor.insertFlat(buffers.get(bufferIndex), name);
     }
     
     /**
@@ -61,9 +61,9 @@ public class MainController {
      * @param rows Number of rows in the inserted table.
      * @param cols Number of columns in the inserted table.
      */
-    public void insert (int bufferIndex, int rows, int cols){
+    public void insertTable (int bufferIndex, int rows, int cols){
         if ( indexOutOfRange(bufferIndex) ) return;
-        editor.insert(buffers.get(bufferIndex), rows, cols);
+        editor.insertTable(buffers.get(bufferIndex), rows, cols);
     }
     
     /**
@@ -75,9 +75,16 @@ public class MainController {
      * @param subName Name of the inner tag(s)
      * @param numSubs Number of inner tags the outer tag will contain.
      */
-    public void insert (int bufferIndex, String name, String subName, int numSubs ){
+    public void insertLayered (int bufferIndex, String name, String subName, int numSubs ){
         if ( indexOutOfRange(bufferIndex) ) return;
-        editor.insert(buffers.get(bufferIndex), name, subName, numSubs);
+        editor.insertLayered(buffers.get(bufferIndex), name, subName, numSubs);
+    }
+    
+    public void insertImg(int bufferindex, String url) {
+        if ( indexOutOfRange(bufferindex) ) return;
+        java.util.HashMap<String,String> options = new java.util.HashMap<String, String>();
+        options.put("url", url);
+        editor.insertWithOptions(buffers.get(bufferindex), "img", options);
     }
     
     public void undoOperation( int bufferIndex ) {

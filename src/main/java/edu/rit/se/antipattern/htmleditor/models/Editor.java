@@ -1,8 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.rit.se.antipattern.htmleditor.models;
+
+import java.util.HashMap;
 
 /**
  * Handles dealing with the functions such as indent and insert
@@ -45,7 +43,7 @@ public class Editor {
      * @param name
      * @param startIndex 
      */
-    public void insert (Buffer toInsert, String name ) {
+    public void insertFlat (Buffer toInsert, String name ) {
         toInsert.saveBuffer();
         EditorCommand ins = new Insert( toInsert, name, 0 );
         ins.execute();
@@ -60,7 +58,7 @@ public class Editor {
      * @param startIndex
      * @param subTags 
      */
-    public void insert (Buffer toInsert, String name, String subName, int subTags) {
+    public void insertLayered (Buffer toInsert, String name, String subName, int subTags) {
         toInsert.saveBuffer();
         int tabs = Indent.calulateTabs(toInsert.getText(), toInsert.getCursorStartPos());
         EditorCommand ins = new Insert( toInsert, name, subName, subTags, tabs );
@@ -74,10 +72,16 @@ public class Editor {
      * @param rows
      * @param cols 
      */
-    public void insert (Buffer toInsert, int rows, int cols) {
+    public void insertTable (Buffer toInsert, int rows, int cols) {
         toInsert.saveBuffer();
         int tabs = Indent.calulateTabs(toInsert.getText(), toInsert.getCursorStartPos());
         EditorCommand ins = new Insert( toInsert, rows, cols, tabs );
+        ins.execute();
+    }
+    
+    public void insertWithOptions(Buffer toInsert, String tagName, HashMap opts) {
+        toInsert.saveBuffer();
+        EditorCommand ins = new Insert( toInsert, tagName, opts );
         ins.execute();
     }
     

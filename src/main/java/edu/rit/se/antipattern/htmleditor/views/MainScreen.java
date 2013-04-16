@@ -52,6 +52,7 @@ public class MainScreen extends javax.swing.JFrame {
         bTagItem = new javax.swing.JMenuItem();
         ulTagItem = new javax.swing.JMenuItem();
         tableTagItem = new javax.swing.JMenuItem();
+        imgTagMenuItem = new javax.swing.JMenuItem();
         indentItem = new javax.swing.JMenuItem();
         cutItem = new javax.swing.JMenuItem();
         pasteItem = new javax.swing.JMenuItem();
@@ -148,6 +149,14 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         tagMenu.add(tableTagItem);
+
+        imgTagMenuItem.setText("<img>");
+        imgTagMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imgTagMenuItemActionPerformed(evt);
+            }
+        });
+        tagMenu.add(imgTagMenuItem);
 
         insertItem.add(tagMenu);
 
@@ -360,14 +369,14 @@ public class MainScreen extends javax.swing.JFrame {
     private void emTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emTagItemActionPerformed
         updateCurrentBuffer();
         int index = jTabbedPane1.getSelectedIndex();
-        c.insert(index, "em");
+        c.insertFlat(index, "em");
         updateCurrentTextArea();
     }//GEN-LAST:event_emTagItemActionPerformed
 
     private void bTagItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTagItemActionPerformed
         updateCurrentBuffer();
         int index = getCurrentIndex();
-        c.insert(index, "b");
+        c.insertFlat(index, "b");
         updateCurrentTextArea();
     }//GEN-LAST:event_bTagItemActionPerformed
 
@@ -431,6 +440,13 @@ public class MainScreen extends javax.swing.JFrame {
         javax.swing.JFrame outline = new OutlineView(getCurrentIndex(), c);
         outline.setVisible(true);
     }//GEN-LAST:event_outlineMenuItemActionPerformed
+
+    private void imgTagMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imgTagMenuItemActionPerformed
+        updateCurrentBuffer();
+        int index = getCurrentIndex();
+        javax.swing.JFrame imgPopup = new ImgPopup( this, c, index, textAreas.get(index).getCaretPosition() );
+        imgPopup.setVisible(true);
+    }//GEN-LAST:event_imgTagMenuItemActionPerformed
 
     private int getCurrentIndex() {
         return jTabbedPane1.getSelectedIndex();
@@ -535,6 +551,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JFileChooser fc;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuItem hTagItem;
+    private javax.swing.JMenuItem imgTagMenuItem;
     private javax.swing.JMenuItem indentItem;
     private javax.swing.JMenu insertItem;
     private javax.swing.JMenuBar jMenuBar1;
