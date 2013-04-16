@@ -2,7 +2,6 @@ package edu.rit.se.antipattern.htmleditor.controllers;
 
 import edu.rit.se.antipattern.htmleditor.models.Buffer;
 import edu.rit.se.antipattern.htmleditor.models.Editor;
-import edu.rit.se.antipattern.htmleditor.models.Element;
 import edu.rit.se.antipattern.htmleditor.models.HTMLTreeModel;
 import edu.rit.se.antipattern.htmleditor.models.ParseException;
 import edu.rit.se.antipattern.htmleditor.models.Parser;
@@ -83,7 +82,7 @@ public class MainController {
     public void insertImg(int bufferindex, String url) {
         if ( indexOutOfRange(bufferindex) ) return;
         java.util.HashMap<String,String> options = new java.util.HashMap<String, String>();
-        options.put("url", url);
+        options.put("src", url);
         editor.insertWithOptions(buffers.get(bufferindex), "img", options, true);
     }
     
