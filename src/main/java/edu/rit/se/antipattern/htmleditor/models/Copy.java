@@ -5,8 +5,8 @@
 package edu.rit.se.antipattern.htmleditor.models;
 
 /**
- *
- * @author obasekiidemudia
+ * Copies text from a Buffer
+ * @author obasekiidemudia and Wayne
  */
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -18,22 +18,15 @@ import javax.swing.JTabbedPane;
 
 public class Copy extends JMenuItem implements EditorCommand {
 
-    private JEditorPane panel;
-    private JTabbedPane text;
+    private Buffer text;
 
-    public Copy(JTabbedPane text) {
+    public Copy(Buffer text) {
         this.text = text;
     }
 
-    
     public void execute() {
-        panel = (JEditorPane)text.getSelectedComponent();
-        StringSelection selection = new StringSelection(panel.getSelectedText());
+        StringSelection selection = new StringSelection(text.getSelectedText());
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(selection, selection);
-    }
-
-    
-    public void undo() {
     }
 }

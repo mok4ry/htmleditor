@@ -47,13 +47,15 @@ public class Buffer {
     }
     
     public void revertBuffer () {
-        Buffer temp = new Buffer(lastState.getBuffer());
-        this.filePath = temp.getFilePath();
-        this.fileName = temp.getFileName();
-        this.text = temp.getText();
-        this.startIndex = temp.getCursorStartPos();
-        this.endIndex = temp.getCursorEndPos();
-        this.lastState = temp.getLastState();
+        if (lastState != null) {
+            Buffer temp = new Buffer(lastState.getBuffer());
+            this.filePath = temp.getFilePath();
+            this.fileName = temp.getFileName();
+            this.text = temp.getText();
+            this.startIndex = temp.getCursorStartPos();
+            this.endIndex = temp.getCursorEndPos();
+            this.lastState = temp.getLastState();
+        }
     }
     
     /**
@@ -176,5 +178,20 @@ public class Buffer {
      */
     public void addLink(String link) {
         links.addElement(link);
+    }
+    
+    /**
+     * Gets the selected Text
+     * @return selectedText
+     */
+    public String getSelectedText() {
+        return text.substring(startIndex, endIndex);
+    }
+    
+    /**
+     * Deletes the selected Text
+     */
+    public void deleteSelection() {
+        text = text.substring(0, startIndex) + text.substring(endIndex);
     }
 }

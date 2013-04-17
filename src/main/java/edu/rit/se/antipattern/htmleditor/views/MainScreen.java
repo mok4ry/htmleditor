@@ -432,13 +432,13 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void cutItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutItemActionPerformed
         updateCurrentBuffer();
-        // TODO: Implement this
+        c.cut(getCurrentIndex());
         updateCurrentTextArea();
     }//GEN-LAST:event_cutItemActionPerformed
 
     private void pasteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteItemActionPerformed
         updateCurrentBuffer();
-        // TODO: Implement this
+        c.paste(getCurrentIndex());
         updateCurrentTextArea();
     }//GEN-LAST:event_pasteItemActionPerformed
 

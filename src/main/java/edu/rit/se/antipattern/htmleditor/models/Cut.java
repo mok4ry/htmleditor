@@ -19,22 +19,16 @@ import javax.swing.JTabbedPane;
 
 public class Cut extends JMenuItem implements EditorCommand {
 
-    private JTabbedPane text;
-    private JEditorPane panel;
+    private Buffer text;
 
-    public Cut(JTabbedPane text) {
+    public Cut(Buffer text) {
         this.text = text;
     }
-
     
     public void execute() {
-        panel = (JEditorPane)text.getSelectedComponent();
-        StringSelection selection = new StringSelection(panel.getSelectedText());
+        StringSelection selection = new StringSelection(text.getSelectedText());
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(selection, selection);
-        panel.replaceSelection(" ");
-    }
-
-        public void undo() {
+        text.deleteSelection();
     }
 }

@@ -80,6 +80,13 @@ public class MainController {
         editor.insertLayered(buffers.get(bufferIndex), name, subName, numSubs);
     }
     
+    /**
+     * Insert a tag with a URL attached
+     * @param bufferindex
+     * @param url
+     * @param tag
+     * @param text 
+     */
     public void insertURL(int bufferindex, String url, String tag, String text) {
         if ( indexOutOfRange(bufferindex) ) return;
         java.util.HashMap<String,String> options = new java.util.HashMap<String, String>();
@@ -91,6 +98,30 @@ public class MainController {
             editor.insertWithOptions(buffers.get(bufferindex), "a", options, false, text);
             buffers.get(bufferindex).addLink(url);
         }
+    }
+    
+    /**
+     * Copies text
+     * @param bufferindex 
+     */
+    public void copy(int bufferindex) {
+        editor.copy(buffers.get(bufferindex));
+    }
+    
+    /**
+     * Cuts text
+     * @param bufferindex
+     */
+    public void cut(int bufferindex) {
+        editor.cut(buffers.get(bufferindex));
+    }
+    
+    /**
+     * Pastes text
+     * @param bufferindex 
+     */
+    public void paste(int bufferindex) {
+        editor.paste(buffers.get(bufferindex));
     }
     
     /**

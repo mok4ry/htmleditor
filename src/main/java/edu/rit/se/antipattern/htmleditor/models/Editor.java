@@ -87,9 +87,37 @@ public class Editor {
     }
     
     /**
-     * 
-     * 
-     * @param toUndo 
+     * Copies text
+     * @param toCopy 
+     */
+    public void copy(Buffer toCopy) {
+        EditorCommand cpy = new Copy(toCopy);
+        cpy.execute();
+    }
+    
+    /**
+     * Cuts text
+     * @param toCopy 
+     */
+    public void cut(Buffer toCut) {
+        toCut.saveBuffer();
+        EditorCommand cut = new Cut(toCut);
+        cut.execute();
+    }
+    
+    /**
+     * Pastes text
+     * @param toCopy 
+     */
+    public void paste(Buffer toPaste) {
+        toPaste.saveBuffer();
+        EditorCommand pst = new Paste(toPaste);
+        pst.execute();
+    }
+    
+    /**
+     * Undoes the previous operation
+     * @param toUndo
      */
     public void undo( Buffer toUndo ) {
         EditorCommand undo = new Undo( toUndo );

@@ -24,17 +24,15 @@ import javax.swing.text.BadLocationException;
 
 public class Paste extends JMenuItem implements EditorCommand {
 
-    private JTabbedPane text;
-    private JEditorPane pane;
+    private Buffer text;
     private String copyText = " ";
 
-    public Paste(JTabbedPane text) {
+    public Paste(Buffer text) {
         this.text = text;
     }
 
     @Override
     public void execute() {
-        pane = (JEditorPane)text.getSelectedComponent();
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         Transferable contents = clipboard.getContents(null);
 
@@ -45,14 +43,7 @@ public class Paste extends JMenuItem implements EditorCommand {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try {
-            pane.getDocument().insertString(pane.getCaretPosition(), copyText, null);   
-        } catch (BadLocationException ex) {
-            Logger.getLogger(Paste.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    
-    public void undo() {
+        
+        text.insertText(copyText, text.getCursorStartPos());   
     }
 }
