@@ -88,7 +88,7 @@ public class ImgPopup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtunActionPerformed
-        mc.insertImg(index, urlField.getText());
+        mc.insertURL(index, urlField.getText(), "img");
         ms.updateText();
         this.dispose();
     }//GEN-LAST:event_okButtunActionPerformed
