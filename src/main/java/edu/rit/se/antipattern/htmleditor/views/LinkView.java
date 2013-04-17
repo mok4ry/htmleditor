@@ -4,18 +4,31 @@
  */
 package edu.rit.se.antipattern.htmleditor.views;
 
+import edu.rit.se.antipattern.htmleditor.controllers.MainController;
+import javax.swing.DefaultListModel;
+
 /**
  *
- * @author Wayne E Starr
+ * @author Wayne
  */
 public class LinkView extends javax.swing.JFrame {
 
+    private MainScreen ms = null;
+    private MainController mc = null;
+    private int index;
+    private DefaultListModel links;
+    
     /**
      * Creates new form LinkView
      */
-    public LinkView() {
+    public LinkView( MainScreen ms, MainController mc, int bufferindex ) {
+        this.ms = ms;
+        this.mc = mc;
+        this.index = bufferindex;
         initComponents();
-        
+        this.setTitle("Link View - " + mc.getBufferFilename(index));
+        links = mc.getLinkList(bufferindex);
+        this.linkList.setModel(links);
     }
 
     /**
@@ -30,6 +43,8 @@ public class LinkView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         linkList = new javax.swing.JList();
         okButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
+        sortComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Link View");
@@ -42,6 +57,25 @@ public class LinkView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(linkList);
 
         okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+
+        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Original", "Alphabetized" }));
+        sortComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -52,7 +86,10 @@ public class LinkView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 333, Short.MAX_VALUE)
+                        .addComponent(refreshButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sortComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
                         .addComponent(okButton)))
                 .addContainerGap())
         );
@@ -62,12 +99,31 @@ public class LinkView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(okButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(okButton)
+                    .addComponent(refreshButton)
+                    .addComponent(sortComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_okButtonActionPerformed
+
+    private void sortComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortComboBoxActionPerformed
+        if (sortComboBox.getSelectedIndex() == 0) {
+            this.linkList.getModel();
+        } else if (sortComboBox.getSelectedIndex() == 1) {
+
+        }
+    }//GEN-LAST:event_sortComboBoxActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        mc.updateBufferLinks(index);
+    }//GEN-LAST:event_refreshButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,7 +155,7 @@ public class LinkView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LinkView().setVisible(true);
+                new LinkView(null, null, 0).setVisible(true);
             }
         });
     }
@@ -107,5 +163,7 @@ public class LinkView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList linkList;
     private javax.swing.JButton okButton;
+    private javax.swing.JButton refreshButton;
+    private javax.swing.JComboBox sortComboBox;
     // End of variables declaration//GEN-END:variables
 }

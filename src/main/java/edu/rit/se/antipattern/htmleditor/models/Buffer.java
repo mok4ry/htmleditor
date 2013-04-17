@@ -1,9 +1,11 @@
 package edu.rit.se.antipattern.htmleditor.models;
 
+import javax.swing.DefaultListModel;
+
 /**
  * the Buffer that holds the text and file path info for the gui
  * 
- * @author Zach
+ * @author Zach and Wayne
  */
 public class Buffer {
     
@@ -13,6 +15,7 @@ public class Buffer {
     private String text;
     private int startIndex;
     private int endIndex;
+    private DefaultListModel links;
     
     /**
      * Initializes a new buffer with the given file path with no text
@@ -26,6 +29,7 @@ public class Buffer {
         this.startIndex = 0;
         this.endIndex = 0;
         this.lastState = null;
+        links = new DefaultListModel();
     }
     
     public Buffer (Buffer toClone){
@@ -35,6 +39,7 @@ public class Buffer {
         this.startIndex = toClone.getCursorStartPos();
         this.endIndex = toClone.getCursorEndPos();
         this.lastState = toClone.getLastState();
+        this.links = toClone.getLinkList();
     }
     
     public void saveBuffer () {
@@ -61,6 +66,7 @@ public class Buffer {
         this.filePath = filePath;
         this.fileName = getFileNameFromPath(filePath);
         this.text = text;
+        links = new DefaultListModel();
     }
     
     private String getFileNameFromPath( String fp ) {
@@ -120,6 +126,10 @@ public class Buffer {
         return filePath;
     }
     
+    /**
+     * Returns the fileName of this Buffer
+     * @return fileName
+     */
     public String getFileName() {
         return fileName;
     }
@@ -150,5 +160,21 @@ public class Buffer {
     @Override
     public String toString() {
         return String.format( "Buffer for file: %s", filePath );
+    }
+    
+    /**
+     * Returns the list of links for LinkView
+     * @return links
+     */
+    public DefaultListModel getLinkList() {
+        return links;
+    }
+    
+    /**
+     * Adds a link to the list of links for LinkView
+     * @return links
+     */
+    public void addLink(String link) {
+        links.addElement(link);
     }
 }
