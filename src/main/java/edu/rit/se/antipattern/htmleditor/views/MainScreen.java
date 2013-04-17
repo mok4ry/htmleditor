@@ -1,6 +1,7 @@
 package edu.rit.se.antipattern.htmleditor.views;
 
 import edu.rit.se.antipattern.htmleditor.controllers.MainController;
+import java.awt.event.KeyEvent;
 
 /**
  * The main screen for our program
@@ -361,6 +362,9 @@ public class MainScreen extends javax.swing.JFrame {
                     int i = c.autoIndent(currentIndex);
                     j.setText(c.getBufferText(currentIndex));
                     j.setCaretPosition(i);
+                } else if (evt.getKeyChar() == ' ') {
+                    updateCurrentBuffer();
+                    c.saveBufferState(currentIndex);
                 }
                 c.bufferModified(index);
             }

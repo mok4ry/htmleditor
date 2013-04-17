@@ -352,6 +352,10 @@ public class MainController {
         }
     }
     
+    public void saveBufferState( int bufferIndex ) {
+        buffers.get(bufferIndex).saveBuffer();
+    }
+    
     @Deprecated
     /**
      * Gets the buffer at a given index. Deprecated because any buffer
