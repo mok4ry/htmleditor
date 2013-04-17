@@ -79,11 +79,16 @@ public class MainController {
         editor.insertLayered(buffers.get(bufferIndex), name, subName, numSubs);
     }
     
-    public void insertImg(int bufferindex, String url) {
+    public void insertURL(int bufferindex, String url, String tag) {
         if ( indexOutOfRange(bufferindex) ) return;
         java.util.HashMap<String,String> options = new java.util.HashMap<String, String>();
-        options.put("src", url);
-        editor.insertWithOptions(buffers.get(bufferindex), "img", options, true);
+        if (tag == "img") {
+            options.put("src", url);
+            editor.insertWithOptions(buffers.get(bufferindex), "img", options, true);
+        } else if (tag == "a") {
+            options.put("href", url);
+            editor.insertWithOptions(buffers.get(bufferindex), "a", options, false);
+        }
     }
     
     public void undoOperation( int bufferIndex ) {
