@@ -358,6 +358,10 @@ public class MainController {
         }
     }
     
+    public void saveBufferState( int bufferIndex ) {
+        buffers.get(bufferIndex).saveBuffer();
+    }
+    
     /**
      * Returns the list of links for LinkView
      * @return links
