@@ -97,7 +97,7 @@ public class Editor {
     
     /**
      * Cuts text
-     * @param toCopy 
+     * @param toCut 
      */
     public void cut(Buffer toCut) {
         toCut.saveBuffer();
@@ -107,7 +107,7 @@ public class Editor {
     
     /**
      * Pastes text
-     * @param toCopy 
+     * @param toPaste
      */
     public void paste(Buffer toPaste) {
         toPaste.saveBuffer();
