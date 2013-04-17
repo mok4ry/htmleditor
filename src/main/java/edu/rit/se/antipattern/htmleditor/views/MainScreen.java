@@ -62,6 +62,7 @@ public class MainScreen extends javax.swing.JFrame {
         undoItem = new javax.swing.JMenuItem();
         ViewMenu = new javax.swing.JMenu();
         outlineMenuItem = new javax.swing.JMenuItem();
+        linkMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -166,7 +167,6 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         tagMenu.add(jMenuItem1);
-        jMenuItem1.getAccessibleContext().setAccessibleName("<a>");
 
         insertItem.add(tagMenu);
 
@@ -232,6 +232,14 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         ViewMenu.add(outlineMenuItem);
+
+        linkMenuItem.setText("Link");
+        linkMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkMenuItemActionPerformed(evt);
+            }
+        });
+        ViewMenu.add(linkMenuItem);
 
         jMenuBar1.add(ViewMenu);
 
@@ -465,6 +473,13 @@ public class MainScreen extends javax.swing.JFrame {
         aPopup.setVisible(true);
     }//GEN-LAST:event_aTagMenuItemActionPerformed
 
+    private void linkMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkMenuItemActionPerformed
+        updateCurrentBuffer();
+        int index = getCurrentIndex();
+        javax.swing.JFrame linkView = new LinkView(this, c, index);
+        linkView.setVisible(true);
+    }//GEN-LAST:event_linkMenuItemActionPerformed
+
     private int getCurrentIndex() {
         return jTabbedPane1.getSelectedIndex();
     }
@@ -575,6 +590,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JMenuItem linkMenuItem;
     private javax.swing.JMenuItem newItem;
     private javax.swing.JMenuItem openItem;
     private javax.swing.JMenuItem outlineMenuItem;

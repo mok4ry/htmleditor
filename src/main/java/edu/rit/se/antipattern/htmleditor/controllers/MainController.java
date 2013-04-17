@@ -8,13 +8,14 @@ import edu.rit.se.antipattern.htmleditor.models.Parser;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import org.apache.commons.io.FileUtils;
 
 /**
  * Main controller for managing information between the HTML Editor's view and
  * models. Provides methods for manipulating buffers.
  * 
- * @author Team Antipattern
+ * @author Team Anti-Pattern
  */
 public class MainController {
     
@@ -88,9 +89,14 @@ public class MainController {
         } else if (tag == "a") {
             options.put("href", url);
             editor.insertWithOptions(buffers.get(bufferindex), "a", options, false);
+            buffers.get(bufferindex).addLink(url);
         }
     }
     
+    /**
+     * Undoes an operation
+     * @param bufferIndex 
+     */
     public void undoOperation( int bufferIndex ) {
         if ( indexOutOfRange(bufferIndex) ) return;
         editor.undo( buffers.get(bufferIndex) );
@@ -350,6 +356,22 @@ public class MainController {
         } catch ( ParseException p ) {
             return null;
         }
+    }
+    
+    /**
+     * Returns the list of links for LinkView
+     * @return links
+     */
+    public DefaultListModel getLinkList(int bufferindex) {
+        return buffers.get(bufferindex).getLinkList();
+    }
+    
+    /**
+     * Updates the links that are contained within a buffer
+     * @param bufferindex 
+     */
+    public void updateBufferLinks(int bufferindex) {
+        //TODO: Plug in Parser Code Here
     }
     
     @Deprecated

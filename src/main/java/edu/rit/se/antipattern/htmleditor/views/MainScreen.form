@@ -130,9 +130,6 @@
                       <Properties>
                         <Property name="label" type="java.lang.String" value="&lt;a&gt;"/>
                       </Properties>
-                      <AccessibilityProperties>
-                        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="&lt;a&gt;"/>
-                      </AccessibilityProperties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aTagMenuItemActionPerformed"/>
                       </Events>
@@ -217,6 +214,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="outlineMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="linkMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Link"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkMenuItemActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
