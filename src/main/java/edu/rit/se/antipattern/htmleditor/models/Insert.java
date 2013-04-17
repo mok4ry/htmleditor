@@ -137,7 +137,7 @@ public class Insert implements EditorCommand {
     private String insertWithOptions( String text, String tagName,
             java.util.HashMap<String,String> options, int cursorPos ) {
         String tagString = selfClosing ?
-                String.format("<%s%s />", tagName, getOptionsString(options) )
+                String.format("<%s%s/>", tagName, getOptionsString(options) )
                 : String.format("<%s%s></%s>", tagName, getOptionsString(options), tagName );
         return text.substring(0, cursorPos) + tagString + text.substring(cursorPos);
     }

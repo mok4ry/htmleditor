@@ -53,6 +53,7 @@ public class MainScreen extends javax.swing.JFrame {
         ulTagItem = new javax.swing.JMenuItem();
         tableTagItem = new javax.swing.JMenuItem();
         imgTagMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         indentItem = new javax.swing.JMenuItem();
         cutItem = new javax.swing.JMenuItem();
         pasteItem = new javax.swing.JMenuItem();
@@ -157,6 +158,15 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         tagMenu.add(imgTagMenuItem);
+
+        jMenuItem1.setLabel("<a>");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aTagMenuItemActionPerformed(evt);
+            }
+        });
+        tagMenu.add(jMenuItem1);
+        jMenuItem1.getAccessibleContext().setAccessibleName("<a>");
 
         insertItem.add(tagMenu);
 
@@ -448,6 +458,13 @@ public class MainScreen extends javax.swing.JFrame {
         imgPopup.setVisible(true);
     }//GEN-LAST:event_imgTagMenuItemActionPerformed
 
+    private void aTagMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aTagMenuItemActionPerformed
+        updateCurrentBuffer();
+        int index = getCurrentIndex();
+        javax.swing.JFrame imgPopup = new ImgPopup( this, c, index, textAreas.get(index).getCaretPosition() );
+        imgPopup.setVisible(true);
+    }//GEN-LAST:event_aTagMenuItemActionPerformed
+
     private int getCurrentIndex() {
         return jTabbedPane1.getSelectedIndex();
     }
@@ -555,6 +572,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem indentItem;
     private javax.swing.JMenu insertItem;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem newItem;
