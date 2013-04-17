@@ -42,6 +42,7 @@ public class HeaderPopup extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Insert Header");
 
         jLabel1.setText("Size");
 
