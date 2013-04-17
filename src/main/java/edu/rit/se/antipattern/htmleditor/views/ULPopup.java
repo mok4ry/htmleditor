@@ -25,6 +25,7 @@ public class ULPopup extends javax.swing.JFrame {
         buffer = b;
         curs = cursor;
         initComponents();
+        this.getRootPane().setDefaultButton(this.jButton1);
     }
 
     /**

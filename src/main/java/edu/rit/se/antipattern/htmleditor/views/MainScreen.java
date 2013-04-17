@@ -454,15 +454,15 @@ public class MainScreen extends javax.swing.JFrame {
     private void imgTagMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imgTagMenuItemActionPerformed
         updateCurrentBuffer();
         int index = getCurrentIndex();
-        javax.swing.JFrame imgPopup = new ImgPopup( this, c, index, textAreas.get(index).getCaretPosition() );
+        javax.swing.JFrame imgPopup = new UrlPopup( this, c, index, textAreas.get(index).getCaretPosition(), "img");
         imgPopup.setVisible(true);
     }//GEN-LAST:event_imgTagMenuItemActionPerformed
 
     private void aTagMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aTagMenuItemActionPerformed
         updateCurrentBuffer();
         int index = getCurrentIndex();
-        javax.swing.JFrame imgPopup = new ImgPopup( this, c, index, textAreas.get(index).getCaretPosition() );
-        imgPopup.setVisible(true);
+        javax.swing.JFrame aPopup = new UrlPopup( this, c, index, textAreas.get(index).getCaretPosition(), "a");
+        aPopup.setVisible(true);
     }//GEN-LAST:event_aTagMenuItemActionPerformed
 
     private int getCurrentIndex() {

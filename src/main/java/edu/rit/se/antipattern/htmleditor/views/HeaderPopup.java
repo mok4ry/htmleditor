@@ -25,6 +25,7 @@ public class HeaderPopup extends javax.swing.JFrame {
         buffer = b;
         curs = cursor;
         initComponents();
+        this.getRootPane().setDefaultButton(this.jButton1);
     }
 
     /**
@@ -40,11 +41,11 @@ public class HeaderPopup extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("size");
+        jLabel1.setText("Size");
 
-        jButton1.setText("submit");
+        jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -63,7 +64,7 @@ public class HeaderPopup extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 106, Short.MAX_VALUE)
+                        .addGap(0, 104, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addContainerGap())
         );
