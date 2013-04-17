@@ -80,9 +80,9 @@ public class Editor {
     }
     
     public void insertWithOptions(Buffer toInsert, String tagName, HashMap opts,
-            boolean selfClosing ) {
+            boolean selfClosing, String text) {
         toInsert.saveBuffer();
-        EditorCommand ins = new Insert( toInsert, tagName, opts, selfClosing );
+        EditorCommand ins = new Insert( toInsert, tagName, opts, selfClosing, text);
         ins.execute();
     }
     

@@ -80,15 +80,15 @@ public class MainController {
         editor.insertLayered(buffers.get(bufferIndex), name, subName, numSubs);
     }
     
-    public void insertURL(int bufferindex, String url, String tag) {
+    public void insertURL(int bufferindex, String url, String tag, String text) {
         if ( indexOutOfRange(bufferindex) ) return;
         java.util.HashMap<String,String> options = new java.util.HashMap<String, String>();
         if (tag == "img") {
             options.put("src", url);
-            editor.insertWithOptions(buffers.get(bufferindex), "img", options, true);
+            editor.insertWithOptions(buffers.get(bufferindex), "img", options, true, "");
         } else if (tag == "a") {
             options.put("href", url);
-            editor.insertWithOptions(buffers.get(bufferindex), "a", options, false);
+            editor.insertWithOptions(buffers.get(bufferindex), "a", options, false, text);
             buffers.get(bufferindex).addLink(url);
         }
     }

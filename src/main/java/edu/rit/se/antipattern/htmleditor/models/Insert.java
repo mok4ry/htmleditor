@@ -10,6 +10,7 @@ public class Insert implements EditorCommand {
     private Buffer b = null;
     private String tagName = null;
     private String subName = null;
+    private String text = null;
     private java.util.HashMap<String,String> options = null;
     private int numSubTags, tabDepth, rows, cols;
     private int typeOfInsert;
@@ -30,12 +31,13 @@ public class Insert implements EditorCommand {
     
     // insert with options
     public Insert( Buffer toInsertInto, String tagName,
-            java.util.HashMap<String,String> options, boolean selfClosing ) {
+            java.util.HashMap<String,String> options, boolean selfClosing, String text) {
         this.b = toInsertInto;
         this.tagName = tagName;
         this.options = options;
         this.typeOfInsert = WITH_OPTIONS;
         this.selfClosing = selfClosing;
+        this.text = text;
     }
     
     // insert layered
@@ -74,7 +76,7 @@ public class Insert implements EditorCommand {
                 break;
             case WITH_OPTIONS:
                 b.setText( insertWithOptions(b.getText(), tagName, options,
-                        b.getCursorStartPos()) );
+                        b.getCursorStartPos(), text));
             default:
                 break;
         }
@@ -135,10 +137,10 @@ public class Insert implements EditorCommand {
     }
     
     private String insertWithOptions( String text, String tagName,
-            java.util.HashMap<String,String> options, int cursorPos ) {
+            java.util.HashMap<String,String> options, int cursorPos, String linkName) {
         String tagString = selfClosing ?
                 String.format("<%s%s/>", tagName, getOptionsString(options) )
-                : String.format("<%s%s></%s>", tagName, getOptionsString(options), tagName );
+                : String.format("<%s%s>%s</%s>", tagName, getOptionsString(options), linkName, tagName );
         return text.substring(0, cursorPos) + tagString + text.substring(cursorPos);
     }
     

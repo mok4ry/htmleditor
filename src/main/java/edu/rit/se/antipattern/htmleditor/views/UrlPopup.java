@@ -22,6 +22,10 @@ public class UrlPopup extends javax.swing.JFrame {
         this.cursorPos = cursorPos;
         this.tag = tag;
         initComponents();
+        if (tag == "img") {
+            this.jLabel2.setVisible(false);
+            this.linkTextField.setVisible(false);
+        }
         this.getRootPane().setDefaultButton(this.okButton);
     }
 
@@ -38,6 +42,8 @@ public class UrlPopup extends javax.swing.JFrame {
         okButton = new javax.swing.JButton();
         urlField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        linkTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Insert URL");
@@ -58,6 +64,8 @@ public class UrlPopup extends javax.swing.JFrame {
 
         jLabel1.setText("URL:");
 
+        jLabel2.setText("Link Text:");
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,9 +75,13 @@ public class UrlPopup extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(layout.createSequentialGroup()
                         .add(jLabel1)
-                        .add(18, 18, 18)
-                        .add(urlField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 420, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(urlField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 447, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
+                        .add(jLabel2)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(linkTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 297, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(okButton)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(cancelButton)))
@@ -85,14 +97,16 @@ public class UrlPopup extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(cancelButton)
-                    .add(okButton)))
+                    .add(okButton)
+                    .add(jLabel2)
+                    .add(linkTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        mc.insertURL(index, urlField.getText(), tag);
+        mc.insertURL(index, urlField.getText(), tag, linkTextField.getText());
         ms.updateText();
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
@@ -138,6 +152,8 @@ public class UrlPopup extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField linkTextField;
     private javax.swing.JButton okButton;
     private javax.swing.JTextField urlField;
     // End of variables declaration//GEN-END:variables

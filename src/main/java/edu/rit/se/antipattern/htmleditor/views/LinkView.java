@@ -115,9 +115,9 @@ public class LinkView extends javax.swing.JFrame {
 
     private void sortComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortComboBoxActionPerformed
         if (sortComboBox.getSelectedIndex() == 0) {
-            this.linkList.getModel();
+            this.linkList.getModel(); // TODO: FLESH OUT FOR SORTING
         } else if (sortComboBox.getSelectedIndex() == 1) {
-
+            this.linkList.getModel(); // TODO: FLESH OUT FOR SORTING
         }
     }//GEN-LAST:event_sortComboBoxActionPerformed
 
