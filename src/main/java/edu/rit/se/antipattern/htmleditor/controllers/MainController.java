@@ -389,6 +389,10 @@ public class MainController {
         }
     }
     
+    /**
+     * Saves the buffer at the given index
+     * @param bufferIndex 
+     */
     public void saveBufferState( int bufferIndex ) {
         buffers.get(bufferIndex).saveBuffer();
     }
@@ -398,16 +402,50 @@ public class MainController {
      * @return links
      */
     public DefaultListModel getLinkList(int bufferindex) {
-        DefaultListModel<String> dlm = new DefaultListModel<String>();
+        updateLinkList(bufferindex);
+        return buffers.get(bufferindex).getLinkList();
+    }
+    
+    /**
+     * Updates the Link List
+     * @param bufferindex 
+     */
+    public void updateLinkList(int bufferindex) {
+        Buffer b = buffers.get(bufferindex);
+        b.clearLinks();
         try {
             ArrayList<String> links = Parser.parseDocument(buffers.get(bufferindex)
                 .getText()).getLinks();
-            for ( String s : links ) dlm.add(0, s);
-            return dlm;
+            for ( String s : links )
+                b.addLink(s);
         } catch ( ParseException p ) {
-            return dlm;
+            b.addLink("Invalid HTML: Bad Parse!");
         }
-        
+    }
+    
+    /**
+     * Sorts the Link List
+     * @param bufferindex 
+     */
+    public void sortLinkList(int bufferindex) {
+        Buffer b = buffers.get(bufferindex);
+        DefaultListModel links = b.getLinkList();
+        ArrayList<String> orderedLinks = new ArrayList<String>();
+        int i = 0;
+        int j = 0;
+        for (i = 0; i < links.getSize(); i++) {
+            String s = (String) links.get(i);
+            for (j = 1; j < orderedLinks.size();) {
+                if (orderedLinks.get(j-1).compareTo(s) < 0) {
+                    j++;
+                }
+            }
+            orderedLinks.add(j-1, s);
+        }
+        links.removeAllElements();
+        for (i = 0; i < orderedLinks.size(); i++) {
+            links.addElement(orderedLinks.get(i));
+        }
     }
     
     @Deprecated

@@ -115,16 +115,19 @@ public class LinkView extends javax.swing.JFrame {
 
     private void sortComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortComboBoxActionPerformed
         if (sortComboBox.getSelectedIndex() == 0) {
-            this.linkList.getModel(); // TODO: FLESH OUT FOR SORTING
+            mc.updateLinkList(index);
         } else if (sortComboBox.getSelectedIndex() == 1) {
-            this.linkList.getModel(); // TODO: FLESH OUT FOR SORTING
+            mc.sortLinkList(index);
         }
     }//GEN-LAST:event_sortComboBoxActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        links = mc.getLinkList(index);
-        this.linkList.clearSelection();
-        this.linkList.setModel(links);
+        if (sortComboBox.getSelectedIndex() == 0) {
+            mc.updateLinkList(index);
+        } else if (sortComboBox.getSelectedIndex() == 1) {
+            mc.updateLinkList(index);
+            mc.sortLinkList(index);
+        }
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     /**

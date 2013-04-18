@@ -181,6 +181,14 @@ public class Buffer {
     }
     
     /**
+     * Clears the list of links for LinkView
+     * @return links
+     */
+    public void clearLinks() {
+        links.removeAllElements();
+    }
+    
+    /**
      * Gets the selected Text
      * @return selectedText
      */

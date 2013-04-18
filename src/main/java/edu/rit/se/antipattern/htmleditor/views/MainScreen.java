@@ -367,10 +367,14 @@ public class MainScreen extends javax.swing.JFrame {
                 javax.swing.JTextArea j = textAreas.get(currentIndex);
                 if (evt.getKeyChar() == '\n') {
                     updateCurrentBuffer();
+                    c.saveBufferState(currentIndex);
                     int i = c.autoIndent(currentIndex);
                     j.setText(c.getBufferText(currentIndex));
                     j.setCaretPosition(i);
                 } else if (evt.getKeyChar() == ' ') {
+                    updateCurrentBuffer();
+                    c.saveBufferState(currentIndex);
+                } else if (evt.getKeyChar() == '\b') {
                     updateCurrentBuffer();
                     c.saveBufferState(currentIndex);
                 }
