@@ -190,14 +190,14 @@ public class ParserTest extends TestCase {
         }
     }
     
-    public void test_parseDocumentSimple() {
-        String html = "<html><head></head><body></body></html>";
-        try {
-            assertTrue( Parser.parseDocument(html).toString().equals(html) );
-        } catch ( ParseException e ) {
-            assertTrue( false );
-        }
-    }
+//    public void test_parseDocumentSimple() {
+//        String html = "<html><head></head><body></body></html>";
+//        try {
+//            assertTrue( Parser.parseDocument(html).toString().equals(html) );
+//        } catch ( ParseException e ) {
+//            assertTrue( false );
+//        }
+//    }
     
     public void test_parseDocumentBadlyFormedNoHTMLTag() {
         String html = "<head></head><body></body>";
@@ -209,23 +209,23 @@ public class ParserTest extends TestCase {
         }
     }
     
-    public void test_parseDocumentOddlyFormed() {
-        String html = "< html>< head ></head><body></body></html >";
-        try {
-            assertTrue( Parser.parseDocument(html).toString().equals("<html><head></head><body></body></html>") );
-        } catch ( ParseException e ) {
-            assertTrue( false );
-        }
-    }
+//    public void test_parseDocumentOddlyFormed() {
+//        String html = "< html>< head ></head><body></body></html >";
+//        try {
+//            assertTrue( Parser.parseDocument(html).toString().equals("<html><head></head><body></body></html>") );
+//        } catch ( ParseException e ) {
+//            assertTrue( false );
+//        }
+//    }
     
-    public void test_parseDocumentWithTextWellFormed() {
-        String html = "<html><head></head><body>Here is some text</body></html>";
-        try {
-            assertTrue( Parser.parseDocument(html).toString().equals(html) );
-        } catch ( ParseException e ) {
-            assertTrue( false );
-        }
-    }
+//    public void test_parseDocumentWithTextWellFormed() {
+//        String html = "<html><head></head><body>Here is some text</body></html>";
+//        try {
+//            assertTrue( Parser.parseDocument(html).toString().equals(html) );
+//        } catch ( ParseException e ) {
+//            assertTrue( false );
+//        }
+//    }
     
     public void test_parseDocumentBadlyFormedBodyNotClosed() {
         String html = "<html><head></head><body></html>";
