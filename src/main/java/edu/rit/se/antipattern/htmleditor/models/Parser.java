@@ -117,7 +117,20 @@ public class Parser {
             return new TextElement(html);
         }
         String name = getTagName(html);
-        return new TagElement( name, parse(getTagContentString(html)) );
+        java.util.HashMap<String,String> opts = getOpts(html, name);
+        return new TagElement( name, opts, parse(getTagContentString(html)) );
+    }
+    
+    // only works for well-formed href options right now
+    protected static java.util.HashMap<String,String> getOpts( String html, String tagName ) {
+        java.util.HashMap<String,String> opts = new java.util.HashMap<String, String>();
+        Pattern linkRegex = Pattern.compile("href=\".*\"");
+        Matcher linkMatcher = linkRegex.matcher(html);
+        if ( linkMatcher.find() ) {
+            String match = html.substring(linkMatcher.start(), linkMatcher.end());
+            opts.put("href", match.substring(6, match.length() - 1));
+        }
+        return opts;
     }
     
     // get the name of the outter-most html element in the given string

@@ -19,9 +19,11 @@ public class TagElement implements Element {
      * @param contents The raw HTML between the opening and closing of this tag
      * @throws ParseException 
      */
-    public TagElement( String name, Element[] contents ) throws ParseException {
+    public TagElement( String name, java.util.HashMap<String,String> options,
+            Element[] contents ) throws ParseException {
         this.name = name.toLowerCase();
         this.contents = contents;
+        this.opts = options;
     }
     
     /**

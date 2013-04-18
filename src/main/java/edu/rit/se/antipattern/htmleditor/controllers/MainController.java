@@ -398,15 +398,16 @@ public class MainController {
      * @return links
      */
     public DefaultListModel getLinkList(int bufferindex) {
-        return buffers.get(bufferindex).getLinkList();
-    }
-    
-    /**
-     * Updates the links that are contained within a buffer
-     * @param bufferindex 
-     */
-    public void updateBufferLinks(int bufferindex) {
-        //TODO: Plug in Parser Code Here
+        DefaultListModel<String> dlm = new DefaultListModel<String>();
+        try {
+            ArrayList<String> links = Parser.parseDocument(buffers.get(bufferindex)
+                .getText()).getLinks();
+            for ( String s : links ) dlm.add(0, s);
+            return dlm;
+        } catch ( ParseException p ) {
+            return dlm;
+        }
+        
     }
     
     @Deprecated
