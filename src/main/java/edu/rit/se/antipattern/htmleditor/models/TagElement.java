@@ -9,6 +9,7 @@ public class TagElement implements Element {
     
     private String name = null;
     private Element[] contents = null;
+    private java.util.HashMap<String,String> opts = null;
     
     /**
      * Initializes a TagElement with the given name and a string of contents,
@@ -19,7 +20,7 @@ public class TagElement implements Element {
      * @throws ParseException 
      */
     public TagElement( String name, Element[] contents ) throws ParseException {
-        this.name = name;
+        this.name = name.toLowerCase();
         this.contents = contents;
     }
     
@@ -34,6 +35,15 @@ public class TagElement implements Element {
     
     public Element[] getChildren() {
         return contents;
+    }
+    
+    public java.util.ArrayList<String> getLinks() {
+        java.util.ArrayList<String> links = new java.util.ArrayList<String>();
+        if (name.equals("a") && opts.containsKey("href")) {
+            links.add(opts.get("href"));
+        }
+        for ( Element e : contents ) links.addAll(e.getLinks());
+        return links;
     }
     
     /**

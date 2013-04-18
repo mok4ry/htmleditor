@@ -1,7 +1,5 @@
 package edu.rit.se.antipattern.htmleditor.views;
 
-import javax.imageio.ImageIO;
-
 /**
  *
  * @author Team Antipattern

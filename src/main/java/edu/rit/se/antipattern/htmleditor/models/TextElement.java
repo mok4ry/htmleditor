@@ -32,6 +32,10 @@ public class TextElement implements Element {
         return new Element[0];
     }
     
+    public java.util.ArrayList<String> getLinks() {
+        return new java.util.ArrayList<String>();
+    }
+    
     /**
      * Get a string representation of this TextElement.  This is simply the text
      * it contains.  Note that this is the same as getName()
@@ -43,6 +47,7 @@ public class TextElement implements Element {
         return text;
     }
     
+    @Override
     public boolean equals( Object o ) {
         return o instanceof TextElement && ((Element)o).getName().equals(text);
     }

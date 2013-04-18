@@ -3,7 +3,7 @@ package edu.rit.se.antipattern.htmleditor.models;
 /**
  * Interface for elements in an HTML file.
  * 
- * @author Team ReichMafia
+ * @author Team Antipattern
  */
 public interface Element {
     /**
@@ -20,5 +20,12 @@ public interface Element {
      * @return Array of this element's children. Will be empty if node is a leaf
      */
     public Element[] getChildren();
+    
+    /**
+     * Get all the links in this element and all elements contained by it.
+     * 
+     * @return All the links from this node in the Element tree and down.
+     */
+    public java.util.ArrayList<String> getLinks();
     
 }
