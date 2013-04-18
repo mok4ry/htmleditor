@@ -162,6 +162,12 @@ public class Parser {
     }
     
     protected static boolean isJustText( String html ) {
-        return !( html.contains("<") || html.contains(">") );
+        if (!(html.contains("<") || html.contains(">"))) {
+            return true;
+        } else if (html.contains("/>")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

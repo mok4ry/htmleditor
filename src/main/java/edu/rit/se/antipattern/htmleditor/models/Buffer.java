@@ -151,6 +151,7 @@ public class Buffer {
       */
     public void setFilePath (String filePath) {
         this.filePath = filePath;
+        this.fileName = getFileNameFromPath(this.filePath);
     }
     
     @Override

@@ -43,8 +43,9 @@ public class MainScreen extends javax.swing.JFrame {
         fileMenu = new javax.swing.JMenu();
         openItem = new javax.swing.JMenuItem();
         saveItem = new javax.swing.JMenuItem();
-        quitItem = new javax.swing.JMenuItem();
+        closeMenuItem = new javax.swing.JMenuItem();
         newItem = new javax.swing.JMenuItem();
+        quitItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         insertItem = new javax.swing.JMenu();
         tagMenu = new javax.swing.JMenu();
@@ -61,11 +62,12 @@ public class MainScreen extends javax.swing.JFrame {
         validateItem = new javax.swing.JMenuItem();
         prefItem = new javax.swing.JMenuItem();
         undoItem = new javax.swing.JMenuItem();
-        ViewMenu = new javax.swing.JMenu();
+        viewMenu = new javax.swing.JMenu();
         outlineMenuItem = new javax.swing.JMenuItem();
         linkMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("HTML Editor - Team Anti-Pattern");
 
         fileMenu.setText("File");
 
@@ -87,14 +89,13 @@ public class MainScreen extends javax.swing.JFrame {
         });
         fileMenu.add(saveItem);
 
-        quitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
-        quitItem.setText("Quit");
-        quitItem.addActionListener(new java.awt.event.ActionListener() {
+        closeMenuItem.setText("Close Tab");
+        closeMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitItemActionPerformed(evt);
+                closeMenuItemActionPerformed(evt);
             }
         });
-        fileMenu.add(quitItem);
+        fileMenu.add(closeMenuItem);
 
         newItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         newItem.setText("New");
@@ -104,6 +105,15 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         fileMenu.add(newItem);
+
+        quitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        quitItem.setText("Exit");
+        quitItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(quitItem);
 
         jMenuBar1.add(fileMenu);
 
@@ -224,7 +234,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenuBar1.add(editMenu);
 
-        ViewMenu.setText("View");
+        viewMenu.setText("View");
 
         outlineMenuItem.setText("Outline");
         outlineMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -232,17 +242,18 @@ public class MainScreen extends javax.swing.JFrame {
                 outlineMenuItemActionPerformed(evt);
             }
         });
-        ViewMenu.add(outlineMenuItem);
+        viewMenu.add(outlineMenuItem);
 
+        linkMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         linkMenuItem.setText("Link");
         linkMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkMenuItemActionPerformed(evt);
             }
         });
-        ViewMenu.add(linkMenuItem);
+        viewMenu.add(linkMenuItem);
 
-        jMenuBar1.add(ViewMenu);
+        jMenuBar1.add(viewMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -282,6 +293,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
         updateCurrentBuffer();
         attemptSaveBuffer( jTabbedPane1.getSelectedIndex() );
+        updateTabName();
     }//GEN-LAST:event_saveItemActionPerformed
 
     private void quitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitItemActionPerformed
@@ -293,6 +305,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     // TODO: rename these functions
     private int attemptCloseBuffer( int index ) {
+        jTabbedPane1.setSelectedIndex(index);
         if ( c.bufferIsModified(index) ) {
             if ( discardChangesWarning() == CANCELED ) {
                 removeBuffer(index);
@@ -310,7 +323,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
     private void removeBuffer( int index ) {
-        if ( index == 0 ) setEditorMenuEnabled(false);
+        if ( jTabbedPane1.getTabCount() == 1 ) setEditorMenuEnabled(false);
         jTabbedPane1.remove(index);
         c.removeBuffer(index);
         textAreas.remove(index);
@@ -332,6 +345,7 @@ public class MainScreen extends javax.swing.JFrame {
             java.io.File outFile = new java.io.File(c.getBufferFilepath(index));
             return c.saveBuffer(index, outFile) ? CONFIRMED : CANCELED;
         } else {
+            fc.setSelectedFile(new java.io.File(c.getBufferFilepath(index)));
             int result = fc.showSaveDialog(this);
             if ( result == javax.swing.JFileChooser.APPROVE_OPTION ) {
                 return c.saveBuffer(index, fc.getSelectedFile()) ?
@@ -343,6 +357,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void newItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newItemActionPerformed
         if ( c.createBuffer( ++numOfUntitledPagesOpened ) ) {
             createAndSwitchToNewTab( textAreas.size() );
+            c.bufferModified(getCurrentIndex());
         } else {
             // TODO: write to some error place that a new file could not be opened
         }
@@ -367,15 +382,18 @@ public class MainScreen extends javax.swing.JFrame {
                 javax.swing.JTextArea j = textAreas.get(currentIndex);
                 if (evt.getKeyChar() == '\n') {
                     updateCurrentBuffer();
+                    c.bufferModified(currentIndex);
                     c.saveBufferState(currentIndex);
                     int i = c.autoIndent(currentIndex);
                     j.setText(c.getBufferText(currentIndex));
                     j.setCaretPosition(i);
                 } else if (evt.getKeyChar() == ' ') {
                     updateCurrentBuffer();
+                    c.bufferModified(currentIndex);
                     c.saveBufferState(currentIndex);
                 } else if (evt.getKeyChar() == '\b') {
                     updateCurrentBuffer();
+                    c.bufferModified(currentIndex);
                     c.saveBufferState(currentIndex);
                 }
                 c.bufferModified(index);
@@ -488,12 +506,22 @@ public class MainScreen extends javax.swing.JFrame {
         linkView.setVisible(true);
     }//GEN-LAST:event_linkMenuItemActionPerformed
 
+    private void closeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeMenuItemActionPerformed
+        updateCurrentBuffer();
+        if ( attemptCloseBuffer(getCurrentIndex()) == CANCELED ) return;
+    }//GEN-LAST:event_closeMenuItemActionPerformed
+
     private int getCurrentIndex() {
         return jTabbedPane1.getSelectedIndex();
     }
     
     private void updateCurrentTextArea() {
         updateTextArea( jTabbedPane1.getSelectedIndex() );
+    }
+    
+    private void updateTabName() {
+        int index = getCurrentIndex();
+        jTabbedPane1.setTitleAt( index , c.getBufferFilename(index) );
     }
     
     private void updateTextArea( int index ) {
@@ -513,6 +541,7 @@ public class MainScreen extends javax.swing.JFrame {
     
     private void setEditorMenuEnabled( boolean onOrOff ) {
         editMenu.setEnabled(onOrOff);
+        viewMenu.setEnabled(onOrOff);
     }
     
     private int warnForValidation() {
@@ -583,8 +612,8 @@ public class MainScreen extends javax.swing.JFrame {
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu ViewMenu;
     private javax.swing.JMenuItem bTagItem;
+    private javax.swing.JMenuItem closeMenuItem;
     private javax.swing.JMenuItem cutItem;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem emTagItem;
@@ -611,6 +640,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem ulTagItem;
     private javax.swing.JMenuItem undoItem;
     private javax.swing.JMenuItem validateItem;
+    private javax.swing.JMenu viewMenu;
     // End of variables declaration//GEN-END:variables
 
 }

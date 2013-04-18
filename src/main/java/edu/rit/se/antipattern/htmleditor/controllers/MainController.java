@@ -40,6 +40,7 @@ public class MainController {
     public void indent (int bufferIndex) {
         if ( indexOutOfRange(bufferIndex) ) return;
         editor.indent(buffers.get(bufferIndex));
+        bufferModified(bufferIndex);
     }
     
     /**
@@ -52,6 +53,7 @@ public class MainController {
     public void insertFlat (int bufferIndex, String name){
         if ( indexOutOfRange(bufferIndex) ) return;
         editor.insertFlat(buffers.get(bufferIndex), name);
+        bufferModified(bufferIndex);        
     }
     
     /**
@@ -64,6 +66,7 @@ public class MainController {
     public void insertTable (int bufferIndex, int rows, int cols){
         if ( indexOutOfRange(bufferIndex) ) return;
         editor.insertTable(buffers.get(bufferIndex), rows, cols);
+        bufferModified(bufferIndex);
     }
     
     /**
@@ -78,6 +81,7 @@ public class MainController {
     public void insertLayered (int bufferIndex, String name, String subName, int numSubs ){
         if ( indexOutOfRange(bufferIndex) ) return;
         editor.insertLayered(buffers.get(bufferIndex), name, subName, numSubs);
+        bufferModified(bufferIndex);
     }
     
     /**
@@ -98,6 +102,7 @@ public class MainController {
             editor.insertWithOptions(buffers.get(bufferindex), "a", options, false, text);
             buffers.get(bufferindex).addLink(url);
         }
+        bufferModified(bufferindex);
     }
     
     /**
@@ -114,6 +119,7 @@ public class MainController {
      */
     public void cut(int bufferindex) {
         editor.cut(buffers.get(bufferindex));
+        bufferModified(bufferindex);
     }
     
     /**
@@ -122,6 +128,7 @@ public class MainController {
      */
     public void paste(int bufferindex) {
         editor.paste(buffers.get(bufferindex));
+        bufferModified(bufferindex);
     }
     
     /**
@@ -131,6 +138,7 @@ public class MainController {
     public void undoOperation( int bufferIndex ) {
         if ( indexOutOfRange(bufferIndex) ) return;
         editor.undo( buffers.get(bufferIndex) );
+        bufferModified(bufferIndex);
     }
     
     /**
@@ -225,6 +233,7 @@ public class MainController {
      */
     public boolean saveBuffer( int index, File fileOut ) {
         try {
+            buffers.get(index).setFilePath(fileOut.getAbsolutePath());
             FileUtils.writeStringToFile( fileOut, buffers.get(index).getText() );
             isModified[index] = false;
             return true;
